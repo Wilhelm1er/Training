@@ -13,6 +13,9 @@ import java.util.Scanner;
 public class Application {
 	
 	public static void main(String[] args) throws InterruptedException {
+		
+		Map<String, Integer> List_Renfo = new HashMap<String, Integer>();
+		
 		System.out.println("BONJOUR");
 		System.out.println("Que souhaitez vous faire: ");
 		
@@ -33,7 +36,8 @@ public class Application {
 					int choice = new Scanner(System.in).nextInt();
 					Renfo.Renforcement(choice);
 					//Creation Map de l'exercice selectionne
-					Map<String, Integer> List_Renfo = new HashMap<String, Integer>(Renfo.Renforcement(choice));
+					List_Renfo = new HashMap<String, Integer>(Renfo.Renforcement(choice));
+					
 					Renfo.choix_Renforcement();
 					System.out.println("Pouvons nous commencer l'entrainement? o/n");
 					String rep = new Scanner(System.in).nextLine();
@@ -50,8 +54,8 @@ public class Application {
 				}
 				System.out.println("Go: ");
 				
-				//for (String mapentry : List_Renfo.keySet()) {
-				System.out.println("Exercice: ");
+				for (String mapentry : List_Renfo.keySet()) {
+				System.out.println("Exercice: "+mapentry);}
 			}
 
 		if(choice_exercice==2) {
