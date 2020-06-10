@@ -1,7 +1,17 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+/**
+ * Description
+ *
+ * Application de Training, 
+ * Version Java de l'appli produite par Ghost en Python 3
+ * 
+ * @author Wilhelm1er
+ */
 
 public class Application {
-
+	
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println("BONJOUR");
 		System.out.println("Que souhaitez vous faire: ");
@@ -22,6 +32,8 @@ public class Application {
 					System.out.println("4 - Elite: ");
 					int choice = new Scanner(System.in).nextInt();
 					Renfo.Renforcement(choice);
+					//Creation Map de l'exercice selectionne
+					Map<String, Integer> List_Renfo = new HashMap<String, Integer>(Renfo.Renforcement(choice));
 					Renfo.choix_Renforcement();
 					System.out.println("Pouvons nous commencer l'entrainement? o/n");
 					String rep = new Scanner(System.in).nextLine();
@@ -29,8 +41,19 @@ public class Application {
 						Choix_2 = true;
 					}
 				}while (Choix_2 == false);
-				}
 				
+				System.out.println("Mettez vous en place");
+				System.out.print("Démarrage dans: ");
+				for(int i=5;i>0;i--) {
+					System.out.println(i);
+					Thread.sleep(1000);
+				}
+				System.out.println("Go: ");
+				
+				//for (String mapentry : List_Renfo.keySet()) {
+				System.out.println("Exercice: ");
+			}
+
 		if(choice_exercice==2) {
 				Training Gain=new Training();
 				
@@ -47,17 +70,17 @@ public class Application {
 					if (rep.equals("o")) {
 						Choix_3 = true;
 					}
-				}while (Choix_3 == false);
+				}while (Choix_3 == false);	
 				
-		}
-		
-		System.out.println("Mettez vous en place");
-		System.out.print("Démarrage dans: ");
-		for(int i=5;i>0;i--) {
-			System.out.println(i);
-			Thread.sleep(1000);
-		}
-		System.out.println("Go: ");
-
+				System.out.println("Mettez vous en place");
+				System.out.print("Démarrage dans: ");
+				for(int i=5;i>0;i--) {
+					System.out.println(i);
+					Thread.sleep(1000);
+				}
+				System.out.println("Go: ");
+				
+				System.out.println("Exercice: ");
+			}
 	}
 }

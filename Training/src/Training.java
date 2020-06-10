@@ -40,6 +40,14 @@ public class Training {
 		return List_1;
 	}
 	
+	public Map<String, Integer> getList_1() {
+		return List_1;
+	}
+
+	public Map<String, Integer> getList_2() {
+		return List_2;
+	}
+
 	public  Map<String, Integer> Gainage(int level) {
 		switch (level) {
 		case 1:
