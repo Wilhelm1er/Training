@@ -1,5 +1,9 @@
 import java.util.Map;
-
+/**
+ * Description
+ * Methode d'affichage en fonction de l'entrainement selectionné
+ * @author Wilhelm1er
+ */
 public class Timer {
 
 	public Timer(Map<String, Integer> List,String type) throws InterruptedException {
@@ -41,5 +45,4 @@ public class Timer {
 			break;
 		}
 	}
-	
-	}
+}

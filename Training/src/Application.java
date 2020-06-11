@@ -21,54 +21,18 @@ public class Application {
 		
 		System.out.println("1 - Training: ");
 		System.out.println("2 - Gainage: ");
+		
 		int choice_exercice = new Scanner(System.in).nextInt();
 		
 		if(choice_exercice==1) {
 				Entrainements Renfo=new Entrainements();
-				
-				Boolean Choix_2 = false;
-				do{
-					System.out.println("Selectionner votre session: ");
-					System.out.println("1 - Débutant: ");
-					System.out.println("2 - Intermédiaire: ");
-					System.out.println("3 - Confirmé: ");
-					System.out.println("4 - Elite: ");
-					int choice = new Scanner(System.in).nextInt();
-					Renfo.Renforcement(choice);
-					//Creation Map de l'exercice selectionne
-					List_Renfo = new HashMap<String, Integer>(Renfo.Renforcement(choice));
-					
-					Renfo.choix_Renforcement();
-					System.out.println("Pouvons nous commencer l'entrainement? o/n");
-					String rep = new Scanner(System.in).nextLine();
-					if (rep.equals("o")) {
-						Choix_2 = true;
-					}
-				}while (Choix_2 == false);
-				
+				Renfo.Renforcement_selection();	
 				Timer Timer_Renfo=new Timer(List_Renfo,"Renforcement");
-				
-			}
-
+		}
 		if(choice_exercice==2) {
 				Entrainements Gain=new Entrainements();
-				
-				Boolean Choix_3 = false;
-				do{
-					System.out.println("Selectionner votre session: ");
-					System.out.println("1 - Routine 1: ");
-					System.out.println("2 - Routine 2: ");
-					int choice = new Scanner(System.in).nextInt();
-					Gain.Gainage(choice);
-					Gain.choix_Gainage();
-					System.out.println("Pouvons nous commencer l'entrainement? o/n");
-					String rep = new Scanner(System.in).nextLine();
-					if (rep.equals("o")) {
-						Choix_3 = true;
-					}
-				}while (Choix_3 == false);	
-				
+				Gain.Gainage_selection();	
 				Timer Timer_Gainage=new Timer(List_Renfo,"Gainage");
-			}
+		}
 	}
 }
