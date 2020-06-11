@@ -31,9 +31,6 @@ public class Entrainements {
 			if (choice >= 1 && choice <= 4) {
 				this.Renforcement(choice);
 				this.choix_Renforcement();
-				System.out.println("Choisissez votre temps de corde à sauter: ");
-				int Duree_corde = new Scanner(System.in).nextInt();
-				System.out.println("Vous avez choisi de faire: " + Duree_corde + " secondes de corde à sauter");
 				System.out.println("Pouvons nous commencer l'entrainement? o/n");
 				String rep = new Scanner(System.in).nextLine();
 				if (rep.equals("o")) {

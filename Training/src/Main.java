@@ -14,7 +14,7 @@ public class Main {
 
 		Map<String, Integer> List_Renfo = new HashMap<String, Integer>();
 
-		System.out.println("BONJOUR");
+		System.out.println("Appli TRAINING made in Java");
 		System.out.println("Que souhaitez vous faire: ");
 
 		System.out.println("1 - Training: ");
