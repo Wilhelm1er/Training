@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 /**
  * Methodes liées aux entrainements selectionnés
  * 
@@ -8,40 +9,47 @@ import java.util.Scanner;
  */
 
 public class Entrainements {
-	
+
 	private Map<String, Integer> List_1 = new HashMap<String, Integer>();
 	private Map<String, Integer> List_2 = new HashMap<String, Integer>();
-	
+
 	/**
 	 * Selection du niveau de difficulté du mode Renforcement
 	 */
 	public void Renforcement_selection() {
-	Boolean Choix_2 = false;
-	do{
-		System.out.println("Selectionner votre session: ");
-		System.out.println("1 - Débutant: ");
-		System.out.println("2 - Intermédiaire: ");
-		System.out.println("3 - Confirmé: ");
-		System.out.println("4 - Elite: ");
-		int choice = new Scanner(System.in).nextInt();
-		this.Renforcement(choice);
-		this.choix_Renforcement();
-		System.out.println("Pouvons nous commencer l'entrainement? o/n");
-		String rep = new Scanner(System.in).nextLine();
-		if (rep.equals("o")) {
-			Choix_2 = true;
-		}
-	}while (Choix_2 == false);
+		Boolean Choix_2 = false;
+		do {
+			System.out.println("Selectionner votre session: ");
+			System.out.println("1 - Débutant: ");
+			System.out.println("2 - Intermédiaire: ");
+			System.out.println("3 - Confirmé: ");
+			System.out.println("4 - Elite: ");
+			int choice = new Scanner(System.in).nextInt();
+			if (choice < 1 && choice > 4) {
+				System.out.println("Niveau choisi inexistant");
+			}
+			if (choice >= 1 && choice <= 4) {
+				this.Renforcement(choice);
+				this.choix_Renforcement();
+				System.out.println("Choisissez votre temps de corde à sauter: ");
+				int Duree_corde = new Scanner(System.in).nextInt();
+				System.out.println("Vous avez choisi de faire: " + Duree_corde + " secondes de corde à sauter");
+				System.out.println("Pouvons nous commencer l'entrainement? o/n");
+				String rep = new Scanner(System.in).nextLine();
+				if (rep.equals("o")) {
+					Choix_2 = true;
+				}
+			}
+		} while (Choix_2 == false);
 	}
-	
+
 	/**
-	 * Creation  de la liste de l'exercice de renforcement musculaire
-	 * suivant le niveau de difficulté selectionné
+	 * Creation de la liste de l'exercice de renforcement musculaire suivant le
+	 * niveau de difficulté selectionné
 	 * 
-	 * @param level
-	 * 			Niveau de difficulté selectionné
-	 * @return List_1
-	 * 			Liste générée correspondant à l'exercice de renforcement selectionné
+	 * @param level Niveau de difficulté selectionné
+	 * @return List_1 Liste générée correspondant à l'exercice de renforcement
+	 *         selectionné
 	 */
 	public Map<String, Integer> Renforcement(int level) {
 		switch (level) {
@@ -76,35 +84,44 @@ public class Entrainements {
 		}
 		return List_1;
 	}
+
 	/**
 	 * Selection du niveau de difficulté du mode Gainage
 	 */
 	public void Gainage_selection() {
-	Boolean Choix_3 = false;
-	do{
-		System.out.println("Selectionner votre session: ");
-		System.out.println("1 - Routine 1: ");
-		System.out.println("2 - Routine 2: ");
-		int choice = new Scanner(System.in).nextInt();
-		this.Gainage(choice);
-		this.choix_Gainage();
-		System.out.println("Pouvons nous commencer l'entrainement? o/n");
-		String rep = new Scanner(System.in).nextLine();
-		if (rep.equals("o")) {
-			Choix_3 = true;
-		}
-	}while (Choix_3 == false);
+		Boolean Choix_3 = false;
+		do {
+			System.out.println("Selectionner votre session: ");
+			System.out.println("1 - Routine 1: ");
+			System.out.println("2 - Routine 2: ");
+			int choice = new Scanner(System.in).nextInt();
+			if (choice < 1 && choice > 2) {
+				System.out.println("Niveau choisi inexistant");
+			}
+			if (choice >= 1 && choice <= 2) {
+				this.Gainage(choice);
+				this.choix_Gainage();
+				System.out.println("Choisissez votre temps de corde à sauter: ");
+				int Duree_corde = new Scanner(System.in).nextInt();
+				System.out.println("Vous avez choisi de faire: " + Duree_corde + " secondes de corde à sauter");
+				System.out.println("Pouvons nous commencer l'entrainement? o/n");
+				String rep = new Scanner(System.in).nextLine();
+				if (rep.equals("o")) {
+					Choix_3 = true;
+				}
+			}
+		} while (Choix_3 == false);
 	}
+
 	/**
-	 * Creation  de la liste de l'exercice de gainage
-	 * suivant le niveau de difficulté selectionné
+	 * Creation de la liste de l'exercice de gainage suivant le niveau de difficulté
+	 * selectionné
 	 * 
-	 * @param level
-	 * 			Niveau de difficulté selectionné
-	 * @return List_2
-	 * 			Liste générée correspondant à l'exercice de gainage selectionné
+	 * @param level Niveau de difficulté selectionné
+	 * @return List_2 Liste générée correspondant à l'exercice de gainage
+	 *         selectionné
 	 */
-	public  Map<String, Integer> Gainage(int level) {
+	public Map<String, Integer> Gainage(int level) {
 		switch (level) {
 		case 1:
 			List_2.put("La Planche", 60);
@@ -121,8 +138,9 @@ public class Entrainements {
 			List_2.put("La Planche 1 bras 1 jambe levée droit", 30);
 			break;
 		}
-		return List_1;	
-	} 		
+		return List_1;
+	}
+
 	/**
 	 * Affichage du choix de l'exercice de renforcement choisi
 	 */
@@ -132,13 +150,14 @@ public class Entrainements {
 			System.out.println("Exercices: " + s + " Répétitions: " + List_1.get(s));
 		}
 	}
+
 	/**
 	 * Affichage du choix de l'exercice de gainage choisi
 	 */
 	public void choix_Gainage() {
 		System.out.println("Session: ");
 		for (String s : List_2.keySet()) {
-			System.out.println("Exercices: " + s + " Répétitions: " + List_2.get(s)+ " secondes.");
+			System.out.println("Exercices: " + s + " Répétitions: " + List_2.get(s) + " secondes.");
 		}
 	}
 }
