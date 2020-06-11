@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Training {
+public class Entrainements {
 	
 	private Map<String, Integer> List_1 = new HashMap<String, Integer>();
 	private Map<String, Integer> List_2 = new HashMap<String, Integer>();

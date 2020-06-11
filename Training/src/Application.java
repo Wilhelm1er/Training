@@ -24,7 +24,7 @@ public class Application {
 		int choice_exercice = new Scanner(System.in).nextInt();
 		
 		if(choice_exercice==1) {
-				Training Renfo=new Training();
+				Entrainements Renfo=new Entrainements();
 				
 				Boolean Choix_2 = false;
 				do{
@@ -46,20 +46,12 @@ public class Application {
 					}
 				}while (Choix_2 == false);
 				
-				System.out.println("Mettez vous en place");
-				System.out.print("Démarrage dans: ");
-				for(int i=5;i>0;i--) {
-					System.out.println(i);
-					Thread.sleep(1000);
-				}
-				System.out.println("Go: ");
+				Timer Timer_Renfo=new Timer(List_Renfo,"Renforcement");
 				
-				for (String mapentry : List_Renfo.keySet()) {
-				System.out.println("Exercice: "+mapentry);}
 			}
 
 		if(choice_exercice==2) {
-				Training Gain=new Training();
+				Entrainements Gain=new Entrainements();
 				
 				Boolean Choix_3 = false;
 				do{
@@ -76,15 +68,7 @@ public class Application {
 					}
 				}while (Choix_3 == false);	
 				
-				System.out.println("Mettez vous en place");
-				System.out.print("Démarrage dans: ");
-				for(int i=5;i>0;i--) {
-					System.out.println(i);
-					Thread.sleep(1000);
-				}
-				System.out.println("Go: ");
-				
-				System.out.println("Exercice: ");
+				Timer Timer_Gainage=new Timer(List_Renfo,"Gainage");
 			}
 	}
 }
