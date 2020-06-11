@@ -1,5 +1,5 @@
 # Trainings
-## Application d'exercices physique automatisé.
+## Application d'exercices physiques automatisée.
 </br> Choix donné à l'utilisateur entre : 
 - Renforcement musculaire général
 - Gainage. 
