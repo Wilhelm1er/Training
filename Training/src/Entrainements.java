@@ -16,7 +16,8 @@ public class Entrainements {
 	/**
 	 * Selection du niveau de difficulté du mode Renforcement
 	 */
-	public void Renforcement_selection() {
+	public int Renforcement_selection() {
+		int level=0;
 		Boolean Choix_2 = false;
 		do {
 			System.out.println("Selectionner votre session: ");
@@ -25,6 +26,7 @@ public class Entrainements {
 			System.out.println("3 - Confirmé: ");
 			System.out.println("4 - Elite: ");
 			int choice = new Scanner(System.in).nextInt();
+			level=choice;
 			if (choice < 1 && choice > 4) {
 				System.out.println("Niveau choisi inexistant");
 			}
@@ -38,6 +40,7 @@ public class Entrainements {
 				}
 			}
 		} while (Choix_2 == false);
+		return level;
 	}
 
 	/**
@@ -84,23 +87,23 @@ public class Entrainements {
 
 	/**
 	 * Selection du niveau de difficulté du mode Gainage
+	 * @return 
 	 */
-	public void Gainage_selection() {
+	public int Gainage_selection() {
+		int level=0;
 		Boolean Choix_3 = false;
 		do {
 			System.out.println("Selectionner votre session: ");
 			System.out.println("1 - Routine 1: ");
 			System.out.println("2 - Routine 2: ");
 			int choice = new Scanner(System.in).nextInt();
+			level=choice;
 			if (choice < 1 && choice > 2) {
 				System.out.println("Niveau choisi inexistant");
 			}
 			if (choice >= 1 && choice <= 2) {
 				this.Gainage(choice);
 				this.choix_Gainage();
-				System.out.println("Choisissez votre temps de corde à sauter: ");
-				int Duree_corde = new Scanner(System.in).nextInt();
-				System.out.println("Vous avez choisi de faire: " + Duree_corde + " secondes de corde à sauter");
 				System.out.println("Pouvons nous commencer l'entrainement? o/n");
 				String rep = new Scanner(System.in).nextLine();
 				if (rep.equals("o")) {
@@ -108,6 +111,7 @@ public class Entrainements {
 				}
 			}
 		} while (Choix_3 == false);
+		return level;
 	}
 
 	/**
@@ -135,7 +139,7 @@ public class Entrainements {
 			List_2.put("La Planche 1 bras 1 jambe levée droit", 30);
 			break;
 		}
-		return List_1;
+		return List_2;
 	}
 
 	/**

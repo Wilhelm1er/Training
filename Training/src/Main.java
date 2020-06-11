@@ -24,13 +24,14 @@ public class Main {
 
 		if (choice_exercice == 1) {
 			Entrainements Renfo = new Entrainements();
-			Renfo.Renforcement_selection();
-			Timer Timer_Renfo = new Timer(List_Renfo, "Renforcement");
+			int level=Renfo.Renforcement_selection();
+			Timer Timer_Renfo = new Timer(Renfo.Renforcement(level), "Renforcement");
 		}
 		if (choice_exercice == 2) {
 			Entrainements Gain = new Entrainements();
-			Gain.Gainage_selection();
-			Timer Timer_Gainage = new Timer(List_Renfo, "Gainage");
+			int level=Gain.Gainage_selection();
+			System.out.println("level selectionné Gainage: "+level);
+			Timer Timer_Gainage = new Timer(Gain.Gainage(level), "Gainage");
 		}
 	}
 }
