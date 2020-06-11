@@ -2,8 +2,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 /**
- * Description
- *
  * Application de Training, 
  * Version Java de l'appli produite par Ghost en Python 3
  * 

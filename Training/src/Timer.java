@@ -1,6 +1,5 @@
 import java.util.Map;
 /**
- * Description
  * Methode d'affichage en fonction de l'entrainement selectionné
  * @author Wilhelm1er
  */

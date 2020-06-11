@@ -2,8 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 /**
- * Description
- * Methode liées aux entrainements selectionnés
+ * Methodes liées aux entrainements selectionnés
  * 
  * @author Wilhelm1er
  */
