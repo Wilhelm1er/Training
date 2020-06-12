@@ -13,38 +13,47 @@ public class Timer {
 	int nbre_serie;
 
 	public Timer(Map<String, Integer> List, String type) throws InterruptedException {
-
+		// Session de base
 		// Choix durée corde à sauter
-		System.out.println("Choisissez votre temps de corde à sauter: ");
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Choisissez votre temps de corde à sauter: (en secondes)");
 		Duree_corde = new Scanner(System.in).nextInt();
-		System.out.println("Vous avez choisi de faire: " + Duree_corde + " secondes de corde à sauter");
+		//System.out.println("Vous avez choisi de faire: " + Duree_corde + " secondes de corde à sauter");
+		System.out.println(" ");
 		// Choix du nombre de série
-		System.out.println("Combien de série: ");
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Nombre de série à effectuer: ");
 		nbre_serie = new Scanner(System.in).nextInt();
-
-		System.out.println("Mettez vous en place");
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("          Installez vous... ");
+		System.out.println("                et          ");
 
 		this.promptEnterKey();
 
-		System.out.print("Démarrage dans: ");
+		System.out.print("Démarrage dans 5 secondes: ");
 
 		for (int i = 5; i > 0; i--) {
 			System.out.println(i);
 			Thread.sleep(1000);
 		}
 
-		System.out.println("GOOOOO:");
-
+		// Switch selon le choix entre renforcement et gainage
 		switch (type) {
 		case "Renforcement":
 			for (int i = 1; i <= nbre_serie; i++) {
-				System.out.println("SERIE NUMERO: " + i);
+				System.out.println(" ");
+				System.out.println("#####################################");
+				System.out.println("          SERIE NUMERO: " + i);
+				System.out.println("#####################################");
+				System.out.println(" ");
 				for (String mapentry : List.keySet()) {
 					this.corde_a_sauter();
-					System.out.println("Exercice: " + mapentry);
+					System.out.println("Exercice suivant: " + mapentry);
 					this.promptEnterKey();
 				}
-
 				if (i < nbre_serie) {
 					this.corde_a_sauter();
 					System.out.println("PAUSE de 3min");
@@ -83,7 +92,10 @@ public class Timer {
 	 * 
 	 */
 	public void promptEnterKey() {
-		System.out.println("Press \"ENTER\" to continue...");
+		System.out.println(" ");
+		System.out.println(" Appuyer sur \"ENTRER\" pour continuer");
+		System.out.println("#####################################");
+		System.out.println(" ");
 		try {
 			System.in.read();
 		} catch (IOException e) {

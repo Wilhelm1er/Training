@@ -33,6 +33,9 @@ public class Entrainements {
 			if (choice >= 1 && choice <= 4) {
 				this.Renforcement(choice);
 				this.choix_Renforcement();
+				System.out.println(" ");
+				System.out.println("#####################################");
+				System.out.println(" ");
 				System.out.println("Pouvons nous commencer l'entrainement? o/n");
 				String rep = new Scanner(System.in).nextLine();
 				if (rep.equals("o")) {
@@ -104,6 +107,9 @@ public class Entrainements {
 			if (choice >= 1 && choice <= 2) {
 				this.Gainage(choice);
 				this.choix_Gainage();
+				System.out.println(" ");
+				System.out.println("#####################################");
+				System.out.println(" ");
 				System.out.println("Pouvons nous commencer l'entrainement? o/n");
 				String rep = new Scanner(System.in).nextLine();
 				if (rep.equals("o")) {
@@ -146,9 +152,12 @@ public class Entrainements {
 	 * Affichage du choix de l'exercice de renforcement choisi
 	 */
 	public void choix_Renforcement() {
+		System.out.println("#####################################");
+		System.out.println(" ");
 		System.out.println("Session: ");
+		System.out.println(" ");
 		for (String s : List_1.keySet()) {
-			System.out.println("Exercices: " + s + " Répétitions: " + List_1.get(s));
+			System.out.println("- " + s + ", " + List_1.get(s)+ " Répétitions.");
 		}
 	}
 
@@ -156,9 +165,12 @@ public class Entrainements {
 	 * Affichage du choix de l'exercice de gainage choisi
 	 */
 	public void choix_Gainage() {
+		System.out.println("#####################################");
+		System.out.println(" ");
 		System.out.println("Session: ");
+		System.out.println(" ");
 		for (String s : List_2.keySet()) {
-			System.out.println("Exercices: " + s + " Répétitions: " + List_2.get(s) + " secondes.");
+			System.out.println("- " + s + ", " + List_2.get(s) + " secondes.");
 		}
 	}
 }

@@ -15,13 +15,18 @@ public class Main {
 
 		Map<String, Integer> List_Renfo = new HashMap<String, Integer>();
 
-		System.out.println("TRAINING made in Java");
+		System.out.println("#####################################");
+		System.out.println("        TRAINING made in Java        ");
+		System.out.println("#####################################");
+		System.out.println(" ");
 		System.out.println("Que souhaitez vous faire: ");
 
 		System.out.println("1 - Training: ");
 		System.out.println("2 - Gainage: ");
 
 		int choice_exercice = new Scanner(System.in).nextInt();
+		System.out.println("#####################################");
+		System.out.println(" ");
 
 		if (choice_exercice == 1) {
 			Entrainements Renfo = new Entrainements();
