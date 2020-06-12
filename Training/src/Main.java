@@ -1,9 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 /**
- * Application de Training, 
- * Version Java de l'appli produite par Ghost en Python 3
+ * Application de Training, Version Java de l'appli produite par Ghost en Python
+ * 3
  * 
  * @author Wilhelm1er
  */
@@ -24,14 +25,15 @@ public class Main {
 
 		if (choice_exercice == 1) {
 			Entrainements Renfo = new Entrainements();
-			int level=Renfo.Renforcement_selection();
+			int level = Renfo.Renforcement_selection();
 			Timer Timer_Renfo = new Timer(Renfo.Renforcement(level), "Renforcement");
 		}
 		if (choice_exercice == 2) {
 			Entrainements Gain = new Entrainements();
-			int level=Gain.Gainage_selection();
-			System.out.println("level selectionné Gainage: "+level);
+			int level = Gain.Gainage_selection();
+			System.out.println("level selectionné Gainage: " + level);
 			Timer Timer_Gainage = new Timer(Gain.Gainage(level), "Gainage");
 		}
+		System.out.print("Session TERMINEE");
 	}
 }
