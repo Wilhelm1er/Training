@@ -14,11 +14,14 @@ public class Entrainements {
 
 	private Map<String, Integer> List_1 = new HashMap<String, Integer>();
 	private Map<String, Integer> List_2 = new HashMap<String, Integer>();
+	private Map<String, Integer> List_3 = new HashMap<String, Integer>();
 
+	// Renforcement
 	/**
 	 * Selection du niveau de difficulté du mode Renforcement
+	 * @return level
 	 */
-	public int Renforcement_selection() {
+	public int renforcement_Selection() {
 		int level=0;
 		Boolean Choix_2 = false;
 		do {
@@ -33,8 +36,8 @@ public class Entrainements {
 				System.out.println("Niveau choisi inexistant");
 			}
 			if (choice >= 1 && choice <= 4) {
-				this.Renforcement(choice);
-				this.choix_Renforcement();
+				this.renforcement(choice);
+				this.renforcement_ToString();
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println(" ");
@@ -53,10 +56,10 @@ public class Entrainements {
 	 * niveau de difficulté selectionné
 	 * 
 	 * @param level Niveau de difficulté selectionné
-	 * @return List_1 Liste générée correspondant à l'exercice de renforcement
+	 * @return List_1 Liste générée correspondant au niveau de l'entrainement de renforcement
 	 *         selectionné
 	 */
-	public Map<String, Integer> Renforcement(int level) {
+	public Map<String, Integer> renforcement(int level) {
 		switch (level) {
 		case 1:
 			List_1.put("Bras tendu coude", 10);
@@ -89,26 +92,43 @@ public class Entrainements {
 		}
 		return List_1;
 	}
-
+	
 	/**
-	 * Selection du niveau de difficulté du mode Gainage
-	 * @return 
+	 * Affichage du choix de l'exercice de renforcement choisi
 	 */
-	public int Gainage_selection() {
+	public void renforcement_ToString() {
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Session: ");
+		System.out.println(" ");
+		for (String s : List_1.keySet()) {
+			System.out.println("- " + s + ", " + List_1.get(s)+ " Répétitions.");
+		}
+	}
+	
+	// Musculation
+	
+	/**
+	 * Selection du niveau de difficulté du mode Musculation
+	 * @return level
+	 */
+	
+	public int musculation_Selection() {
 		int level=0;
 		Boolean Choix_3 = false;
 		do {
 			System.out.println("Selectionner votre niveau: ");
-			System.out.println("1 - Routine 1: ");
-			System.out.println("2 - Routine 2: ");
+			
+			System.out.println("Niveau 1: ");
+			System.out.println("Niveau 2: ");
 			int choice = new Scanner(System.in).nextInt();
 			level=choice;
 			if (choice < 1 && choice > 2) {
 				System.out.println("Niveau choisi inexistant");
 			}
 			if (choice >= 1 && choice <= 2) {
-				this.Gainage(choice);
-				this.choix_Gainage();
+				this.musculation(choice);
+				this.musculation_ToString();
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println(" ");
@@ -121,6 +141,79 @@ public class Entrainements {
 		} while (Choix_3 == false);
 		return level;
 	}
+	/**
+	 * Creation de la liste de l'exercice de musculation suivant le
+	 * niveau de difficulté selectionné
+	 * 
+	 * @param level Niveau de difficulté selectionné
+	 * @return List_3 Liste générée correspondant au niveau l'entrainement de musculation
+	 *         selectionné
+	 */
+	
+	public Map<String, Integer> musculation(int level) {
+		switch (level) {
+		case 1:
+			List_3.put("Dips", 5);
+			List_3.put("Pompes pieds surélevés", 10);
+			List_3.put("Pompes", 10);
+			List_3.put("Tractions", 10);
+			break;
+		case 2:
+			List_3.put("Dips", 10);
+			List_3.put("Pompes pieds surélevés", 15);
+			List_3.put("Pompes", 15);
+			List_3.put("Tractions", 15);
+			break;
+		}
+		return List_3;
+		}
+
+	/**
+	 * Affichage du choix de l'exercice de musculation choisi
+	 */
+	public void musculation_ToString() {
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Session: ");
+		System.out.println(" ");
+		for (String s : List_3.keySet()) {
+			System.out.println("- " + s + ", " + List_3.get(s)+ " Répétitions.");
+		}
+	}
+
+	// Gainage
+	
+	/**
+	 * Selection du niveau de difficulté du mode Gainage
+	 * @return level
+	 */
+	public int gainage_Selection() {
+		int level=0;
+		Boolean Choix_4 = false;
+		do {
+			System.out.println("Selectionner votre niveau: ");
+			System.out.println("1 - Routine 1: ");
+			System.out.println("2 - Routine 2: ");
+			int choice = new Scanner(System.in).nextInt();
+			level=choice;
+			if (choice < 1 && choice > 2) {
+				System.out.println("Niveau choisi inexistant");
+			}
+			if (choice >= 1 && choice <= 2) {
+				this.gainage(choice);
+				this.Gainage_ToString();
+				System.out.println(" ");
+				System.out.println("#####################################");
+				System.out.println(" ");
+				System.out.println("Pouvons nous commencer l'entrainement? o/n");
+				String rep = new Scanner(System.in).nextLine();
+				if (rep.equals("o")) {
+					Choix_4 = true;
+				}
+			}
+		} while (Choix_4 == false);
+		return level;
+	}
 
 	/**
 	 * Creation de la liste de l'exercice de gainage suivant le niveau de difficulté
@@ -130,7 +223,7 @@ public class Entrainements {
 	 * @return List_2 Liste générée correspondant à l'exercice de gainage
 	 *         selectionné
 	 */
-	public Map<String, Integer> Gainage(int level) {
+	public Map<String, Integer> gainage(int level) {
 		switch (level) {
 		case 1:
 			List_2.put("La Planche", 60);
@@ -151,22 +244,9 @@ public class Entrainements {
 	}
 
 	/**
-	 * Affichage du choix de l'exercice de renforcement choisi
-	 */
-	public void choix_Renforcement() {
-		System.out.println("#####################################");
-		System.out.println(" ");
-		System.out.println("Session: ");
-		System.out.println(" ");
-		for (String s : List_1.keySet()) {
-			System.out.println("- " + s + ", " + List_1.get(s)+ " Répétitions.");
-		}
-	}
-
-	/**
 	 * Affichage du choix de l'exercice de gainage choisi
 	 */
-	public void choix_Gainage() {
+	public void Gainage_ToString() {
 		System.out.println("#####################################");
 		System.out.println(" ");
 		System.out.println("Session: ");
