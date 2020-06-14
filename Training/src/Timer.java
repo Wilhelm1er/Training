@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Scanner;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
@@ -98,6 +97,8 @@ public class Timer {
 			this.corde_a_sauter();
 			break;
 		}
+		System.out.println("Session TERMINEE");
+		System.out.println(" ");
 		// Prise de l'instant de fin de l'entrainement
 		Timestamp timestamp_2 = new Timestamp(System.currentTimeMillis());
 		// Conversion de la durée de l'entrainement.
@@ -107,6 +108,10 @@ public class Timer {
 		int hours = (int) ((diff / (1000 * 60 * 60)) % 24);
 		// Affichage de la durée de l'entrainement
 		System.out.println("Durée de l'entrainement: " + minutes + " minutes " + seconds + " secondes.");
+		System.out.println(" ");
+		System.out.println("#####################################");
+		System.out.println(" ");
+		Menu menu=new Menu();
 	}
 
 	/**
