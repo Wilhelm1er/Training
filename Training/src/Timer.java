@@ -1,7 +1,11 @@
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Scanner;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  * Methode d'affichage en fonction de l'entrainement selectionné
@@ -10,10 +14,11 @@ import java.util.Scanner;
  */
 public class Timer {
 
-	int Duree_corde;
-	int Duree_pause;
-	int nbre_serie;
-	Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
+	private int Duree_corde;
+	private int Duree_pause;
+	private int nbre_serie;
+	File file = new File("/Users/ender 1/git/Trainings/Training/buzzer1.wav");
+	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 
 	public Timer(Map<String, Integer> List, String type) throws InterruptedException {
 		// Session de base
@@ -39,16 +44,15 @@ public class Timer {
 
 			this.promptEnterKey();
 
-			System.out.print("Démarrage dans 5 secondes: ");
+			this.demarrage();
 
-			for (int i = 5; i > 0; i--) {
-				System.out.println(i);
-				Thread.sleep(1000);
-			}
 			// Prise de l'instant de demarrage de l'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
 
 			for (int i = 1; i <= nbre_serie; i++) {
+				if(i>1) {
+					this.promptEnterKey();
+				}
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println("          SERIE NUMERO: " + i);
@@ -56,7 +60,7 @@ public class Timer {
 				System.out.println(" ");
 				for (String mapentry : List.keySet()) {
 					this.corde_a_sauter();
-					System.out.println("Exercice suivant: " + mapentry + " - " + List.get(mapentry) + " Répétitions.");
+					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Répétitions.");
 					this.promptEnterKey();
 				}
 				if (i < nbre_serie) {
@@ -86,16 +90,15 @@ public class Timer {
 
 			this.promptEnterKey();
 
-			System.out.print("Démarrage dans 5 secondes: ");
+			this.demarrage();
 
-			for (int i = 5; i > 0; i--) {
-				System.out.println(i);
-				Thread.sleep(1000);
-			}
 			// Prise de l'instant de demarrage de l'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
 
 			for (int i = 1; i <= nbre_serie; i++) {
+				if(i>1) {
+					this.promptEnterKey();
+				}
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println("          SERIE NUMERO: " + i);
@@ -105,6 +108,7 @@ public class Timer {
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Répétitions.");
 					this.promptEnterKey();
 					this.pause(Duree_pause);
+					this.bip();
 				}
 				if (i < nbre_serie) {
 					System.out.println("PAUSE de 3min");
@@ -131,16 +135,15 @@ public class Timer {
 
 			this.promptEnterKey();
 
-			System.out.print("Démarrage dans 5 secondes: ");
+			this.demarrage();
 
-			for (int i = 5; i > 0; i--) {
-				System.out.println(i);
-				Thread.sleep(1000);
-			}
 			// Prise de l'instant de demarrage de l'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
 
 			for (int i = 1; i <= nbre_serie; i++) {
+				if(i>1) {
+					this.promptEnterKey();
+				}
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println("          SERIE NUMERO: " + i);
@@ -149,6 +152,8 @@ public class Timer {
 				for (String mapentry : List.keySet()) {
 					this.corde_a_sauter();
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Secondes.");
+					// AJOUTER GESTION TEMPS EXO
+					this.pause(List.get(mapentry));
 					this.promptEnterKey();
 				}
 				if (i < nbre_serie) {
@@ -164,9 +169,9 @@ public class Timer {
 		Timestamp timestamp_2 = new Timestamp(System.currentTimeMillis());
 		// Conversion de la durée de l'entrainement.
 		long diff = timestamp_2.getTime() - timestamp_1.getTime();
-		int seconds = (int) (diff / 1000) % 60 ;
-		int minutes = (int) ((diff / (1000*60)) % 60);
-		int hours   = (int) ((diff / (1000*60*60)) % 24);
+		int seconds = (int) (diff / 1000) % 60;
+		int minutes = (int) ((diff / (1000 * 60)) % 60);
+		int hours = (int) ((diff / (1000 * 60 * 60)) % 24);
 		// Affichage de la durée de l'entrainement
 		System.out.println("Durée de l'entrainement: " + minutes + " minutes " + seconds + " secondes.");
 	}
@@ -196,7 +201,11 @@ public class Timer {
 		for (int i = Duree_corde; i > 0; i--) {
 			System.out.println(i);
 			Thread.sleep(1000);
+			if (i == 5) {
+				this.bip();
+			}
 		}
+
 	}
 
 	/**
@@ -208,6 +217,43 @@ public class Timer {
 		for (int i = time; i > 0; i--) {
 			System.out.println(i);
 			Thread.sleep(1000);
+			if (i == 5) {
+				this.bip();
+			}
+		}
+	}
+
+	/**
+	 * Methode pour jouer le bip sonore
+	 * 
+	 */
+	public void bip() {
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(file));
+			clip.start();
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+	}
+
+	/**
+	 * Methode pour lancer le demarrage
+	 * 
+	 * @throws InterruptedException
+	 * 
+	 */
+	public void demarrage() throws InterruptedException {
+		System.out.print("Démarrage dans 5 secondes: ");
+
+		for (int i = 5; i > 0; i--) {
+			if (i == 4) {
+				this.bip();
+			}
+			System.out.print(i);
+			Thread.sleep(1000);
+			System.out.print('\r');
+			
 		}
 	}
 }

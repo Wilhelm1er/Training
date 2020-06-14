@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.sound.sampled.AudioSystem;
+
 /**
  * Application de Training, Version Java de l'appli produite par Ghost en Python
  * 3
