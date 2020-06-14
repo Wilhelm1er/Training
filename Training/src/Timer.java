@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -39,7 +40,9 @@ public class Timer {
 			System.out.println(i);
 			Thread.sleep(1000);
 		}
-
+		// Prise de l'instant de demarrage de l'entrainement
+		Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
+		
 		// Switch selon le choix entre renforcement et gainage
 		switch (type) {
 		case "Renforcement":
@@ -89,6 +92,15 @@ public class Timer {
 			break;
 		}
 		this.corde_a_sauter();
+		// Prise de l'instant de fin de l'entrainement
+		Timestamp timestamp_2 = new Timestamp(System.currentTimeMillis());
+		// Conversion de la durée de l'entrainement.
+		long diff = timestamp_2.getTime() - timestamp_1.getTime();
+		long diffSeconds = diff / 1000;
+		long diffMinutes = diff / (60 * 1000);
+		long diffHours = diff / (60 * 60 * 1000);
+		// Affichage de la durée de l'entrainement
+		System.out.println("Durée de l'entrainement: "+diffMinutes+" minutes "+diffSeconds+" secondes.");
 	}
 
 	/**
