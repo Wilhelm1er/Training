@@ -1,6 +1,8 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Methodes liées aux entrainements selectionnés
@@ -20,7 +22,7 @@ public class Entrainements {
 		int level=0;
 		Boolean Choix_2 = false;
 		do {
-			System.out.println("Selectionner votre session: ");
+			System.out.println("Selectionner votre niveau: ");
 			System.out.println("1 - Débutant: ");
 			System.out.println("2 - Intermédiaire: ");
 			System.out.println("3 - Confirmé: ");
@@ -57,30 +59,30 @@ public class Entrainements {
 	public Map<String, Integer> Renforcement(int level) {
 		switch (level) {
 		case 1:
-			List_1.put("Abdo rameur", 15);
 			List_1.put("Bras tendu coude", 10);
 			List_1.put("Tractions", 5);
+			List_1.put("Abdo rameur", 15);
 			List_1.put("Mountain Climbers", 15);
 			List_1.put("Pompes", 5);
 			break;
 		case 2:
-			List_1.put("Abdo rameur", 20);
 			List_1.put("Bras tendu coude", 12);
 			List_1.put("Tractions", 7);
+			List_1.put("Abdo rameur", 20);
 			List_1.put("Mountain Climbers", 18);
 			List_1.put("Pompes", 7);
 			break;
 		case 3:
-			List_1.put("Abdo rameur", 25);
 			List_1.put("Bras tendu coude", 20);
 			List_1.put("Tractions", 15);
+			List_1.put("Abdo rameur", 25);
 			List_1.put("Mountain Climbers", 25);
 			List_1.put("Pompes", 15);
 			break;
 		case 4:
-			List_1.put("Abdo rameur", 30);
 			List_1.put("Bras tendu coude", 25);
 			List_1.put("Tractions", 20);
+			List_1.put("Abdo rameur", 30);
 			List_1.put("Mountain Climbers", 30);
 			List_1.put("Pompes", 20);
 			break;
@@ -96,7 +98,7 @@ public class Entrainements {
 		int level=0;
 		Boolean Choix_3 = false;
 		do {
-			System.out.println("Selectionner votre session: ");
+			System.out.println("Selectionner votre niveau: ");
 			System.out.println("1 - Routine 1: ");
 			System.out.println("2 - Routine 2: ");
 			int choice = new Scanner(System.in).nextInt();

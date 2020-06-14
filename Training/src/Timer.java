@@ -51,7 +51,7 @@ public class Timer {
 				System.out.println(" ");
 				for (String mapentry : List.keySet()) {
 					this.corde_a_sauter();
-					System.out.println("Exercice suivant: " + mapentry);
+					System.out.println("Exercice suivant: " + mapentry+ " - "+List.get(mapentry)+ " Répétitions.");
 					this.promptEnterKey();
 				}
 				if (i < nbre_serie) {
@@ -67,16 +67,20 @@ public class Timer {
 
 		case "Gainage":
 			for (int i = 1; i <= nbre_serie; i++) {
-				System.out.println("SERIE NUMERO: " + i);
+				System.out.println(" ");
+				System.out.println("#####################################");
+				System.out.println("          SERIE NUMERO: " + i);
+				System.out.println("#####################################");
+				System.out.println(" ");
 				for (String mapentry : List.keySet()) {
 					this.corde_a_sauter();
-					System.out.println("Exercice: " + mapentry);
+					System.out.println("Exercice: " + mapentry+ " - "+List.get(mapentry)+ " Secondes.");
 					this.promptEnterKey();
 				}
 				if (i < nbre_serie) {
 					this.corde_a_sauter();
 					System.out.println("PAUSE de 3min");
-					for (int k = 8; k > 0; k--) {
+					for (int k = 180; k > 0; k--) {
 						System.out.println(k);
 						Thread.sleep(1000);
 					}

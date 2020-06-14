@@ -36,7 +36,6 @@ public class Main {
 		if (choice_exercice == 2) {
 			Entrainements Gain = new Entrainements();
 			int level = Gain.Gainage_selection();
-			System.out.println("level selectionné Gainage: " + level);
 			Timer Timer_Gainage = new Timer(Gain.Gainage(level), "Gainage");
 		}
 		System.out.print("Session TERMINEE");
