@@ -26,31 +26,9 @@ public class Timer {
 		// Switch selon le choix entre renforcement et gainage
 		switch (type) {
 		case "Renforcement":
-			// Choix durée corde à sauter
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("Choisissez votre temps de corde à sauter: (en secondes)");
-			Duree_corde = new Scanner(System.in).nextInt();
-			System.out.println(" ");
-			// Choix du nombre de série
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("Nombre de série à effectuer: ");
-			nbre_serie = new Scanner(System.in).nextInt();
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("          Installez vous... ");
-			System.out.println("                et          ");
-
-			this.promptEnterKey();
-
-			this.demarrage();
-
-			// Prise de l'instant de demarrage de l'entrainement
-			timestamp_1 = new Timestamp(System.currentTimeMillis());
-
+			this.process_CordeASauter();
 			for (int i = 1; i <= nbre_serie; i++) {
-				if(i>1) {
+				if (i > 1) {
 					this.promptEnterKey();
 				}
 				System.out.println(" ");
@@ -72,31 +50,9 @@ public class Timer {
 			this.corde_a_sauter();
 			break;
 		case "Musculation":
-			// Choix durée du temps de pause
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("Choisissez votre temps de pause: (en secondes)");
-			Duree_pause = new Scanner(System.in).nextInt();
-			System.out.println(" ");
-			// Choix du nombre de série
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("Nombre de série à effectuer: ");
-			nbre_serie = new Scanner(System.in).nextInt();
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("          Installez vous... ");
-			System.out.println("                et          ");
-
-			this.promptEnterKey();
-
-			this.demarrage();
-
-			// Prise de l'instant de demarrage de l'entrainement
-			timestamp_1 = new Timestamp(System.currentTimeMillis());
-
+			this.process_AvecPause();
 			for (int i = 1; i <= nbre_serie; i++) {
-				if(i>1) {
+				if (i > 1) {
 					this.promptEnterKey();
 				}
 				System.out.println(" ");
@@ -117,31 +73,9 @@ public class Timer {
 			}
 			break;
 		case "Gainage":
-			// Choix durée corde à sauter
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("Choisissez votre temps de corde à sauter: (en secondes)");
-			Duree_corde = new Scanner(System.in).nextInt();
-			System.out.println(" ");
-			// Choix du nombre de série
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("Nombre de série à effectuer: ");
-			nbre_serie = new Scanner(System.in).nextInt();
-			System.out.println("#####################################");
-			System.out.println(" ");
-			System.out.println("          Installez vous... ");
-			System.out.println("                et          ");
-
-			this.promptEnterKey();
-
-			this.demarrage();
-
-			// Prise de l'instant de demarrage de l'entrainement
-			timestamp_1 = new Timestamp(System.currentTimeMillis());
-
+			this.process_CordeASauter();
 			for (int i = 1; i <= nbre_serie; i++) {
-				if(i>1) {
+				if (i > 1) {
 					this.promptEnterKey();
 				}
 				System.out.println(" ");
@@ -152,7 +86,6 @@ public class Timer {
 				for (String mapentry : List.keySet()) {
 					this.corde_a_sauter();
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Secondes.");
-					// AJOUTER GESTION TEMPS EXO
 					this.pause(List.get(mapentry));
 					this.promptEnterKey();
 				}
@@ -252,8 +185,68 @@ public class Timer {
 			}
 			System.out.print(i);
 			Thread.sleep(1000);
-			System.out.print('\r');
-			
 		}
+	}
+
+	/**
+	 * Methode pour lancer le processus avec un temps de corde a sauter
+	 * 
+	 * @throws InterruptedException
+	 * 
+	 */
+	public void process_CordeASauter() throws InterruptedException {
+		// Choix durée corde à sauter
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Choisissez votre temps de corde à sauter: (en secondes)");
+		Duree_corde = new Scanner(System.in).nextInt();
+		System.out.println(" ");
+		// Choix du nombre de série
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Nombre de série à effectuer: ");
+		nbre_serie = new Scanner(System.in).nextInt();
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("          Installez vous... ");
+		System.out.println("                et          ");
+
+		this.promptEnterKey();
+
+		this.demarrage();
+
+		// Prise de l'instant de demarrage de l'entrainement
+		timestamp_1 = new Timestamp(System.currentTimeMillis());
+	}
+
+	/**
+	 * Methode pour lancer le processus avec un temps de pause
+	 * 
+	 * @throws InterruptedException
+	 * 
+	 */
+	public void process_AvecPause() throws InterruptedException {
+		// Choix durée du temps de pause
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Choisissez votre temps de pause: (en secondes)");
+		Duree_pause = new Scanner(System.in).nextInt();
+		System.out.println(" ");
+		// Choix du nombre de série
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("Nombre de série à effectuer: ");
+		nbre_serie = new Scanner(System.in).nextInt();
+		System.out.println("#####################################");
+		System.out.println(" ");
+		System.out.println("          Installez vous... ");
+		System.out.println("                et          ");
+
+		this.promptEnterKey();
+
+		this.demarrage();
+
+		// Prise de l'instant de demarrage de l'entrainement
+		timestamp_1 = new Timestamp(System.currentTimeMillis());
 	}
 }
