@@ -24,7 +24,6 @@ Lancement temporaire à partir du Main
 
 ## Roadmap
 
-- 3ème entrainement
 - Pause à tout moment
 - Gestions d'utilisateurs
 - Base de données
