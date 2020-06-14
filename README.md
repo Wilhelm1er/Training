@@ -26,7 +26,6 @@ Lancement temporaire à partir du Main
 
 - 3ème entrainement
 - Pause à tout moment
-- Chronomètre global
 - Gestions d'utilisateurs
 - Base de données
 - Son à la fin du cardio
