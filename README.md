@@ -27,7 +27,6 @@ Lancement temporaire à partir du Main
 - Pause à tout moment
 - Gestions d'utilisateurs
 - Base de données
-- Son à la fin du cardio
 - Rapport statistique
 - Interface graphique
 
