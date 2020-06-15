@@ -16,7 +16,7 @@ public class Timer {
 	private int Duree_corde;
 	private int Duree_pause;
 	private int nbre_serie;
-	File file = new File("/Users/ender 1/git/Trainings/Training/buzzer1.wav");
+	File file = new File("buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 
 	public Timer(Map<String, Integer> List, String type) throws InterruptedException {

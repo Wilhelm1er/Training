@@ -17,8 +17,14 @@ public class Main {
 		System.out.println(" ");
 		System.out.print("Veuillez entrer votre nom: ");
 		String name = new Scanner(System.in).nextLine();
+		System.out.print("Veuillez entrer votre poids: ");
+		String poids = new Scanner(System.in).nextLine();
 		System.out.println(" ");
 		System.out.println("Bienvenue "+name);
+		System.out.println(" ");
+		
+		Connect ConnectDb=new Connect();
+		ConnectDb.connect();
 		System.out.println(" ");
 		
 		Menu menu=new Menu();
