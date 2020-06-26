@@ -1,3 +1,6 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -10,23 +13,27 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException{
-
+		
+		Menu menu=new Menu();
+		
+		//Recuperation date du jour
+		DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		java.sql.Date dateS = new java.sql.Date(date.getTime());
+		//System.out.println(format.format(date));
+		
 		System.out.println("#####################################");
 		System.out.println("     TRAINING made in Java  v1.0     ");
 		System.out.println("#####################################");
 		System.out.println(" ");
-		System.out.print("Veuillez entrer votre nom: ");
-		String name = new Scanner(System.in).nextLine();
-		System.out.print("Veuillez entrer votre poids: ");
-		String poids = new Scanner(System.in).nextLine();
-		System.out.println(" ");
-		System.out.println("Bienvenue "+name);
-		System.out.println(" ");
+		menu.menu_user();
+		// Affichage utilisateur enregistre
 		
-		Connect ConnectDb=new Connect();
-		ConnectDb.connect();
 		System.out.println(" ");
+		System.out.println("#####################################");
+		System.out.println(" ");
+	
+		//poids.ajout(name, poids, dateS);
 		
-		Menu menu=new Menu();
 	}
 }

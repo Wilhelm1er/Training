@@ -1,20 +1,89 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
-public class Menu {
-	
-	public Menu() throws InterruptedException{
-		
-	System.out.println("Que souhaitez vous faire: ");
+import bdd.Poids;
+import bdd.Utilisateur;
 
-	System.out.println("1 - Faire un entrainement ");
-	System.out.println("2 - Consulter mes derniers entrainements ");
-	System.out.println("3 - Consulter ma courbe de poids ");
-	System.out.println("4 - Quitter ");
-	int choice_menu = new Scanner(System.in).nextInt();
-	System.out.println("#####################################");
-	System.out.println(" ");
-	
-	if (choice_menu == 1) {
+public class Menu {
+
+	Utilisateur user = new Utilisateur();
+	Poids poids = new Poids();
+	private String name="";
+	DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date();
+	java.sql.Date dateS = new java.sql.Date(date.getTime());
+
+	public void menu_user() throws InterruptedException {
+		System.out.println("Bienvenue, voici la liste des utilisateurs existant: ");
+		user.selectAll();
+
+		System.out.println("1 - Utilisateur existant ");
+		System.out.println("2 - Creer un nouvel utilisateur ");
+		int choice_menu = new Scanner(System.in).nextInt();
+		if (choice_menu == 1) {
+			System.out.print("Veuillez entrer votre nom: ");
+			name = new Scanner(System.in).nextLine();
+			user.create_User(name);
+			System.out.println(" ");
+			System.out.println("Bienvenue " + name);
+			System.out.println(" ");
+		}
+		if (choice_menu == 2) {
+			System.out.print("Veuillez entrer votre nom: ");
+			String name = new Scanner(System.in).nextLine();
+			user.create_User(name);
+			System.out.println(" ");
+			System.out.println("Bienvenue " + name);
+			System.out.println(" ");
+		}
+		if (choice_menu < 1 && choice_menu > 2) {
+			System.out.print("Choix non reconnu.");
+			System.exit(0);
+		}
+		this.menu_general();
+	}
+
+	public void menu_general() throws InterruptedException {
+		System.out.println("Que souhaitez vous faire: ");
+
+		System.out.println("1 - Faire un entrainement ");
+		System.out.println("2 - Consulter mes derniers entrainements ");
+		System.out.println("3 - Consulter ma courbe de poids ");
+		System.out.println("4 - Quitter ");
+		int choice_menu = new Scanner(System.in).nextInt();
+		System.out.println("#####################################");
+		System.out.println(" ");
+
+		if (choice_menu == 1) {
+			this.menu_entrainement();
+		}
+		if (choice_menu == 2) {
+			System.out.println("En construction...");
+			System.out.println(" ");
+			System.out.println("#####################################");
+			System.out.println(" ");
+			Menu menu = new Menu();
+		}
+		if (choice_menu == 3) {
+			poids.user_Selected(name);
+			System.out.println(" ");
+			System.out.println("#####################################");
+			System.out.println(" ");
+			Menu menu = new Menu();
+		}
+		if (choice_menu == 4) {
+			System.out.println("Au revoir! ");
+			System.exit(0);
+		}
+	}
+
+	public void menu_entrainement() throws InterruptedException {
+		System.out.print("Veuillez entrer votre poids: ");
+		String p = new Scanner(System.in).nextLine();
+		double pds=Double.parseDouble(p);
+		poids.ajout(name, pds, dateS);
 		System.out.println("1 - Renforcement: ");
 		System.out.println("2 - Musculation: ");
 		System.out.println("3 - Gainage: ");
@@ -37,25 +106,6 @@ public class Menu {
 			Entrainements Gain = new Entrainements();
 			int level = Gain.gainage_Selection();
 			Timer Timer_Gainage = new Timer(Gain.gainage(level), "Gainage");
-			}
-	}
-	if (choice_menu == 2) {
-		System.out.println("En construction...");
-		System.out.println(" ");
-		System.out.println("#####################################");
-		System.out.println(" ");
-		Menu menu=new Menu();
-	}
-	if (choice_menu == 3) {
-		System.out.println("En construction...");
-		System.out.println(" ");
-		System.out.println("#####################################");
-		System.out.println(" ");
-		Menu menu=new Menu();
-		}
-	if (choice_menu == 4) {
-		System.out.println("Au revoir! ");
-		System.exit(0);
 		}
 	}
 }
