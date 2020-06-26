@@ -34,11 +34,34 @@ public class Utilisateur {
 	public void create_User(String name) {
 		String sql = "INSERT INTO Utilisateur(name) VALUES(?)";
 
-		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, name);
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
+		Connection conn = null;
+	    PreparedStatement pStmnt = null;
+	    
+		try {
+				conn = this.connect();
+				String preQueryStatement = "SELECT * FROM Utilisateur WHERE name = ?";
+		        pStmnt = conn.prepareStatement(preQueryStatement);
+		        pStmnt.setString(1,name);            
+
+		        ResultSet rs = pStmnt.executeQuery();
+		        if (!rs.next())
+		        {
+		            String insertStatement
+		            = "INSERT INTO Utilisateur(name) VALUES(?)";
+		            pStmnt = conn.prepareStatement(insertStatement);
+
+		            pStmnt.setString(1, name);
+		           
+		            pStmnt.executeUpdate();
+
+		            System.out.println("Nouvel utilisateur ajouté");
+		           
+		        } 
+		        else
+		        {
+		            System.out.println("Utilisateur reconnu");
+		        }	
+	} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 	}

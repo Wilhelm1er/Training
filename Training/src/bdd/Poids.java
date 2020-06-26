@@ -50,11 +50,27 @@ public class Poids {
 	 * Affichage contenu table poids pour un utilisateur
 	 */
 	public void user_Selected(String name) {
-		String sql = "SELECT Poids, Date FROM Poids WHERE user_id=?";
+		int user_id=0;
+		String sql = "SELECT user_id FROM Utilisateur WHERE name=?";
 
 		try (Connection conn = this.connect();
-				PreparedStatement pstmt  = conn.prepareStatement(sql)){
-				pstmt.setString(1, name);
+			PreparedStatement pstmt  = conn.prepareStatement(sql)){
+			pstmt.setString(2, name);
+			ResultSet rs = pstmt.executeQuery();
+
+			// loop through the result set
+			while (rs.next()) {
+				user_id=rs.getInt("user_id");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	
+		String sql2 = "SELECT Poids, Date FROM Poids WHERE user_id=?";
+
+		try (Connection conn = this.connect();
+				PreparedStatement pstmt  = conn.prepareStatement(sql2)){
+				pstmt.setInt(1, user_id);
 				ResultSet rs = pstmt.executeQuery();
 
 			// loop through the result set

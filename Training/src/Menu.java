@@ -10,44 +10,28 @@ public class Menu {
 
 	Utilisateur user = new Utilisateur();
 	Poids poids = new Poids();
-	private String name="";
+	private String name = "";
 	DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Date date = new Date();
 	java.sql.Date dateS = new java.sql.Date(date.getTime());
 
 	public void menu_user() throws InterruptedException {
-		System.out.println("Bienvenue, voici la liste des utilisateurs existant: ");
+		System.out.println("Liste des utilisateurs existant: ");
 		user.selectAll();
+		System.out.println(" ");
 
-		System.out.println("1 - Utilisateur existant ");
-		System.out.println("2 - Creer un nouvel utilisateur ");
-		int choice_menu = new Scanner(System.in).nextInt();
-		if (choice_menu == 1) {
-			System.out.print("Veuillez entrer votre nom: ");
-			name = new Scanner(System.in).nextLine();
-			user.create_User(name);
-			System.out.println(" ");
-			System.out.println("Bienvenue " + name);
-			System.out.println(" ");
-		}
-		if (choice_menu == 2) {
-			System.out.print("Veuillez entrer votre nom: ");
-			String name = new Scanner(System.in).nextLine();
-			user.create_User(name);
-			System.out.println(" ");
-			System.out.println("Bienvenue " + name);
-			System.out.println(" ");
-		}
-		if (choice_menu < 1 && choice_menu > 2) {
-			System.out.print("Choix non reconnu.");
-			System.exit(0);
-		}
+		System.out.print("Veuillez entrer votre nom: ");
+		name = new Scanner(System.in).nextLine();
+		user.create_User(name);
+		System.out.println(" ");
+		System.out.println("Bienvenue " + name);
+		System.out.println(" ");
+
 		this.menu_general();
 	}
 
 	public void menu_general() throws InterruptedException {
 		System.out.println("Que souhaitez vous faire: ");
-
 		System.out.println("1 - Faire un entrainement ");
 		System.out.println("2 - Consulter mes derniers entrainements ");
 		System.out.println("3 - Consulter ma courbe de poids ");
@@ -56,9 +40,11 @@ public class Menu {
 		System.out.println("#####################################");
 		System.out.println(" ");
 
+		// Entrainements
 		if (choice_menu == 1) {
 			this.menu_entrainement();
 		}
+		// DERNIERS ENTRAINEMENTS
 		if (choice_menu == 2) {
 			System.out.println("En construction...");
 			System.out.println(" ");
@@ -66,6 +52,7 @@ public class Menu {
 			System.out.println(" ");
 			Menu menu = new Menu();
 		}
+		// CONSULTATION POIDS
 		if (choice_menu == 3) {
 			poids.user_Selected(name);
 			System.out.println(" ");
@@ -73,6 +60,7 @@ public class Menu {
 			System.out.println(" ");
 			Menu menu = new Menu();
 		}
+		// QUITTER
 		if (choice_menu == 4) {
 			System.out.println("Au revoir! ");
 			System.exit(0);
@@ -81,9 +69,12 @@ public class Menu {
 
 	public void menu_entrainement() throws InterruptedException {
 		System.out.print("Veuillez entrer votre poids: ");
+		
+		// Ajout du poids
 		String p = new Scanner(System.in).nextLine();
-		double pds=Double.parseDouble(p);
+		double pds = Double.parseDouble(p);
 		poids.ajout(name, pds, dateS);
+		
 		System.out.println("1 - Renforcement: ");
 		System.out.println("2 - Musculation: ");
 		System.out.println("3 - Gainage: ");
