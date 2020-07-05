@@ -25,7 +25,6 @@ Lancement temporaire à partir du Main
 ## Roadmap
 
 - Pause à tout moment
-- bug ordre exercices
 - Gestions d'utilisateurs (en cours)
   - Configuration par user
   - Selection user existant
