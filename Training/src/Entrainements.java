@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,9 +11,9 @@ import java.util.Scanner;
 
 public class Entrainements {
 
-	private Map<String, Integer> List_1 = new HashMap<String, Integer>();
-	private Map<String, Integer> List_2 = new HashMap<String, Integer>();
-	private Map<String, Integer> List_3 = new HashMap<String, Integer>();
+	private Map<String, Integer> List_1 = new LinkedHashMap<String, Integer>();
+	private Map<String, Integer> List_2 = new LinkedHashMap<String, Integer>();
+	private Map<String, Integer> List_3 = new LinkedHashMap<String, Integer>();
 
 	// Renforcement
 	/**

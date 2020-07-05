@@ -27,10 +27,11 @@ public class Poids {
 	}
 
 	/**
-	 * Creation d'un utilisateur
+	 * ajout poids
 	 *
 	 * @param name
-	 * @param capacity
+	 * @param poids
+	 * @param date
 	 */
 	public void ajout(String name, Double poids, Date date) {
 		String sql = "INSERT INTO Poids(user_id,Poids,Date) VALUES(?,?,?)";
