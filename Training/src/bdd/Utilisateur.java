@@ -32,10 +32,9 @@ public class Utilisateur {
 	 * @param capacity
 	 */
 	public void create_User(String name) {
-		String sql = "INSERT INTO Utilisateur(name) VALUES(?)";
-
 		Connection conn = null;
 	    PreparedStatement pStmnt = null;
+	    ResultSet rs=null;
 	    
 		try {
 				conn = this.connect();
@@ -43,19 +42,15 @@ public class Utilisateur {
 		        pStmnt = conn.prepareStatement(preQueryStatement);
 		        pStmnt.setString(1,name);            
 
-		        ResultSet rs = pStmnt.executeQuery();
+		        rs = pStmnt.executeQuery();
 		        if (!rs.next())
 		        {
-		            String insertStatement
-		            = "INSERT INTO Utilisateur(name) VALUES(?)";
+		            String insertStatement= "INSERT INTO Utilisateur(name) VALUES(?)";
 		            pStmnt = conn.prepareStatement(insertStatement);
-
 		            pStmnt.setString(1, name);
-		           
 		            pStmnt.executeUpdate();
-
+		            
 		            System.out.println("Nouvel utilisateur ajouté");
-		           
 		        } 
 		        else
 		        {
@@ -64,8 +59,15 @@ public class Utilisateur {
 	} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		finally{
+            try{
+            	conn.close();
+            	rs.close();
+                pStmnt.close();
+            }catch(SQLException e){
+            }}
 	}
-
+	
 	/**
 	 * Affichage contenu table utilisateur
 	 */

@@ -34,14 +34,18 @@ public class Poids {
 	 * @param date
 	 */
 	public void ajout(String name, Double poids, Date date) {
-		String sql = "INSERT INTO Poids(user_id,Poids,Date) VALUES(?,?,?)";
+		
+	    PreparedStatement pStmnt = null;
 
-		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, name);
-			pstmt.setDouble(2, poids);
-			pstmt.setDate(3, date);
-			pstmt.executeUpdate();
-			pstmt.close();
+		try {Connection conn = this.connect(); 
+		String preQueryStatement = "INSERT INTO Poids(user_id,Poids,Date) VALUES(?,?,?)";
+		pStmnt = conn.prepareStatement(preQueryStatement);
+		
+			pStmnt.setString(1, name);
+			pStmnt.setDouble(2, poids);
+			pStmnt.setDate(3, date);
+			pStmnt.executeUpdate();
+			pStmnt.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,13 +14,14 @@ import javax.sound.sampled.Clip;
  */
 public class Timer {
 
+	bdd.Training Training=new bdd.Training();
 	private int Duree_corde;
 	private int Duree_pause;
 	private int nbre_serie;
 	File file = new File("buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 
-	public Timer(Map<String, Integer> List, String type) throws InterruptedException {
+	public Timer(Map<String, Integer> List, String type, String name,Date date,int level) throws InterruptedException {
 		// Session de base
 
 		// Switch selon le choix entre renforcement et gainage
@@ -111,6 +113,8 @@ public class Timer {
 		System.out.println(" ");
 		System.out.println("#####################################");
 		System.out.println(" ");
+		// Ajout training dans la BDD
+		Training.ajout_training(name,date,type,nbre_serie,Duree_corde,level,diff);
 		Menu menu=new Menu();
 	}
 
@@ -143,7 +147,6 @@ public class Timer {
 				this.bip();
 			}
 		}
-
 	}
 
 	/**

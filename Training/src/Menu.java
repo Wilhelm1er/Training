@@ -15,6 +15,10 @@ public class Menu {
 	Date date = new Date();
 	java.sql.Date dateS = new java.sql.Date(date.getTime());
 
+	/**
+	 * Appel du menu de selection de l'utilisateur, ou de la creation d'un nouvel utilisateur
+	 * Interrogation de la bdd
+	 */
 	public void menu_user() throws InterruptedException {
 		System.out.println("Liste des utilisateurs existant: ");
 		user.selectAll();
@@ -30,6 +34,10 @@ public class Menu {
 		this.menu_general();
 	}
 
+	/**
+	 * Appel du menu general
+	 * 
+	 */
 	public void menu_general() throws InterruptedException {
 		System.out.println("Que souhaitez vous faire: ");
 		System.out.println("1 - Faire un entrainement ");
@@ -66,6 +74,9 @@ public class Menu {
 			System.exit(0);
 		}
 	}
+	/**
+	 * Appel du menu de selection de l'entrainement
+	 */
 
 	public void menu_entrainement() throws InterruptedException {
 		System.out.print("Veuillez entrer votre poids: ");
@@ -86,17 +97,17 @@ public class Menu {
 		if (choice_exercice == 1) {
 			Entrainements Renfo = new Entrainements();
 			int level = Renfo.renforcement_Selection();
-			Timer Timer_Renfo = new Timer(Renfo.renforcement(level), "Renforcement");
+			Timer Timer_Renfo = new Timer(Renfo.renforcement(level), "Renforcement",name,dateS,level);
 		}
 		if (choice_exercice == 2) {
 			Entrainements Muscu = new Entrainements();
 			int level = Muscu.musculation_Selection();
-			Timer Timer_Renfo = new Timer(Muscu.musculation(level), "Musculation");
+			Timer Timer_Renfo = new Timer(Muscu.musculation(level), "Musculation",name,dateS,level);
 		}
 		if (choice_exercice == 3) {
 			Entrainements Gain = new Entrainements();
 			int level = Gain.gainage_Selection();
-			Timer Timer_Gainage = new Timer(Gain.gainage(level), "Gainage");
+			Timer Timer_Gainage = new Timer(Gain.gainage(level), "Gainage",name,dateS,level);
 		}
 	}
 }
