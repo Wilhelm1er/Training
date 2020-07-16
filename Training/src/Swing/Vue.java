@@ -52,9 +52,9 @@ public class Vue extends JFrame{
 		JPanel pan = new JPanel();
 		
 		JLabel login = new JLabel("Login:");
-	    JTextField log_input= new JTextField("",8);
+	    JTextField log_input= new JTextField("",10);
 	    JLabel mdp = new JLabel("Mot de passe:");
-	    JTextField mdp_input= new JTextField("",8);
+	    JTextField mdp_input= new JTextField("",10);
 	    
 	    JButton new_user = new JButton("Créer utilisateur");
 	    JButton connexion = new JButton("Connexion");
