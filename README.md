@@ -26,9 +26,7 @@ Lancement temporaire à partir du Main
 
 - Pause à tout moment
 - Gestions d'utilisateurs (en cours)
-  - Configuration par user
-  - Selection user existant
-- Base de données
+  - Mise en place d'un login, mdp
 - Rapport statistique
 - Interface graphique
 
