@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 public class Timer {
 
 	bdd.Training Training=new bdd.Training();
+	Menu menu=new Menu();
 	private int Duree_corde;
 	private int Duree_pause;
 	private int nbre_serie;
@@ -115,7 +116,7 @@ public class Timer {
 		System.out.println(" ");
 		// Ajout training dans la BDD
 		Training.ajout_training(name,date,type,nbre_serie,Duree_corde,level,diff);
-		Menu menu=new Menu();
+		menu.menu_general();
 	}
 
 	/**

@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 import bdd.Poids;
+import bdd.Training;
 import bdd.Utilisateur;
 
 public class Menu {
 
 	Utilisateur user = new Utilisateur();
+	Training training =new Training();
 	Poids poids = new Poids();
 	private String name = "";
 	DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -54,11 +56,11 @@ public class Menu {
 		}
 		// DERNIERS ENTRAINEMENTS
 		if (choice_menu == 2) {
-			System.out.println("En construction...");
+			training.training_Selected(name);
 			System.out.println(" ");
 			System.out.println("#####################################");
 			System.out.println(" ");
-			Menu menu = new Menu();
+			this.menu_general();
 		}
 		// CONSULTATION POIDS
 		if (choice_menu == 3) {
@@ -66,7 +68,7 @@ public class Menu {
 			System.out.println(" ");
 			System.out.println("#####################################");
 			System.out.println(" ");
-			Menu menu = new Menu();
+			this.menu_general();
 		}
 		// QUITTER
 		if (choice_menu == 4) {

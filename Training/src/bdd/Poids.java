@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Poids {
 	/**
@@ -34,13 +36,15 @@ public class Poids {
 	 * @param date
 	 */
 	public void ajout(String name, Double poids, Date date) {
-		
-	    PreparedStatement pStmnt = null;
 
-		try {Connection conn = this.connect(); 
-		String preQueryStatement = "INSERT INTO Poids(user_id,Poids,Date) VALUES(?,?,?)";
-		pStmnt = conn.prepareStatement(preQueryStatement);
-		
+		PreparedStatement pStmnt = null;
+
+		try {
+			Connection conn = this.connect();
+
+			String preQueryStatement = "INSERT INTO Poids(user_id,Poids,Date) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?)";
+			pStmnt = conn.prepareStatement(preQueryStatement);
+
 			pStmnt.setString(1, name);
 			pStmnt.setDouble(2, poids);
 			pStmnt.setDate(3, date);
@@ -53,35 +57,23 @@ public class Poids {
 
 	/**
 	 * Affichage contenu table poids pour un utilisateur
+	 * 
+	 * @param name
 	 */
 	public void user_Selected(String name) {
-		int user_id=0;
-		String sql = "SELECT user_id FROM Utilisateur WHERE name=?";
 
-		try (Connection conn = this.connect();
-			PreparedStatement pstmt  = conn.prepareStatement(sql)){
-			pstmt.setString(2, name);
+		String sql2 = "SELECT Poids, Date FROM Poids WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
+
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
+			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
 
 			// loop through the result set
 			while (rs.next()) {
-				user_id=rs.getInt("user_id");
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	
-		String sql2 = "SELECT Poids, Date FROM Poids WHERE user_id=?";
-
-		try (Connection conn = this.connect();
-				PreparedStatement pstmt  = conn.prepareStatement(sql2)){
-				pstmt.setInt(1, user_id);
-				ResultSet rs = pstmt.executeQuery();
-
-			// loop through the result set
-			while (rs.next()) {
-				System.out.println(rs.getInt("user_id") + "\t" + rs.getString("date") + "\t"+
-                        rs.getDouble("Poids"));
+				String str = rs.getString("date");
+				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+				Date date = new Date(Long.parseLong(str));
+				System.out.println(sf.format(date) + "\t" + rs.getDouble("Poids") + "kg");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
