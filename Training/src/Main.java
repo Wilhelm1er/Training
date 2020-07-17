@@ -2,8 +2,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
-import Swing.Vue;
+import Swing.Principal;
 
 /**
  * Application de Training, Version Java de l'appli produite par Ghost en Python
@@ -17,9 +16,11 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException{
 		
 		Menu menu=new Menu();
-		Vue vue= new Vue();
 		
-		vue.authent();
+		Principal firstWindow=new Principal();
+		
+		//firstWindow.principal();
+		firstWindow.principal();
 		
 		//Recuperation date du jour
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

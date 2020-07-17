@@ -15,7 +15,7 @@ public class Training {
 	 * @return the Connection object
 	 */
 	private Connection connect() {
-		String url = "jdbc:sqlite:entrainements.db";
+		String url = "jdbc:sqlite:resources/entrainements.db";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url);
