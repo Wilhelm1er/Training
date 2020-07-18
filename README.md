@@ -25,10 +25,13 @@ Lancement temporaire à partir du Main
 ## Roadmap
 
 - Pause à tout moment
-- Gestions d'utilisateurs (en cours)
-  - Mise en place d'un login, mdp
 - Rapport statistique
 - Interface graphique
+  - menu pour quitter
+  - gestion training, poids, stats
+- Bugs:
+  - musculation, son double, enregistrement bdd, temps pause?, repos avant pause
+- Compte rendu fin exo
 
 ## Contributeurs
 
