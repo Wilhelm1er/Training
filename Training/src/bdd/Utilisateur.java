@@ -24,13 +24,14 @@ public class Utilisateur {
 		}
 		return conn;
 	}
+
 	/**
 	 * Creation d'un utilisateur
 	 *
 	 * @param name
 	 * @param capacity
 	 */
-	public void create_User(String name) {
+	public boolean create_User(String name, String mdp) {
 		Connection conn = null;
 		PreparedStatement pStmnt = null;
 		ResultSet rs = null;
@@ -43,14 +44,16 @@ public class Utilisateur {
 
 			rs = pStmnt.executeQuery();
 			if (!rs.next()) {
-				String insertStatement = "INSERT INTO Utilisateur(name) VALUES(?)";
+				String insertStatement = "INSERT INTO Utilisateur(name,mdp) VALUES(?,?)";
 				pStmnt = conn.prepareStatement(insertStatement);
 				pStmnt.setString(1, name);
+				pStmnt.setString(2, mdp);
 				pStmnt.executeUpdate();
-
 				System.out.println("Nouvel utilisateur ajouté");
+				return true;
+
 			} else {
-				System.out.println("Utilisateur reconnu");
+				return false;
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -62,6 +65,47 @@ public class Utilisateur {
 			} catch (SQLException e) {
 			}
 		}
+		return false;
+	}
+
+	/**
+	 * Connexion d'un utilisateur
+	 *
+	 * @param name
+	 * @param capacity
+	 */
+	public boolean connexion_User(String name, String mdp) {
+		Connection conn = null;
+		PreparedStatement pStmnt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = this.connect();
+			String preQueryStatement = "SELECT * FROM Utilisateur WHERE name= ? AND mdp= ?";
+			pStmnt = conn.prepareStatement(preQueryStatement);
+			pStmnt.setString(1, name);
+			pStmnt.setString(2, mdp);
+
+			rs = pStmnt.executeQuery();
+			if (rs.next()) {
+
+				return true;
+			} else {
+
+				return false;
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				conn.close();
+				rs.close();
+				pStmnt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return false;
 	}
 
 	/**

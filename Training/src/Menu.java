@@ -28,7 +28,7 @@ public class Menu {
 
 		System.out.print("Veuillez entrer votre nom: ");
 		name = new Scanner(System.in).nextLine();
-		user.create_User(name);
+		//user.create_User(name);
 		System.out.println(" ");
 		System.out.println("Bienvenue " + name);
 		System.out.println(" ");
