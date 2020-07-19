@@ -10,7 +10,7 @@ import java.sql.Date;
 
 public class Training {
 	/**
-	 * Connect to the test.db database
+	 * Connect to the entrainements.db database
 	 *
 	 * @return the Connection object
 	 */
@@ -98,9 +98,15 @@ public class Training {
 				int minutes = (int) ((rs.getLong("temps") / (1000 * 60)) % 60);
 				int hours = (int) ((rs.getLong("temps") / (1000 * 60 * 60)) % 24);
 				
-				System.out.println(sf.format(date) + " - " + rs.getString("entrainement") + " - "+ rs.getInt("serie")+
-						" série(s) - Level: "+rs.getInt("level")+ " - Corde: "+rs.getInt("tps_rope")+ "s - Pause: "+rs.getInt("tps_pause")
-						+ "s - Temps: " + minutes + " minutes " + seconds + " secondes.");
+				System.out.print(sf.format(date) + " - " + rs.getString("entrainement") + " - "+ rs.getInt("serie")+
+						" série(s) - Level: "+rs.getInt("level"));
+				if(rs.getInt("tps_rope")!=0) {
+						System.out.print(" - Corde: "+rs.getInt("tps_rope")+"s ");
+						}
+				if(rs.getInt("tps_pause")!=0) {
+					System.out.print(" - Pause: "+rs.getInt("tps_pause")+ "s ");
+					}
+				System.out.println("- Temps: " + minutes + " minutes " + seconds + " secondes.");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

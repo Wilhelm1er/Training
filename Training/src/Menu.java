@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import bdd.ChallengeBdd;
 import bdd.Poids;
 import bdd.Training;
 import bdd.Utilisateur;
@@ -10,7 +11,8 @@ import bdd.Utilisateur;
 public class Menu {
 
 	Utilisateur user = new Utilisateur();
-	Training training =new Training();
+	Training training = new Training();
+	ChallengeBdd challengeBdd=new ChallengeBdd();
 	Poids poids = new Poids();
 	private String name = "";
 	DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -18,8 +20,8 @@ public class Menu {
 	java.sql.Date dateS = new java.sql.Date(date.getTime());
 
 	/**
-	 * Appel du menu de selection de l'utilisateur, ou de la creation d'un nouvel utilisateur
-	 * Interrogation de la bdd
+	 * Appel du menu de selection de l'utilisateur, ou de la creation d'un nouvel
+	 * utilisateur Interrogation de la bdd
 	 */
 	public void menu_user() throws InterruptedException {
 		System.out.println("Liste des utilisateurs existant: ");
@@ -28,7 +30,7 @@ public class Menu {
 
 		System.out.print("Veuillez entrer votre nom: ");
 		name = new Scanner(System.in).nextLine();
-		//user.create_User(name);
+		// user.create_User(name);
 		System.out.println(" ");
 		System.out.println("Bienvenue " + name);
 		System.out.println(" ");
@@ -57,6 +59,7 @@ public class Menu {
 		// DERNIERS ENTRAINEMENTS
 		if (choice_menu == 2) {
 			training.training_Selected(name);
+			challengeBdd.affichageChallenge(name);
 			System.out.println(" ");
 			System.out.println("#####################################");
 			System.out.println(" ");
@@ -76,21 +79,23 @@ public class Menu {
 			System.exit(0);
 		}
 	}
+
 	/**
 	 * Appel du menu de selection de l'entrainement
 	 */
 
 	public void menu_entrainement() throws InterruptedException {
 		System.out.print("Veuillez entrer votre poids: ");
-		
+
 		// Ajout du poids
 		String p = new Scanner(System.in).nextLine();
 		double pds = Double.parseDouble(p);
 		poids.ajout(name, pds, dateS);
-		
-		System.out.println("1 - Renforcement: ");
-		System.out.println("2 - Musculation: ");
-		System.out.println("3 - Gainage: ");
+
+		System.out.println("1 - Renforcement");
+		System.out.println("2 - Musculation");
+		System.out.println("3 - Gainage");
+		System.out.println("4 - Challenge");
 
 		int choice_exercice = new Scanner(System.in).nextInt();
 		System.out.println("#####################################");
@@ -99,17 +104,38 @@ public class Menu {
 		if (choice_exercice == 1) {
 			Entrainements Renfo = new Entrainements();
 			int level = Renfo.renforcement_Selection();
-			Timer Timer_Renfo = new Timer(Renfo.renforcement(level), "Renforcement",name,dateS,level);
+			Timer Timer_Renfo = new Timer(Renfo.renforcement(level), "Renforcement", name, dateS, level);
 		}
 		if (choice_exercice == 2) {
 			Entrainements Muscu = new Entrainements();
 			int level = Muscu.musculation_Selection();
-			Timer Timer_Renfo = new Timer(Muscu.musculation(level), "Musculation",name,dateS,level);
+			Timer Timer_Renfo = new Timer(Muscu.musculation(level), "Musculation", name, dateS, level);
 		}
 		if (choice_exercice == 3) {
 			Entrainements Gain = new Entrainements();
 			int level = Gain.gainage_Selection();
-			Timer Timer_Gainage = new Timer(Gain.gainage(level), "Gainage",name,dateS,level);
+			Timer Timer_Gainage = new Timer(Gain.gainage(level), "Gainage", name, dateS, level);
+		}
+		if (choice_exercice == 4) {
+			this.menu_challenge();
+		}
+	}
+	
+	/**
+	 * Appel du menu de selection du challenge
+	 */
+
+	public void menu_challenge() throws InterruptedException {
+		System.out.println("1 - FBI");
+
+		int choice_challenge = new Scanner(System.in).nextInt();
+		System.out.println("#####################################");
+		System.out.println(" ");
+
+		if (choice_challenge == 1) {
+			String challengeName = "FBI";
+			Challenge challenge = new Challenge();
+			challenge.fbi(name, dateS, challengeName);
 		}
 	}
 }

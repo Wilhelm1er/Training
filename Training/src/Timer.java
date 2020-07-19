@@ -10,7 +10,6 @@ import javax.sound.sampled.Clip;
 /**
  * Methode d'affichage en fonction de l'entrainement selectionné
  * 
- * @author Wilhelm1er
  */
 public class Timer {
 
@@ -19,7 +18,7 @@ public class Timer {
 	private int Duree_corde;
 	private int Duree_pause;
 	private int nbre_serie;
-	File file = new File("resources/buzzer1.wav");
+	private File bip = new File("resources/buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 
 	public Timer(Map<String, Integer> List, String type, String name, Date date, int level)
@@ -121,10 +120,12 @@ public class Timer {
 			Training.ajout_training(name, date, type, nbre_serie, Duree_corde, level, diff);
 			break;
 		case "Musculation":
+			// Ajout training dans la BDD
 			Training.ajout_autre(name, date, type, nbre_serie, Duree_pause, level, diff);
 			break;
 		case "Gainage":
-			Training.ajout_autre(name, date, type, nbre_serie, Duree_pause, level, diff);
+			// Ajout training dans la BDD
+			Training.ajout_training(name, date, type, nbre_serie, Duree_corde, level, diff);
 			break;
 		}
 		menu.menu_general();
@@ -183,7 +184,7 @@ public class Timer {
 	public void bip() {
 		try {
 			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(file));
+			clip.open(AudioSystem.getAudioInputStream(bip));
 			clip.start();
 		} catch (Exception exc) {
 			exc.printStackTrace();
