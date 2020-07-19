@@ -13,7 +13,7 @@ import javax.sound.sampled.Clip;
  */
 public class Timer {
 
-	bdd.Training Training = new bdd.Training();
+	bdd.TrainingBdd Training = new bdd.TrainingBdd();
 	Menu menu = new Menu();
 	private int Duree_corde;
 	private int Duree_pause;

@@ -15,6 +15,10 @@ public class Challenge {
 	Menu menu = new Menu();
 	bdd.ChallengeBdd challenge = new bdd.ChallengeBdd();
 
+	/**
+	 * Challenge FBI
+	 * 
+	 */
 	public void fbi(String name, Date date, String type) throws InterruptedException {
 
 		File acdc = new File("resources/Thunderstruck.wav");
@@ -40,9 +44,40 @@ public class Challenge {
 		
 		menu.menu_general();
 	}
+	
+	/**
+	 * Challenge Pompiers
+	 * 
+	 */
+	public void pompiers(String name, Date date, String type) throws InterruptedException {
+
+		File bsu = new File("resources/BringSallyUp.wav");
+		// durée du challenge
+		int time = 211;
+
+		System.out.println(" ");
+		System.out.println("#####################################");
+		System.out.println("          CHALLENGE Pompiers         ");
+		System.out.println("            Bip chaque 30s           ");
+		System.out.println("#####################################");
+		System.out.println(" ");
+
+		this.promptEnterKey();
+
+		this.jouer(bsu);
+		this.timer(time);
+
+		System.out.println("Session TERMINEE");
+		System.out.println(" ");
+
+		// Ajout dans la BDD
+		challenge.ajout(name, date, type);
+		
+		menu.menu_general();
+	}
 
 	/**
-	 * Methode pour jouer la musique du challenge FBI
+	 * Methode pour jouer la musique du challenge
 	 * 
 	 */
 	public void jouer(File file) {

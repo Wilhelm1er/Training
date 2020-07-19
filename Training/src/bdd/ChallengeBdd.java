@@ -66,7 +66,7 @@ public class ChallengeBdd {
 				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 				Date date = new Date(Long.parseLong(str));
 
-				System.out.print(sf.format(date) + " - Challenge: " + rs.getString("type"));
+				System.out.println(sf.format(date) + " - Challenge: " + rs.getString("type"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

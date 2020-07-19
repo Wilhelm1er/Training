@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 import bdd.ChallengeBdd;
 import bdd.Poids;
-import bdd.Training;
+import bdd.TrainingBdd;
 import bdd.Utilisateur;
 
 public class Menu {
 
 	Utilisateur user = new Utilisateur();
-	Training training = new Training();
+	TrainingBdd training = new TrainingBdd();
 	ChallengeBdd challengeBdd=new ChallengeBdd();
 	Poids poids = new Poids();
 	private String name = "";
@@ -85,13 +85,8 @@ public class Menu {
 	 */
 
 	public void menu_entrainement() throws InterruptedException {
-		System.out.print("Veuillez entrer votre poids: ");
-
-		// Ajout du poids
-		String p = new Scanner(System.in).nextLine();
-		double pds = Double.parseDouble(p);
-		poids.ajout(name, pds, dateS);
-
+		
+		this.enregistrementPoids();
 		System.out.println("1 - Renforcement");
 		System.out.println("2 - Musculation");
 		System.out.println("3 - Gainage");
@@ -102,17 +97,17 @@ public class Menu {
 		System.out.println(" ");
 
 		if (choice_exercice == 1) {
-			Entrainements Renfo = new Entrainements();
+			Training Renfo = new Training();
 			int level = Renfo.renforcement_Selection();
 			Timer Timer_Renfo = new Timer(Renfo.renforcement(level), "Renforcement", name, dateS, level);
 		}
 		if (choice_exercice == 2) {
-			Entrainements Muscu = new Entrainements();
+			Training Muscu = new Training();
 			int level = Muscu.musculation_Selection();
 			Timer Timer_Renfo = new Timer(Muscu.musculation(level), "Musculation", name, dateS, level);
 		}
 		if (choice_exercice == 3) {
-			Entrainements Gain = new Entrainements();
+			Training Gain = new Training();
 			int level = Gain.gainage_Selection();
 			Timer Timer_Gainage = new Timer(Gain.gainage(level), "Gainage", name, dateS, level);
 		}
@@ -127,6 +122,7 @@ public class Menu {
 
 	public void menu_challenge() throws InterruptedException {
 		System.out.println("1 - FBI");
+		System.out.println("2 - Pompiers");
 
 		int choice_challenge = new Scanner(System.in).nextInt();
 		System.out.println("#####################################");
@@ -136,6 +132,31 @@ public class Menu {
 			String challengeName = "FBI";
 			Challenge challenge = new Challenge();
 			challenge.fbi(name, dateS, challengeName);
+		}
+		if (choice_challenge == 2) {
+			String challengeName = "Pompiers";
+			Challenge challenge = new Challenge();
+			challenge.pompiers(name, dateS, challengeName);
+		}
+	}
+	/**
+	 * Choix enregistrement poids
+	 */
+
+	public void enregistrementPoids() throws InterruptedException {
+		
+		System.out.println("Enregistrer votre poids? o/n");
+		String rep = new Scanner(System.in).nextLine();
+		if (rep.equals("o")) {
+			System.out.print("Veuillez entrer votre poids: ");
+
+			// Ajout du poids
+			String p = new Scanner(System.in).nextLine();
+			double pds = Double.parseDouble(p);
+			poids.ajout(name, pds, dateS);
+		}	
+		if (rep.equals("n")) {
+			
 		}
 	}
 }
