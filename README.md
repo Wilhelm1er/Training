@@ -30,7 +30,7 @@ Lancement temporaire à partir du Main
   - menu pour quitter
   - gestion training, poids, stats
 - Bugs:
-  - musculation, son double, enregistrement bdd, temps pause?, repos avant pause
+  - musculation: temps pause?, repos avant pause
 - Compte rendu fin exo
 
 ## Contributeurs
