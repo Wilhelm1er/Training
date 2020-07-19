@@ -50,6 +50,30 @@ public class Training {
 			System.out.println(e.getMessage());
 		}
 	}
+	/**
+	 * Enregistrement d'un entrainement musculation ou gainage
+	 *
+	 * @param name
+	 * @param capacity
+	 */
+
+	public void ajout_autre(String name, Date date, String entrainement, int serie, int pause, int level, long time) {
+		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,tps_pause,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?,?)";
+
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, name);
+			pstmt.setDate(2, date);
+			pstmt.setString(3, entrainement);
+			pstmt.setInt(4, serie);
+			pstmt.setInt(5, pause);
+			pstmt.setInt(6, level);
+			pstmt.setLong(7, time);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	
 	/**
 	 * Affichage contenu des derniers trainings pour un utilisateur
@@ -58,7 +82,7 @@ public class Training {
 	 */
 	public void training_Selected(String name) {
 
-		String sql2 = "SELECT date, entrainement, serie, level, tps_rope, temps FROM Training WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
+		String sql2 = "SELECT date, entrainement, serie, level, tps_rope, temps,tps_pause FROM Training WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
 			pstmt.setString(1, name);
@@ -75,7 +99,7 @@ public class Training {
 				int hours = (int) ((rs.getLong("temps") / (1000 * 60 * 60)) % 24);
 				
 				System.out.println(sf.format(date) + " - " + rs.getString("entrainement") + " - "+ rs.getInt("serie")+
-						" série(s) - Level: "+rs.getInt("level")+ " - Corde: "+rs.getInt("tps_rope")
+						" série(s) - Level: "+rs.getInt("level")+ " - Corde: "+rs.getInt("tps_rope")+ "s - Pause: "+rs.getInt("tps_pause")
 						+ "s - Temps: " + minutes + " minutes " + seconds + " secondes.");
 			}
 		} catch (SQLException e) {

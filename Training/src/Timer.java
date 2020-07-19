@@ -14,15 +14,16 @@ import javax.sound.sampled.Clip;
  */
 public class Timer {
 
-	bdd.Training Training=new bdd.Training();
-	Menu menu=new Menu();
+	bdd.Training Training = new bdd.Training();
+	Menu menu = new Menu();
 	private int Duree_corde;
 	private int Duree_pause;
 	private int nbre_serie;
 	File file = new File("resources/buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 
-	public Timer(Map<String, Integer> List, String type, String name,Date date,int level) throws InterruptedException {
+	public Timer(Map<String, Integer> List, String type, String name, Date date, int level)
+			throws InterruptedException {
 		// Session de base
 
 		// Switch selon le choix entre renforcement et gainage
@@ -66,7 +67,6 @@ public class Timer {
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Répétitions.");
 					this.promptEnterKey();
 					this.pause(Duree_pause);
-					this.bip();
 				}
 				if (i < nbre_serie) {
 					System.out.println("PAUSE de 3min");
@@ -114,8 +114,19 @@ public class Timer {
 		System.out.println(" ");
 		System.out.println("#####################################");
 		System.out.println(" ");
-		// Ajout training dans la BDD
-		Training.ajout_training(name,date,type,nbre_serie,Duree_corde,level,diff);
+		// Switch selon le choix entre renforcement et gainage
+		switch (type) {
+		case "Renforcement":
+			// Ajout training dans la BDD
+			Training.ajout_training(name, date, type, nbre_serie, Duree_corde, level, diff);
+			break;
+		case "Musculation":
+			Training.ajout_autre(name, date, type, nbre_serie, Duree_pause, level, diff);
+			break;
+		case "Gainage":
+			Training.ajout_autre(name, date, type, nbre_serie, Duree_pause, level, diff);
+			break;
+		}
 		menu.menu_general();
 	}
 
