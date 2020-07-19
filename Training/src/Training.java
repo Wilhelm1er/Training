@@ -15,7 +15,7 @@ public class Training {
 	private Map<String, Integer> List_2 = new LinkedHashMap<String, Integer>();
 	private Map<String, Integer> List_3 = new LinkedHashMap<String, Integer>();
 
-	// Renforcement
+	// Renforcement 
 	/**
 	 * Selection du niveau de difficulté du mode Renforcement
 	 * @return level
