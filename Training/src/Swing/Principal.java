@@ -1,10 +1,16 @@
 package Swing;
 
 import java.awt.BorderLayout;
+
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -64,39 +70,58 @@ public class Principal implements ActionListener {
 		panLogin.add(connexion);
 
 		panLogin.add(erreur);
+		
 		return panLogin;
-
 	}
 
+	public JPanel InterfaceTraining() {
+		/**
+		 * Crée et active l'interface de training.
+		 */
+		JPanel panel= new JPanel();
+		
+			JLabel niveau = new JLabel("niveau");
+			panel.add(niveau);
+			
+			String[] liste={"Débutant","Intermédiaire","Confirmé","Elite"};
+			JComboBox niveauCB = new JComboBox(liste);
+			panel.add(niveauCB);
+			
+			return panel;
+		}
 	/**
-	 * Crée et active l'interface de training.
+	 * Crée et active le menu.
 	 */
 
-	public JPanel training() {
-		JPanel panTraining = new JPanel();
-
-		JLabel titre = new JLabel("Bienvenue dans l'appli d'entrainements automatisés:");
-		// Définition de sa couleur de fond
-		//panTraining.setBackground(Color.BLACK);
-
-		JLabel choix = new JLabel("Choix:");
-
-		// Possibilité 1 : instanciation avec le libellé
-		JButton bouton = new JButton("Mon premier bouton");
-
-		JComboBox combo = new JComboBox();
-
-		// Possibilité 2 : instanciation puis définition du libellé
-		JButton bouton2 = new JButton();
-		bouton2.setText("Mon deuxième bouton");
-		panTraining.add(titre);
-		panTraining.add(choix);
-		panTraining.add(combo);
-		panTraining.add(bouton);
-		panTraining.add(bouton2);
-
-		return panTraining;
-
+	public void menu() {
+		// Menu
+		JMenuBar menuBar = new JMenuBar();
+		
+		JMenu menu1 = new JMenu("Fichier");
+		JMenu menu2 = new JMenu("Entrainement");
+		
+		JMenuItem rapports = new JMenuItem("Rapports");
+		JMenuItem poids = new JMenuItem("Suivi du poids");
+		JMenuItem quitter = new JMenuItem(new QuitterAction("Quitter"));
+		
+		menu1.add(rapports);
+		menu1.add(poids);
+		menu1.add(quitter);
+		
+		JMenuItem renforcement = new JMenuItem(new RenforcementAction("Renforcement"));
+		JMenuItem musculation = new JMenuItem("Musculation");
+		JMenuItem gainage = new JMenuItem("Gainage");
+		JMenuItem challenge = new JMenuItem("Challenge");
+		
+		menu2.add(renforcement);
+		menu2.add(musculation);
+		menu2.add(gainage);
+		menu2.add(challenge);
+		
+		menuBar.add(menu1);
+		menuBar.add(menu2);
+		
+		frame.setJMenuBar(menuBar);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
@@ -107,20 +132,37 @@ public class Principal implements ActionListener {
 				System.out.println("Création échouée de l'utilisateur");
 				erreur.setVisible(true);
 			}
-
 		}
 
 		if (arg0.getSource() == connexion) {
 			if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
-				System.out.println("Connexion réussie de l'utilisateur");
+				System.out.println("Connexion réussie");
 				frame.remove(login());
-				frame.add(training());
+				this.menu();
 				frame.revalidate();
 			} else {
-				System.out.println("Connexion échouée de l'utilisateur");
+				System.out.println("Connexion échouée");
 				erreur.setVisible(true);
 			}
 		}
-
+	}
+	public class RenforcementAction extends AbstractAction {
+		public RenforcementAction(String texte){
+			super(texte);
+		}
+	 
+		public void actionPerformed(ActionEvent e) { 
+			frame.add(InterfaceTraining());
+		} 
+	}
+	
+	public class QuitterAction extends AbstractAction {
+		public QuitterAction(String texte){
+			super(texte);
+		}
+	 
+		public void actionPerformed(ActionEvent e) { 
+			System.exit(0);
+		} 
 	}
 }
