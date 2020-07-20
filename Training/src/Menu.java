@@ -1,3 +1,4 @@
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -131,12 +132,12 @@ public class Menu {
 		if (choice_challenge == 1) {
 			String challengeName = "FBI";
 			Challenge challenge = new Challenge();
-			challenge.fbi(name, dateS, challengeName);
+			challenge.startChallenge(name, dateS, challengeName);
 		}
 		if (choice_challenge == 2) {
 			String challengeName = "Pompiers";
 			Challenge challenge = new Challenge();
-			challenge.pompiers(name, dateS, challengeName);
+			challenge.startChallenge(name, dateS, challengeName);
 		}
 	}
 	/**
