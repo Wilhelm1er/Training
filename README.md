@@ -27,8 +27,7 @@ Lancement temporaire à partir du Main
 - Pause à tout moment
 - Rapport statistique
 - Interface graphique
-  - menu pour quitter
-  - gestion training, poids, stats
+  - gestion training
 - Bugs:
   - musculation: temps pause?, repos avant pause
 - Compte rendu fin exo
