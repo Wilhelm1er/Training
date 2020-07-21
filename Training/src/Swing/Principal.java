@@ -2,7 +2,7 @@ package Swing;
 
 import java.awt.BorderLayout;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel ;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import bdd.ChallengeBdd;
@@ -57,7 +57,7 @@ public class Principal implements ActionListener {
 	public void login() {
 		JPanel panelNorth = new JPanel();
 		JPanel panelCenter = new JPanel();
-		
+
 		frame.add(panelNorth, BorderLayout.NORTH);
 		frame.add(panelCenter, BorderLayout.CENTER);
 
@@ -139,32 +139,32 @@ public class Principal implements ActionListener {
 
 	public JPanel interfaceRapports() {
 		JPanel panel = new JPanel();
-		panel.setSize(600,400);
-		String[] colonne=new String[] {"Date","type","Série","Level","Corde/Pause","Temps"};
+		panel.setSize(600, 400);
+		String[] colonne = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
 		JTable table = new JTable();
 		DefaultTableModel model = new DefaultTableModel(colonne, 0);
-			
-		model.setColumnIdentifiers(colonne);  
-		
+
+		model.setColumnIdentifiers(colonne);
+
 		JScrollPane scroll = new JScrollPane(table);
-		
-	    panel.add(scroll);
+
+		panel.add(scroll);
 
 		frame.getContentPane().removeAll();
-		
+
 		for (List<String> d : trainingBdd.training_Selected(name)) {
-			model.addRow(new Object[]{d.get(0),d.get(1),d.get(2),d.get(3),d.get(4),d.get(5)});
-			
+			model.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
+
 		}
 		table.setModel(model);
-		
+
 		TableColumn rope = table.getColumnModel().getColumn(4);
-        rope.setPreferredWidth(40);
+		rope.setPreferredWidth(40);
 		TableColumn serie = table.getColumnModel().getColumn(2);
-        serie.setPreferredWidth(40);
-        TableColumn level = table.getColumnModel().getColumn(3);
-        level.setPreferredWidth(40);
-        
+		serie.setPreferredWidth(40);
+		TableColumn level = table.getColumnModel().getColumn(3);
+		level.setPreferredWidth(40);
+
 		panel.add(scroll);
 
 		for (String s : challengeBdd.affichageChallenge(name)) {
@@ -179,17 +179,17 @@ public class Principal implements ActionListener {
 	public void interfacePoids() {
 		JPanel panelNorth = new JPanel();
 		JPanel panelCenter = new JPanel();
-		
-		String[] colonne=new String[] {"Date","Poids"};
+
+		String[] colonne = new String[] { "Date", "Poids" };
 		JTable table = new JTable();
 		DefaultTableModel model = new DefaultTableModel(colonne, 0);
 
-		model.setColumnIdentifiers(colonne);   
-	    
-	    JScrollPane scroll = new JScrollPane(table);
-		
-	    panelCenter.add(scroll);
-	    
+		model.setColumnIdentifiers(colonne);
+
+		JScrollPane scroll = new JScrollPane(table);
+
+		panelCenter.add(scroll);
+
 		frame.getContentPane().removeAll();
 		frame.setLayout(new BorderLayout());
 		frame.add(panelNorth, BorderLayout.NORTH);
@@ -215,8 +215,8 @@ public class Principal implements ActionListener {
 		panelNorth.add(buttonPoids);
 
 		for (String d : poids.user_Selected(name).keySet()) {
-			model.addRow(new Object[]{d,poids.user_Selected(name).get(d)});
-			
+			model.addRow(new Object[] { d, poids.user_Selected(name).get(d) });
+
 		}
 		table.setModel(model);
 		panelCenter.add(scroll);
