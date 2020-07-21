@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Utilisateur {
 	/**
@@ -111,8 +112,12 @@ public class Utilisateur {
 	/**
 	 * Affichage contenu table utilisateur
 	 */
-	public void selectAll() {
-		String sql = "SELECT user_id, name FROM Utilisateur";
+	public ArrayList<String> selectAll() {
+		
+		ArrayList<String> user = new ArrayList<String>();
+		String result="";
+		
+		String sql = "SELECT name FROM Utilisateur";
 
 		try (Connection conn = this.connect();
 				Statement stmt = conn.createStatement();
@@ -120,10 +125,12 @@ public class Utilisateur {
 
 			// loop through the result set
 			while (rs.next()) {
-				System.out.println(rs.getInt("user_id") + "\t" + rs.getString("name") + "\t");
+				result=rs.getString("name") + "\t";
+				user.add(result);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return user;
 	}
 }

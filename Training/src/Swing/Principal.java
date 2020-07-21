@@ -1,16 +1,9 @@
 package Swing;
 
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel ;
+import javax.swing.table.TableColumn;
 
 import bdd.ChallengeBdd;
 import bdd.Poids;
@@ -19,6 +12,8 @@ import bdd.Utilisateur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 
 public class Principal implements ActionListener {
 
@@ -35,8 +30,10 @@ public class Principal implements ActionListener {
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private String name = "";
 	TrainingBdd trainingBdd = new TrainingBdd();
-	ChallengeBdd challengeBdd=new ChallengeBdd();
+	ChallengeBdd challengeBdd = new ChallengeBdd();
 	Poids poids = new Poids();
+	Date date = new Date();
+	java.sql.Date dateS = new java.sql.Date(date.getTime());
 
 	public void principal() {
 
@@ -44,9 +41,9 @@ public class Principal implements ActionListener {
 		frame.setTitle("Training");
 		frame.setLayout(new BorderLayout());
 		// Définit sa taille : 400 pixels de large et 100 pixels de haut
-		frame.setSize(800, 500);
+		frame.setSize(800, 600);
 
-		frame.add(login());
+		login();
 
 		// Nous demandons maintenant à notre objet de se positionner au centre
 		frame.setLocationRelativeTo(null);
@@ -57,8 +54,21 @@ public class Principal implements ActionListener {
 	/**
 	 * Crée et active l'interface de login.
 	 */
-	public JPanel login() {
-		JPanel panLogin = new JPanel();
+	public void login() {
+		JPanel panelNorth = new JPanel();
+		JPanel panelCenter = new JPanel();
+		
+		frame.add(panelNorth, BorderLayout.NORTH);
+		frame.add(panelCenter, BorderLayout.CENTER);
+
+		JLabel listUser = new JLabel("Utilisateurs enregistrés: ");
+		panelNorth.add(listUser);
+
+		for (String s : user.selectAll()) {
+			JLabel label = new JLabel(s);
+			label.setVisible(true);
+			panelNorth.add(label);
+		}
 
 		inputMdp.setEchoChar('*');
 		erreur.setVisible(false);
@@ -66,26 +76,25 @@ public class Principal implements ActionListener {
 		new_user.addActionListener(this);
 		connexion.addActionListener(this);
 
-		panLogin.add(labelLogin);
-		panLogin.add(inputLogin);
-		panLogin.add(labelMdp);
-		panLogin.add(inputMdp);
+		panelCenter.add(labelLogin);
+		panelCenter.add(inputLogin);
+		panelCenter.add(labelMdp);
+		panelCenter.add(inputMdp);
 
-		panLogin.add(new_user);
-		panLogin.add(connexion);
+		panelCenter.add(new_user);
+		panelCenter.add(connexion);
 
-		panLogin.add(erreur);
+		panelCenter.add(erreur);
 
-		return panLogin;
 	}
 
 	public JPanel interfaceTraining(String type) {
 		JPanel panel = new JPanel();
-		
+
 		frame.getContentPane().removeAll();
 
 		JLabel niveau = new JLabel("");
-		
+
 		if (type == "Renforcement") {
 			comboNiveau.removeAllItems();
 			String[] liste = { "Débutant", "Intermédiaire", "Confirmé", "Elite" };
@@ -127,43 +136,90 @@ public class Principal implements ActionListener {
 
 		return panel;
 	}
+
 	public JPanel interfaceRapports() {
 		JPanel panel = new JPanel();
+		panel.setSize(600,400);
+		String[] colonne=new String[] {"Date","type","Série","Level","Corde/Pause","Temps"};
+		JTable table = new JTable();
+		DefaultTableModel model = new DefaultTableModel(colonne, 0);
+			
+		model.setColumnIdentifiers(colonne);  
 		
+		JScrollPane scroll = new JScrollPane(table);
+		
+	    panel.add(scroll);
+
 		frame.getContentPane().removeAll();
-
-		for(String s:trainingBdd.training_Selected(name)) {
-			JLabel label = new JLabel(s);
-			   label.setVisible(true);
-			   panel.add(label);
+		
+		for (List<String> d : trainingBdd.training_Selected(name)) {
+			model.addRow(new Object[]{d.get(0),d.get(1),d.get(2),d.get(3),d.get(4),d.get(5)});
+			
 		}
-		for(String s:challengeBdd.affichageChallenge(name)) {
-			JLabel label = new JLabel(s);
-			   label.setVisible(true);
-			   panel.add(label);
-		}
-		System.out.println(" ");
-		System.out.println("Affichage Rapports");
-		System.out.println(" ");
+		table.setModel(model);
+		
+		TableColumn rope = table.getColumnModel().getColumn(4);
+        rope.setPreferredWidth(40);
+		TableColumn serie = table.getColumnModel().getColumn(2);
+        serie.setPreferredWidth(40);
+        TableColumn level = table.getColumnModel().getColumn(3);
+        level.setPreferredWidth(40);
+        
+		panel.add(scroll);
 
+		for (String s : challengeBdd.affichageChallenge(name)) {
+			JLabel label = new JLabel(s);
+			label.setVisible(true);
+			panel.add(label);
+		}
 
 		return panel;
 	}
-	public JPanel interfacePoids() {
-		JPanel panel = new JPanel();
+
+	public void interfacePoids() {
+		JPanel panelNorth = new JPanel();
+		JPanel panelCenter = new JPanel();
 		
+		String[] colonne=new String[] {"Date","Poids"};
+		JTable table = new JTable();
+		DefaultTableModel model = new DefaultTableModel(colonne, 0);
+
+		model.setColumnIdentifiers(colonne);   
+	    
+	    JScrollPane scroll = new JScrollPane(table);
+		
+	    panelCenter.add(scroll);
+	    
 		frame.getContentPane().removeAll();
+		frame.setLayout(new BorderLayout());
+		frame.add(panelNorth, BorderLayout.NORTH);
+		frame.add(panelCenter, BorderLayout.CENTER);
 
-		for(String s:poids.user_Selected(name)) {
-			JLabel label = new JLabel(s);
-			   label.setVisible(true);
-			   panel.add(label);
+		JLabel labelPoids = new JLabel("Entrer votre poids: ");
+		JTextField textePoids = new JTextField(10);
+		JButton buttonPoids = new JButton("Enregistrer");
+
+		buttonPoids.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Ajout du poids
+				String p = textePoids.getText();
+				double pds = Double.parseDouble(p);
+				poids.ajout(name, pds, dateS);
+				interfacePoids();
+				frame.revalidate();
+			}
+		});
+
+		panelNorth.add(labelPoids);
+		panelNorth.add(textePoids);
+		panelNorth.add(buttonPoids);
+
+		for (String d : poids.user_Selected(name).keySet()) {
+			model.addRow(new Object[]{d,poids.user_Selected(name).get(d)});
+			
 		}
-		System.out.println(" ");
-		System.out.println("Affichage poids");
-		System.out.println(" ");
-
-		return panel;
+		table.setModel(model);
+		panelCenter.add(scroll);
 	}
 
 	/**
@@ -196,13 +252,13 @@ public class Principal implements ActionListener {
 		});
 		poids.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.add(interfacePoids());
+				interfacePoids();
 				frame.revalidate();
 			}
 		});
 		menuUser.add(rapports);
 		menuUser.add(poids);
-		
+
 		menuFichier.add(quitter);
 
 		JMenuItem renforcement = new JMenuItem("Renforcement");
@@ -260,8 +316,8 @@ public class Principal implements ActionListener {
 		if (arg0.getSource() == connexion) {
 			if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
 				System.out.println("Connexion réussie");
-				name=inputLogin.getText();
-				frame.remove(login());
+				name = inputLogin.getText();
+				frame.getContentPane().removeAll();
 				this.menu();
 				frame.revalidate();
 			} else {

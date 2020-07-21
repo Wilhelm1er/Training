@@ -25,10 +25,6 @@ public class Menu {
 	 * utilisateur Interrogation de la bdd
 	 */
 	public void menu_user() throws InterruptedException {
-		System.out.println("Liste des utilisateurs existant: ");
-		user.selectAll();
-		System.out.println(" ");
-
 		System.out.print("Veuillez entrer votre nom: ");
 		name = new Scanner(System.in).nextLine();
 		// user.create_User(name);

@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Poids {
 	/**
@@ -61,10 +64,11 @@ public class Poids {
 	 * 
 	 * @param name
 	 */
-	public ArrayList<String> user_Selected(String name) {
+	public Map<String,Double> user_Selected(String name) {
 
-		ArrayList<String> poids = new ArrayList<String>();
-		String result="";
+		Map<String,Double> poids = new LinkedHashMap<String,Double>();
+		String result;
+		Double mesure;
 		
 		String sql2 = "SELECT Poids, Date FROM Poids WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
@@ -78,8 +82,10 @@ public class Poids {
 				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 				Date date = new Date(Long.parseLong(str));
 				
-				result=sf.format(date) + "\t" + rs.getDouble("Poids") + "kg";
-				poids.add(result);
+				result=sf.format(date);
+				mesure=rs.getDouble("Poids");
+				
+				poids.put(result,mesure);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
