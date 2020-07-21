@@ -1,3 +1,4 @@
+package Application;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,9 +29,9 @@ public class Main {
 		java.sql.Date dateS = new java.sql.Date(date.getTime());
 		
 		System.out.println("#####################################");
-		System.out.println("     TRAINING made in Java  v2.0     ");
+		System.out.println("     TRAINING made in Java  v3.0     ");
 		System.out.println("#####################################");
-		System.out.println(" ");
+		
 		menu.menu_user();
 		
 		System.out.println(" ");

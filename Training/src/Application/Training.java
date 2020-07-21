@@ -1,3 +1,4 @@
+package Application;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -94,14 +95,15 @@ public class Training {
 	/**
 	 * Affichage du choix de l'exercice de renforcement choisi
 	 */
-	public void renforcement_ToString() {
+	public String renforcement_ToString() {
 		System.out.println("#####################################");
 		System.out.println(" ");
 		System.out.println("Session: ");
 		System.out.println(" ");
 		for (String s : listRenfo.keySet()) {
-			System.out.println("- " + s + ", " + listRenfo.get(s)+ " Répétitions.");
+			return "- " + s + ", " + listRenfo.get(s)+ " Répétitions.";
 		}
+		return null;
 	}
 	
 	// Musculation

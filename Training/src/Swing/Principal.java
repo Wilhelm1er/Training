@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import Application.Training;
 import bdd.ChallengeBdd;
 import bdd.Poids;
 import bdd.TrainingBdd;
@@ -12,10 +13,12 @@ import bdd.Utilisateur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.List;
 
-public class Principal implements ActionListener {
+public class Principal implements ActionListener, ItemListener {
 
 	private JFrame frame = new JFrame();
 
@@ -34,9 +37,11 @@ public class Principal implements ActionListener {
 	Poids poids = new Poids();
 	Date date = new Date();
 	java.sql.Date dateS = new java.sql.Date(date.getTime());
+	private JTextArea descriptionTraining = new JTextArea(20,30);
 
 	public void principal() {
 
+		frame.getContentPane().removeAll();
 		// Définit un titre pour notre fenêtre
 		frame.setTitle("Training");
 		frame.setLayout(new BorderLayout());
@@ -55,19 +60,22 @@ public class Principal implements ActionListener {
 	 * Crée et active l'interface de login.
 	 */
 	public void login() {
-		JPanel panelNorth = new JPanel();
+		JPanel panelSouth = new JPanel();
 		JPanel panelCenter = new JPanel();
 
-		frame.add(panelNorth, BorderLayout.NORTH);
+		inputLogin.setText("");
+		inputMdp.setText("");
+
+		frame.add(panelSouth, BorderLayout.SOUTH);
 		frame.add(panelCenter, BorderLayout.CENTER);
 
 		JLabel listUser = new JLabel("Utilisateurs enregistrés: ");
-		panelNorth.add(listUser);
+		panelSouth.add(listUser);
 
 		for (String s : user.selectAll()) {
 			JLabel label = new JLabel(s);
 			label.setVisible(true);
-			panelNorth.add(label);
+			panelSouth.add(label);
 		}
 
 		inputMdp.setEchoChar('*');
@@ -132,7 +140,47 @@ public class Principal implements ActionListener {
 			panel.add(niveau);
 		}
 
+		comboNiveau.addActionListener(new ActionListener() {
+
+			String s="";
+			int level=0;
+			Training Renfo = new Training();
+			
+			
+			
+	        public void actionPerformed(ActionEvent e)
+	        {
+	           
+	        	String result = (String) comboNiveau.getSelectedItem();
+                System.out.println("Choix : "+result);
+	        	if(comboNiveau.getSelectedItem().equals("Débutant")) {
+	        		System.out.println(comboNiveau.getSelectedItem());
+	        		level=1;
+	        	}
+	        	if(comboNiveau.getSelectedItem().equals("Intermédiaire")) {
+	        		level=2;
+	        	}
+	        	if(comboNiveau.getSelectedItem().equals("Confirmé")) {
+	        		level=3;
+	        	}
+	        	if(comboNiveau.getSelectedItem().equals("Elite")) {
+	        		level=4;
+	        	}
+				try {
+					Application.Timer Timer_Renfo = new Application.Timer(Renfo.renforcement(level), "Renforcement", name, dateS, level);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				descriptionTraining.setText(Renfo.renforcement_ToString());
+				frame.revalidate();
+				
+	        }
+	    });  
+	    
 		panel.add(comboNiveau);
+		panel.add(descriptionTraining);
 
 		return panel;
 	}
@@ -236,11 +284,22 @@ public class Principal implements ActionListener {
 
 		JMenuItem rapports = new JMenuItem("Rapports");
 		JMenuItem poids = new JMenuItem("Suivi du poids");
+		JMenuItem logout = new JMenuItem("Fermer la session");
 		JMenuItem quitter = new JMenuItem("Quitter");
 
 		quitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+
+		logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().removeAll();
+				frame.setJMenuBar(null);
+				frame.revalidate();
+				name = "";
+				principal();
 			}
 		});
 
@@ -259,6 +318,7 @@ public class Principal implements ActionListener {
 		menuUser.add(rapports);
 		menuUser.add(poids);
 
+		menuFichier.add(logout);
 		menuFichier.add(quitter);
 
 		JMenuItem renforcement = new JMenuItem("Renforcement");
@@ -306,22 +366,22 @@ public class Principal implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == new_user) {
 			if (user.create_User(inputLogin.getText(), inputMdp.getText())) {
-				System.out.println("Création réussie de l'utilisateur");
+				// System.out.println("Création réussie de l'utilisateur");
 			} else {
-				System.out.println("Création échouée de l'utilisateur");
+				// System.out.println("Création échouée de l'utilisateur");
 				erreur.setVisible(true);
 			}
 		}
 
 		if (arg0.getSource() == connexion) {
 			if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
-				System.out.println("Connexion réussie");
+				// System.out.println("Connexion réussie");
 				name = inputLogin.getText();
 				frame.getContentPane().removeAll();
 				this.menu();
 				frame.revalidate();
 			} else {
-				System.out.println("Connexion échouée");
+				// System.out.println("Connexion échouée");
 				erreur.setVisible(true);
 			}
 		}
