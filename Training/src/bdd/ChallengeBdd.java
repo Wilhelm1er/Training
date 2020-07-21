@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class ChallengeBdd {
 	/**
@@ -36,6 +37,7 @@ public class ChallengeBdd {
 	public void ajout(String name, Date date, String type, long time, String termine) {
 		String sql = "INSERT INTO Challenge(user_id,date,type,temps,termine) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?)";
 
+		
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, name);
 			pstmt.setDate(2, date);
@@ -54,8 +56,11 @@ public class ChallengeBdd {
 	 * 
 	 * @param name
 	 */
-	public void affichageChallenge(String name) {
+	public ArrayList<String> affichageChallenge(String name) {
 
+		ArrayList<String> training = new ArrayList<String>();
+		String result="";
+		
 		String sql2 = "SELECT date, type, temps, termine FROM Challenge WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
@@ -72,10 +77,12 @@ public class ChallengeBdd {
 				int minutes = (int) ((rs.getLong("temps") / (1000 * 60)) % 60);
 				int hours = (int) ((rs.getLong("temps") / (1000 * 60 * 60)) % 24);
 
-				System.out.println(sf.format(date) + " - Challenge: " + rs.getString("type")+" - Temps: " + minutes + " minutes " + seconds + " secondes."+" - Terminé: " + rs.getString("termine"));
+				result=sf.format(date) + " - Challenge: " + rs.getString("type")+" - Temps: " + minutes + " minutes " + seconds + " secondes."+" - Terminé: " + rs.getString("termine");
+				training.add(result);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return training;
 	}
 }

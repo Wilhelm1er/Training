@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Poids {
 	/**
@@ -60,8 +61,11 @@ public class Poids {
 	 * 
 	 * @param name
 	 */
-	public void user_Selected(String name) {
+	public ArrayList<String> user_Selected(String name) {
 
+		ArrayList<String> poids = new ArrayList<String>();
+		String result="";
+		
 		String sql2 = "SELECT Poids, Date FROM Poids WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
@@ -73,10 +77,13 @@ public class Poids {
 				String str = rs.getString("date");
 				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 				Date date = new Date(Long.parseLong(str));
-				System.out.println(sf.format(date) + "\t" + rs.getDouble("Poids") + "kg");
+				
+				result=sf.format(date) + "\t" + rs.getDouble("Poids") + "kg";
+				poids.add(result);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return poids;
 	}
 }

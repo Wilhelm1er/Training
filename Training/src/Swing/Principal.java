@@ -1,8 +1,6 @@
 package Swing;
 
 import java.awt.BorderLayout;
-
-import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -10,11 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import bdd.ChallengeBdd;
+import bdd.Poids;
+import bdd.TrainingBdd;
 import bdd.Utilisateur;
 
 import java.awt.event.ActionEvent;
@@ -32,6 +32,11 @@ public class Principal implements ActionListener {
 	private Utilisateur user = new Utilisateur();
 	private JLabel labelLogin = new JLabel("Login:");
 	private JLabel labelMdp = new JLabel("Mot de passe:");
+	private JComboBox<String> comboNiveau = new JComboBox<String>();
+	private String name = "";
+	TrainingBdd trainingBdd = new TrainingBdd();
+	ChallengeBdd challengeBdd=new ChallengeBdd();
+	Poids poids = new Poids();
 
 	public void principal() {
 
@@ -39,7 +44,7 @@ public class Principal implements ActionListener {
 		frame.setTitle("Training");
 		frame.setLayout(new BorderLayout());
 		// Définit sa taille : 400 pixels de large et 100 pixels de haut
-		frame.setSize(400, 300);
+		frame.setSize(800, 500);
 
 		frame.add(login());
 
@@ -70,25 +75,97 @@ public class Principal implements ActionListener {
 		panLogin.add(connexion);
 
 		panLogin.add(erreur);
-		
+
 		return panLogin;
 	}
 
-	public JPanel InterfaceTraining() {
-		/**
-		 * Crée et active l'interface de training.
-		 */
-		JPanel panel= new JPanel();
+	public JPanel interfaceTraining(String type) {
+		JPanel panel = new JPanel();
 		
-			JLabel niveau = new JLabel("niveau");
+		frame.getContentPane().removeAll();
+
+		JLabel niveau = new JLabel("");
+		
+		if (type == "Renforcement") {
+			comboNiveau.removeAllItems();
+			String[] liste = { "Débutant", "Intermédiaire", "Confirmé", "Elite" };
+			for (int i = 0; i < liste.length; i++) {
+				comboNiveau.addItem(liste[i]);
+			}
+			niveau.setText("Level");
 			panel.add(niveau);
-			
-			String[] liste={"Débutant","Intermédiaire","Confirmé","Elite"};
-			JComboBox niveauCB = new JComboBox(liste);
-			panel.add(niveauCB);
-			
-			return panel;
 		}
+		if (type == "Musculation") {
+			comboNiveau.removeAllItems();
+			String[] liste = { "Numéro 1", "Numéro 2" };
+			for (int i = 0; i < liste.length; i++) {
+				comboNiveau.addItem(liste[i]);
+			}
+			niveau.setText("Level");
+			panel.add(niveau);
+		}
+		if (type == "Gainage") {
+			comboNiveau.removeAllItems();
+			String[] liste = { "Numéro 1", "Numéro 2" };
+			for (int i = 0; i < liste.length; i++) {
+				comboNiveau.addItem(liste[i]);
+			}
+			niveau.setText("Routine");
+			panel.add(niveau);
+		}
+		if (type == "Challenge") {
+			comboNiveau.removeAllItems();
+			String[] liste = { "FBI", "Pompiers" };
+			for (int i = 0; i < liste.length; i++) {
+				comboNiveau.addItem(liste[i]);
+			}
+			niveau.setText("Challenge");
+			panel.add(niveau);
+		}
+
+		panel.add(comboNiveau);
+
+		return panel;
+	}
+	public JPanel interfaceRapports() {
+		JPanel panel = new JPanel();
+		
+		frame.getContentPane().removeAll();
+
+		for(String s:trainingBdd.training_Selected(name)) {
+			JLabel label = new JLabel(s);
+			   label.setVisible(true);
+			   panel.add(label);
+		}
+		for(String s:challengeBdd.affichageChallenge(name)) {
+			JLabel label = new JLabel(s);
+			   label.setVisible(true);
+			   panel.add(label);
+		}
+		System.out.println(" ");
+		System.out.println("Affichage Rapports");
+		System.out.println(" ");
+
+
+		return panel;
+	}
+	public JPanel interfacePoids() {
+		JPanel panel = new JPanel();
+		
+		frame.getContentPane().removeAll();
+
+		for(String s:poids.user_Selected(name)) {
+			JLabel label = new JLabel(s);
+			   label.setVisible(true);
+			   panel.add(label);
+		}
+		System.out.println(" ");
+		System.out.println("Affichage poids");
+		System.out.println(" ");
+
+		return panel;
+	}
+
 	/**
 	 * Crée et active le menu.
 	 */
@@ -96,31 +173,77 @@ public class Principal implements ActionListener {
 	public void menu() {
 		// Menu
 		JMenuBar menuBar = new JMenuBar();
-		
-		JMenu menu1 = new JMenu("Fichier");
-		JMenu menu2 = new JMenu("Entrainement");
-		
+
+		JMenu menuFichier = new JMenu("Fichier");
+		JMenu menuUser = new JMenu(name);
+		JMenu menuTraining = new JMenu("Entrainement");
+
 		JMenuItem rapports = new JMenuItem("Rapports");
 		JMenuItem poids = new JMenuItem("Suivi du poids");
-		JMenuItem quitter = new JMenuItem(new QuitterAction("Quitter"));
+		JMenuItem quitter = new JMenuItem("Quitter");
+
+		quitter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		rapports.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.add(interfaceRapports());
+				frame.revalidate();
+			}
+		});
+		poids.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.add(interfacePoids());
+				frame.revalidate();
+			}
+		});
+		menuUser.add(rapports);
+		menuUser.add(poids);
 		
-		menu1.add(rapports);
-		menu1.add(poids);
-		menu1.add(quitter);
-		
-		JMenuItem renforcement = new JMenuItem(new RenforcementAction("Renforcement"));
+		menuFichier.add(quitter);
+
+		JMenuItem renforcement = new JMenuItem("Renforcement");
 		JMenuItem musculation = new JMenuItem("Musculation");
 		JMenuItem gainage = new JMenuItem("Gainage");
 		JMenuItem challenge = new JMenuItem("Challenge");
-		
-		menu2.add(renforcement);
-		menu2.add(musculation);
-		menu2.add(gainage);
-		menu2.add(challenge);
-		
-		menuBar.add(menu1);
-		menuBar.add(menu2);
-		
+
+		renforcement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.add(interfaceTraining("Renforcement"));
+				frame.revalidate();
+			}
+		});
+		musculation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.add(interfaceTraining("Musculation"));
+				frame.revalidate();
+			}
+		});
+		gainage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.add(interfaceTraining("Gainage"));
+				frame.revalidate();
+			}
+		});
+		challenge.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.add(interfaceTraining("Challenge"));
+				frame.revalidate();
+			}
+		});
+
+		menuTraining.add(renforcement);
+		menuTraining.add(musculation);
+		menuTraining.add(gainage);
+		menuTraining.add(challenge);
+
+		menuBar.add(menuFichier);
+		menuBar.add(menuUser);
+		menuBar.add(menuTraining);
+
 		frame.setJMenuBar(menuBar);
 	}
 
@@ -137,6 +260,7 @@ public class Principal implements ActionListener {
 		if (arg0.getSource() == connexion) {
 			if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
 				System.out.println("Connexion réussie");
+				name=inputLogin.getText();
 				frame.remove(login());
 				this.menu();
 				frame.revalidate();
@@ -145,24 +269,5 @@ public class Principal implements ActionListener {
 				erreur.setVisible(true);
 			}
 		}
-	}
-	public class RenforcementAction extends AbstractAction {
-		public RenforcementAction(String texte){
-			super(texte);
-		}
-	 
-		public void actionPerformed(ActionEvent e) { 
-			frame.add(InterfaceTraining());
-		} 
-	}
-	
-	public class QuitterAction extends AbstractAction {
-		public QuitterAction(String texte){
-			super(texte);
-		}
-	 
-		public void actionPerformed(ActionEvent e) { 
-			System.exit(0);
-		} 
 	}
 }

@@ -12,7 +12,7 @@ import bdd.Utilisateur;
 public class Menu {
 
 	Utilisateur user = new Utilisateur();
-	TrainingBdd training = new TrainingBdd();
+	TrainingBdd trainingBdd = new TrainingBdd();
 	ChallengeBdd challengeBdd=new ChallengeBdd();
 	Poids poids = new Poids();
 	private String name = "";
@@ -59,7 +59,7 @@ public class Menu {
 		}
 		// DERNIERS ENTRAINEMENTS
 		if (choice_menu == 2) {
-			training.training_Selected(name);
+			trainingBdd.training_Selected(name);
 			challengeBdd.affichageChallenge(name);
 			System.out.println(" ");
 			System.out.println("#####################################");

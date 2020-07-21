@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class Training {
 
-	private Map<String, Integer> List_1 = new LinkedHashMap<String, Integer>();
-	private Map<String, Integer> List_2 = new LinkedHashMap<String, Integer>();
-	private Map<String, Integer> List_3 = new LinkedHashMap<String, Integer>();
+	private Map<String, Integer> listRenfo = new LinkedHashMap<String, Integer>();
+	private Map<String, Integer> listGainage = new LinkedHashMap<String, Integer>();
+	private Map<String, Integer> listMuscu = new LinkedHashMap<String, Integer>();
 
 	// Renforcement 
 	/**
@@ -60,35 +60,35 @@ public class Training {
 	public Map<String, Integer> renforcement(int level) {
 		switch (level) {
 		case 1:
-			List_1.put("Bras tendu coude", 10);
-			List_1.put("Tractions", 5);
-			List_1.put("Abdo rameur", 15);
-			List_1.put("Mountain Climbers", 15);
-			List_1.put("Pompes", 5);
+			listRenfo.put("Bras tendu coude", 10);
+			listRenfo.put("Tractions", 5);
+			listRenfo.put("Abdo rameur", 15);
+			listRenfo.put("Mountain Climbers", 15);
+			listRenfo.put("Pompes", 5);
 			break;
 		case 2:
-			List_1.put("Bras tendu coude", 12);
-			List_1.put("Tractions", 7);
-			List_1.put("Abdo rameur", 20);
-			List_1.put("Mountain Climbers", 18);
-			List_1.put("Pompes", 7);
+			listRenfo.put("Bras tendu coude", 12);
+			listRenfo.put("Tractions", 7);
+			listRenfo.put("Abdo rameur", 20);
+			listRenfo.put("Mountain Climbers", 18);
+			listRenfo.put("Pompes", 7);
 			break;
 		case 3:
-			List_1.put("Bras tendu coude", 20);
-			List_1.put("Tractions", 15);
-			List_1.put("Abdo rameur", 25);
-			List_1.put("Mountain Climbers", 25);
-			List_1.put("Pompes", 15);
+			listRenfo.put("Bras tendu coude", 20);
+			listRenfo.put("Tractions", 15);
+			listRenfo.put("Abdo rameur", 25);
+			listRenfo.put("Mountain Climbers", 25);
+			listRenfo.put("Pompes", 15);
 			break;
 		case 4:
-			List_1.put("Bras tendu coude", 25);
-			List_1.put("Tractions", 20);
-			List_1.put("Abdo rameur", 30);
-			List_1.put("Mountain Climbers", 30);
-			List_1.put("Pompes", 20);
+			listRenfo.put("Bras tendu coude", 25);
+			listRenfo.put("Tractions", 20);
+			listRenfo.put("Abdo rameur", 30);
+			listRenfo.put("Mountain Climbers", 30);
+			listRenfo.put("Pompes", 20);
 			break;
 		}
-		return List_1;
+		return listRenfo;
 	}
 	
 	/**
@@ -99,8 +99,8 @@ public class Training {
 		System.out.println(" ");
 		System.out.println("Session: ");
 		System.out.println(" ");
-		for (String s : List_1.keySet()) {
-			System.out.println("- " + s + ", " + List_1.get(s)+ " Répétitions.");
+		for (String s : listRenfo.keySet()) {
+			System.out.println("- " + s + ", " + listRenfo.get(s)+ " Répétitions.");
 		}
 	}
 	
@@ -151,19 +151,19 @@ public class Training {
 	public Map<String, Integer> musculation(int level) {
 		switch (level) {
 		case 1:
-			List_3.put("Dips", 5);
-			List_3.put("Pompes pieds surélevés", 10);
-			List_3.put("Pompes", 10);
-			List_3.put("Tractions", 10);
+			listMuscu.put("Dips", 5);
+			listMuscu.put("Pompes pieds surélevés", 10);
+			listMuscu.put("Pompes", 10);
+			listMuscu.put("Tractions", 10);
 			break;
 		case 2:
-			List_3.put("Dips", 10);
-			List_3.put("Pompes pieds surélevés", 15);
-			List_3.put("Pompes", 15);
-			List_3.put("Tractions", 15);
+			listMuscu.put("Dips", 10);
+			listMuscu.put("Pompes pieds surélevés", 15);
+			listMuscu.put("Pompes", 15);
+			listMuscu.put("Tractions", 15);
 			break;
 		}
-		return List_3;
+		return listMuscu;
 		}
 
 	/**
@@ -174,8 +174,8 @@ public class Training {
 		System.out.println(" ");
 		System.out.println("Session: ");
 		System.out.println(" ");
-		for (String s : List_3.keySet()) {
-			System.out.println("- " + s + ", " + List_3.get(s)+ " Répétitions.");
+		for (String s : listMuscu.keySet()) {
+			System.out.println("- " + s + ", " + listMuscu.get(s)+ " Répétitions.");
 		}
 	}
 
@@ -224,21 +224,21 @@ public class Training {
 	public Map<String, Integer> gainage(int level) {
 		switch (level) {
 		case 1:
-			List_2.put("La Planche", 60);
-			List_2.put("Superman", 60);
-			List_2.put("La Planche Latérale Gauche", 45);
-			List_2.put("La Planche Latérale Droite", 45);
-			List_2.put("La Planche Dos", 60);
+			listGainage.put("La Planche", 60);
+			listGainage.put("Superman", 60);
+			listGainage.put("La Planche Latérale Gauche", 45);
+			listGainage.put("La Planche Latérale Droite", 45);
+			listGainage.put("La Planche Dos", 60);
 			break;
 		case 2:
-			List_2.put("La Planche", 60);
-			List_2.put("La Planche Latérale Gauche avec torsion", 30);
-			List_2.put("La Planche Latérale Droite avec torsion", 30);
-			List_2.put("La Planche 1 bras 1 jambe levée gauche", 30);
-			List_2.put("La Planche 1 bras 1 jambe levée droit", 30);
+			listGainage.put("La Planche", 60);
+			listGainage.put("La Planche Latérale Gauche avec torsion", 30);
+			listGainage.put("La Planche Latérale Droite avec torsion", 30);
+			listGainage.put("La Planche 1 bras 1 jambe levée gauche", 30);
+			listGainage.put("La Planche 1 bras 1 jambe levée droit", 30);
 			break;
 		}
-		return List_2;
+		return listGainage;
 	}
 
 	/**
@@ -249,8 +249,8 @@ public class Training {
 		System.out.println(" ");
 		System.out.println("Session: ");
 		System.out.println(" ");
-		for (String s : List_2.keySet()) {
-			System.out.println("- " + s + ", " + List_2.get(s) + " secondes.");
+		for (String s : listGainage.keySet()) {
+			System.out.println("- " + s + ", " + listGainage.get(s) + " secondes.");
 		}
 	}
 }

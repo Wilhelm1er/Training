@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.sql.Date;
 
 public class TrainingBdd {
@@ -80,10 +81,13 @@ public class TrainingBdd {
 	 * 
 	 * @param name
 	 */
-	public void training_Selected(String name) {
+	public ArrayList<String> training_Selected(String name) {
 
 		String sql2 = "SELECT date, entrainement, serie, level, tps_rope, temps,tps_pause FROM Training WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
+		ArrayList<String> training = new ArrayList<String>();
+		String result="";
+		
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
 			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
@@ -98,18 +102,20 @@ public class TrainingBdd {
 				int minutes = (int) ((rs.getLong("temps") / (1000 * 60)) % 60);
 				int hours = (int) ((rs.getLong("temps") / (1000 * 60 * 60)) % 24);
 				
-				System.out.print(sf.format(date) + " - " + rs.getString("entrainement") + " - "+ rs.getInt("serie")+
-						" série(s) - Level: "+rs.getInt("level"));
+				result=sf.format(date) + " - " + rs.getString("entrainement") + " - "+ rs.getInt("serie")+
+						" série(s) - Level: "+rs.getInt("level");
 				if(rs.getInt("tps_rope")!=0) {
-						System.out.print(" - Corde: "+rs.getInt("tps_rope")+"s ");
+					result=result+" - Corde: "+rs.getInt("tps_rope")+"s ";
 						}
 				if(rs.getInt("tps_pause")!=0) {
-					System.out.print(" - Pause: "+rs.getInt("tps_pause")+ "s ");
+					result=result+" - Pause: "+rs.getInt("tps_pause")+ "s ";
 					}
-				System.out.println("- Temps: " + minutes + " minutes " + seconds + " secondes.");
+				result=result+"- Temps: " + minutes + " minutes " + seconds + " secondes.";
+				training.add(result);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return training;
 	}
 }
