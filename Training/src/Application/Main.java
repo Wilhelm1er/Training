@@ -16,8 +16,6 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException{
 		
-		Menu menu=new Menu();
-		
 		Principal firstWindow=new Principal();
 		
 		//firstWindow.principal();
@@ -27,12 +25,6 @@ public class Main {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		java.sql.Date dateS = new java.sql.Date(date.getTime());
-		
-		System.out.println("#####################################");
-		System.out.println("     TRAINING made in Java  v3.0     ");
-		System.out.println("#####################################");
-		
-		menu.menu_user();
 		
 		System.out.println(" ");
 		System.out.println("#####################################");

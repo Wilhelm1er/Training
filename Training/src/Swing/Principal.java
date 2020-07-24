@@ -1,7 +1,11 @@
 package Swing;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -13,12 +17,10 @@ import bdd.Utilisateur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.List;
 
-public class Principal implements ActionListener, ItemListener {
+public class Principal implements ActionListener {
 
 	private JFrame frame = new JFrame();
 
@@ -37,7 +39,19 @@ public class Principal implements ActionListener, ItemListener {
 	Poids poids = new Poids();
 	Date date = new Date();
 	java.sql.Date dateS = new java.sql.Date(date.getTime());
-	private JTextArea descriptionTraining = new JTextArea(20,30);
+	private JTextArea descriptionTraining = new JTextArea(20, 30);
+	private JLabel labelCorde = new JLabel("Temps de corde: ");
+	private JTextField inputCorde = new JTextField("45", 10);
+	private JLabel labelPause = new JLabel("Temps de pause: ");
+	private JTextField inputPause = new JTextField("30", 10);
+	private JLabel labelSerie = new JLabel("Nombre de série: ");
+	private JTextField inputSerie = new JTextField("1", 10);
+	private int dureeCorde = 45;
+	private int dureePause = 30;
+	private int nbreSerie = 1;
+	private JLabel demarrer = new JLabel("Lancer session:");
+	private JButton demarrerButton = new JButton("Démarrer");
+	private String typeTraining;
 
 	public void principal() {
 
@@ -46,7 +60,7 @@ public class Principal implements ActionListener, ItemListener {
 		frame.setTitle("Training");
 		frame.setLayout(new BorderLayout());
 		// Définit sa taille : 400 pixels de large et 100 pixels de haut
-		frame.setSize(800, 600);
+		frame.setSize(600, 400);
 
 		login();
 
@@ -60,14 +74,21 @@ public class Principal implements ActionListener, ItemListener {
 	 * Crée et active l'interface de login.
 	 */
 	public void login() {
+		JPanel panelNorth = new JPanel();
 		JPanel panelSouth = new JPanel();
-		JPanel panelCenter = new JPanel();
+		JPanel panelWest = new JPanel();
+		
+		JLabel labelWelcome = new JLabel("Application training");
+		
+		panelNorth.add(labelWelcome);
+		
+		panelWest.setLayout(new GridLayout(10, 1));
 
 		inputLogin.setText("");
 		inputMdp.setText("");
 
 		frame.add(panelSouth, BorderLayout.SOUTH);
-		frame.add(panelCenter, BorderLayout.CENTER);
+		frame.add(panelWest, BorderLayout.WEST);
 
 		JLabel listUser = new JLabel("Utilisateurs enregistrés: ");
 		panelSouth.add(listUser);
@@ -84,22 +105,41 @@ public class Principal implements ActionListener, ItemListener {
 		new_user.addActionListener(this);
 		connexion.addActionListener(this);
 
-		panelCenter.add(labelLogin);
-		panelCenter.add(inputLogin);
-		panelCenter.add(labelMdp);
-		panelCenter.add(inputMdp);
+		panelWest.add(labelLogin);
+		panelWest.add(inputLogin);
+		panelWest.add(labelMdp);
+		panelWest.add(inputMdp);
 
-		panelCenter.add(new_user);
-		panelCenter.add(connexion);
+		panelWest.add(new_user);
+		panelWest.add(connexion);
 
-		panelCenter.add(erreur);
+		panelWest.add(erreur);
 
 	}
 
-	public JPanel interfaceTraining(String type) {
-		JPanel panel = new JPanel();
+	public void interfaceTraining(String type) {
+		JPanel panelNorth = new JPanel();
+		JPanel panelCenter = new JPanel();
+		JPanel panelWest = new JPanel();
+		JPanel panelSouth = new JPanel();
 
 		frame.getContentPane().removeAll();
+		frame.setLayout(new BorderLayout());
+		frame.add(panelNorth, BorderLayout.NORTH);
+		frame.add(panelCenter, BorderLayout.CENTER);
+		frame.add(panelWest, BorderLayout.WEST);
+		frame.add(panelSouth, BorderLayout.SOUTH);
+		
+		panelWest.setLayout(new GridLayout(20, 1));
+
+		JLabel labelTraining = new JLabel(typeTraining);
+		panelNorth.add(labelTraining);
+
+		inputCorde.setHorizontalAlignment(JTextField.CENTER);
+
+		inputPause.setHorizontalAlignment(JTextField.CENTER);
+
+		inputSerie.setHorizontalAlignment(JTextField.CENTER);
 
 		JLabel niveau = new JLabel("");
 
@@ -109,8 +149,12 @@ public class Principal implements ActionListener, ItemListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			panelWest.add(labelCorde);
+			panelWest.add(inputCorde);
+			panelWest.add(labelSerie);
+			panelWest.add(inputSerie);
 			niveau.setText("Level");
-			panel.add(niveau);
+			panelWest.add(niveau);
 		}
 		if (type == "Musculation") {
 			comboNiveau.removeAllItems();
@@ -118,8 +162,12 @@ public class Principal implements ActionListener, ItemListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			panelWest.add(labelPause);
+			panelWest.add(inputPause);
+			panelWest.add(labelSerie);
+			panelWest.add(inputSerie);
 			niveau.setText("Level");
-			panel.add(niveau);
+			panelWest.add(niveau);
 		}
 		if (type == "Gainage") {
 			comboNiveau.removeAllItems();
@@ -127,8 +175,12 @@ public class Principal implements ActionListener, ItemListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			panelWest.add(labelCorde);
+			panelWest.add(inputCorde);
+			panelWest.add(labelSerie);
+			panelWest.add(inputSerie);
 			niveau.setText("Routine");
-			panel.add(niveau);
+			panelWest.add(niveau);
 		}
 		if (type == "Challenge") {
 			comboNiveau.removeAllItems();
@@ -137,68 +189,38 @@ public class Principal implements ActionListener, ItemListener {
 				comboNiveau.addItem(liste[i]);
 			}
 			niveau.setText("Challenge");
-			panel.add(niveau);
+			panelWest.add(niveau);
 		}
 
-		comboNiveau.addActionListener(new ActionListener() {
+		panelWest.add(comboNiveau);
+		panelCenter.add(descriptionTraining);
+		panelSouth.add(demarrer);
+		panelSouth.add(demarrerButton);
 
-			String s="";
-			int level=0;
-			Training Renfo = new Training();
-			
-			
-			
-	        public void actionPerformed(ActionEvent e)
-	        {
-	           
-	        	String result = (String) comboNiveau.getSelectedItem();
-                System.out.println("Choix : "+result);
-	        	if(comboNiveau.getSelectedItem().equals("Débutant")) {
-	        		System.out.println(comboNiveau.getSelectedItem());
-	        		level=1;
-	        	}
-	        	if(comboNiveau.getSelectedItem().equals("Intermédiaire")) {
-	        		level=2;
-	        	}
-	        	if(comboNiveau.getSelectedItem().equals("Confirmé")) {
-	        		level=3;
-	        	}
-	        	if(comboNiveau.getSelectedItem().equals("Elite")) {
-	        		level=4;
-	        	}
-				try {
-					Application.Timer Timer_Renfo = new Application.Timer(Renfo.renforcement(level), "Renforcement", name, dateS, level);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				descriptionTraining.setText(Renfo.renforcement_ToString());
-				frame.revalidate();
-				
-	        }
-	    });  
-	    
-		panel.add(comboNiveau);
-		panel.add(descriptionTraining);
+		demarrerButton.addActionListener(this);
 
-		return panel;
 	}
 
 	public JPanel interfaceRapports() {
 		JPanel panel = new JPanel();
-		panel.setSize(600, 400);
 		String[] colonne = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
 		JTable table = new JTable();
+		
 		DefaultTableModel model = new DefaultTableModel(colonne, 0);
 
 		model.setColumnIdentifiers(colonne);
+		
 
 		JScrollPane scroll = new JScrollPane(table);
+		scroll.setPreferredSize(new Dimension(550,300));
 
 		panel.add(scroll);
 
 		frame.getContentPane().removeAll();
+		
+		DefaultTableCellRenderer custom = new DefaultTableCellRenderer(); 
+		custom.setHorizontalAlignment(JLabel.CENTER); // centre les données de ton tableau
+		
 
 		for (List<String> d : trainingBdd.training_Selected(name)) {
 			model.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
@@ -207,11 +229,14 @@ public class Principal implements ActionListener, ItemListener {
 		table.setModel(model);
 
 		TableColumn rope = table.getColumnModel().getColumn(4);
+		rope.setCellRenderer(custom);
 		rope.setPreferredWidth(40);
 		TableColumn serie = table.getColumnModel().getColumn(2);
-		serie.setPreferredWidth(40);
+		serie.setCellRenderer(custom);
+		serie.setPreferredWidth(30);
 		TableColumn level = table.getColumnModel().getColumn(3);
-		level.setPreferredWidth(40);
+		level.setCellRenderer(custom);
+		level.setPreferredWidth(80);
 
 		panel.add(scroll);
 
@@ -235,7 +260,7 @@ public class Principal implements ActionListener, ItemListener {
 		model.setColumnIdentifiers(colonne);
 
 		JScrollPane scroll = new JScrollPane(table);
-
+		scroll.setPreferredSize(new Dimension(550,300));
 		panelCenter.add(scroll);
 
 		frame.getContentPane().removeAll();
@@ -328,25 +353,29 @@ public class Principal implements ActionListener, ItemListener {
 
 		renforcement.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.add(interfaceTraining("Renforcement"));
+				typeTraining = "Renforcement";
+				interfaceTraining("Renforcement");
 				frame.revalidate();
 			}
 		});
 		musculation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.add(interfaceTraining("Musculation"));
+				typeTraining = "Musculation";
+				interfaceTraining("Musculation");
 				frame.revalidate();
 			}
 		});
 		gainage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.add(interfaceTraining("Gainage"));
+				typeTraining = "Gainage";
+				interfaceTraining("Gainage");
 				frame.revalidate();
 			}
 		});
 		challenge.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.add(interfaceTraining("Challenge"));
+				typeTraining = "Challenge";
+				interfaceTraining("Challenge");
 				frame.revalidate();
 			}
 		});
@@ -385,5 +414,48 @@ public class Principal implements ActionListener, ItemListener {
 				erreur.setVisible(true);
 			}
 		}
+		if (arg0.getSource() == demarrerButton) {
+			System.out.println(("type training:"+typeTraining));
+			Training Training = new Training();
+			String level = (String) comboNiveau.getSelectedItem();
+			try {
+				Application.Timer Timer_Training = new Application.Timer(Training.training(level), typeTraining, name,
+						dateS, level);
+			} catch (InterruptedException e) {
+				System.out.println("ne fonctionne pas");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public int getDureeCorde() {
+		return dureeCorde;
+	}
+
+	public int setDureeCorde() {
+		dureeCorde = Integer.parseInt(inputCorde.getText());
+		return dureeCorde;
+	}
+
+	public int getDureePause() {
+		return dureeCorde;
+	}
+
+	public int setDureePause() {
+		dureePause = Integer.parseInt(inputPause.getText());
+		return dureePause;
+	}
+
+	public int getNbreSerie() {
+		return nbreSerie;
+	}
+
+	public int setNbreSerie() {
+		nbreSerie = Integer.parseInt(inputSerie.getText());
+		return nbreSerie;
+	}
+
+	public String getTypeTraining() {
+		return typeTraining;
 	}
 }

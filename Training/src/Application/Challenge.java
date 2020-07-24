@@ -14,7 +14,6 @@ import javax.sound.sampled.Clip;
 
 public class Challenge {
 
-	private Menu menu = new Menu();
 	private bdd.ChallengeBdd challenge = new bdd.ChallengeBdd();
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 	private String termine = "";
@@ -90,7 +89,6 @@ public class Challenge {
 		System.out.println("#####################################");
 		System.out.println(" ");
 
-		menu.menu_general();
 
 	}
 

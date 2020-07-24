@@ -35,7 +35,7 @@ public class TrainingBdd {
 	 * @param capacity
 	 */
 
-	public void ajout_training(String name, Date date, String entrainement, int serie, int rope, int level, long time) {
+	public void ajout_training(String name, Date date, String entrainement, int serie, int rope, String level, long time) {
 		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,tps_rope,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?,?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -44,7 +44,7 @@ public class TrainingBdd {
 			pstmt.setString(3, entrainement);
 			pstmt.setInt(4, serie);
 			pstmt.setInt(5, rope);
-			pstmt.setInt(6, level);
+			pstmt.setString(6, level);
 			pstmt.setLong(7, time);
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -59,7 +59,7 @@ public class TrainingBdd {
 	 * @param capacity
 	 */
 
-	public void ajout_autre(String name, Date date, String entrainement, int serie, int pause, int level, long time) {
+	public void ajout_autre(String name, Date date, String entrainement, int serie, int pause, String level, long time) {
 		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,tps_pause,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?,?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -68,7 +68,7 @@ public class TrainingBdd {
 			pstmt.setString(3, entrainement);
 			pstmt.setInt(4, serie);
 			pstmt.setInt(5, pause);
-			pstmt.setInt(6, level);
+			pstmt.setString(6, level);
 			pstmt.setLong(7, time);
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -109,7 +109,7 @@ public class TrainingBdd {
 				listTraining.add(sf.format(date));
 				listTraining.add(rs.getString("entrainement"));
 				listTraining.add(String.valueOf(rs.getInt("serie")));
-				listTraining.add(String.valueOf(rs.getInt("level")));
+				listTraining.add(rs.getString("level"));
 				
 				if(rs.getInt("tps_rope")!=0) {
 					listTraining.add(String.valueOf(rs.getInt("tps_rope")));

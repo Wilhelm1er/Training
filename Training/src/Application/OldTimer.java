@@ -8,32 +8,31 @@ import java.util.Scanner;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import Swing.Principal;
-
 /**
  * Methode d'affichage en fonction de l'entrainement selectionné
  * 
  */
-public class Timer {
+public class OldTimer {
 
 	bdd.TrainingBdd Training = new bdd.TrainingBdd();
-	Principal principal=new Principal();
-
-	private int duree_corde=principal.getDureeCorde();
-	private int duree_pause=principal.getDureePause();
-	private int nbre_serie=principal.getNbreSerie();
+	private int Duree_corde;
+	private int Duree_pause;
+	private int nbre_serie;
 	private File bip = new File("resources/buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 
-	public Timer(Map<String, Integer> List, String type, String name, Date date, String level)
+	public OldTimer(Map<String, Integer> List, String type, String name, Date date, String level)
 			throws InterruptedException {
 		// Session de base
-		
+
 		// Switch selon le choix entre renforcement et gainage
 		switch (type) {
 		case "Renforcement":
+			this.process_CordeASauter();
 			for (int i = 1; i <= nbre_serie; i++) {
-				
+				if (i > 1) {
+					this.promptEnterKey();
+				}
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println("          SERIE NUMERO: " + i);
@@ -53,8 +52,11 @@ public class Timer {
 			this.corde_a_sauter();
 			break;
 		case "Musculation":
+			this.process_AvecPause();
 			for (int i = 1; i <= nbre_serie; i++) {
-				
+				if (i > 1) {
+					this.promptEnterKey();
+				}
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println("          SERIE NUMERO: " + i);
@@ -63,7 +65,7 @@ public class Timer {
 				for (String mapentry : List.keySet()) {
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Répétitions.");
 					this.promptEnterKey();
-					this.pause(duree_pause);
+					this.pause(Duree_pause);
 				}
 				if (i < nbre_serie) {
 					System.out.println("PAUSE de 3min");
@@ -72,8 +74,11 @@ public class Timer {
 			}
 			break;
 		case "Gainage":
+			this.process_CordeASauter();
 			for (int i = 1; i <= nbre_serie; i++) {
-				
+				if (i > 1) {
+					this.promptEnterKey();
+				}
 				System.out.println(" ");
 				System.out.println("#####################################");
 				System.out.println("          SERIE NUMERO: " + i);
@@ -112,18 +117,17 @@ public class Timer {
 		switch (type) {
 		case "Renforcement":
 			// Ajout training dans la BDD
-			Training.ajout_training(name, date, type, nbre_serie, duree_corde, level, diff);
+			Training.ajout_training(name, date, type, nbre_serie, Duree_corde, level, diff);
 			break;
 		case "Musculation":
 			// Ajout training dans la BDD
-			Training.ajout_autre(name, date, type, nbre_serie, duree_pause, level, diff);
+			Training.ajout_autre(name, date, type, nbre_serie, Duree_pause, level, diff);
 			break;
 		case "Gainage":
 			// Ajout training dans la BDD
-			Training.ajout_training(name, date, type, nbre_serie, duree_corde, level, diff);
+			Training.ajout_training(name, date, type, nbre_serie, Duree_corde, level, diff);
 			break;
 		}
-
 	}
 
 	/**
@@ -148,7 +152,7 @@ public class Timer {
 	 */
 	public void corde_a_sauter() throws InterruptedException {
 		System.out.println("CORDE A SAUTER");
-		for (int i = duree_corde; i > 0; i--) {
+		for (int i = Duree_corde; i > 0; i--) {
 			System.out.println(i);
 			Thread.sleep(1000);
 			if (i == 5) {
@@ -215,7 +219,7 @@ public class Timer {
 		System.out.println("#####################################");
 		System.out.println(" ");
 		System.out.println("Choisissez votre temps de corde à sauter: (en secondes)");
-		duree_corde = new Scanner(System.in).nextInt();
+		Duree_corde = new Scanner(System.in).nextInt();
 		System.out.println(" ");
 		// Choix du nombre de série
 		System.out.println("#####################################");
@@ -246,7 +250,7 @@ public class Timer {
 		System.out.println("#####################################");
 		System.out.println(" ");
 		System.out.println("Choisissez votre temps de pause: (en secondes)");
-		duree_pause = new Scanner(System.in).nextInt();
+		Duree_pause = new Scanner(System.in).nextInt();
 		System.out.println(" ");
 		// Choix du nombre de série
 		System.out.println("#####################################");
