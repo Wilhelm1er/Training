@@ -16,8 +16,7 @@ public class Training {
 
 	private Map<String, Integer> listTraining = new LinkedHashMap<String, Integer>();
 
-	Principal principal = new Principal();
-	String typeTraining = principal.getTypeTraining();
+	
 	// Renforcement
 
 	/**
@@ -28,10 +27,9 @@ public class Training {
 	 * @return List_1 Liste générée correspondant au niveau de l'entrainement de
 	 *         renforcement selectionné
 	 */
-	public Map<String, Integer> training(String level) {
-		typeTraining = principal.getTypeTraining();
-		System.out.println("seconde type: "+typeTraining);
-		if (typeTraining.equals("Renforcement")) {
+	public Map<String, Integer> training(String type,String level) {
+		
+		if (type.equals("Renforcement")) {
 			switch (level) {
 			case "Débutant":
 				listTraining.put("Bras tendu coude", 10);
@@ -62,7 +60,7 @@ public class Training {
 				listTraining.put("Pompes", 20);
 				break;
 			}}
-		if (typeTraining.equals("Musculation")) {
+		if (type.equals("Musculation")) {
 			switch (level) {
 			case "Niveau 1":
 				listTraining.put("Dips", 5);
@@ -77,7 +75,7 @@ public class Training {
 				listTraining.put("Tractions", 15);
 				break;
 			}}
-		if (typeTraining.equals("Gainage")) {
+		if (type.equals("Gainage")) {
 			switch (level) {
 			case "Routine 1":
 				listTraining.put("La Planche", 60);
@@ -107,39 +105,11 @@ public class Training {
 		System.out.println(" ");
 		System.out.println("Session: ");
 		System.out.println(" ");
-		for (String s : listRenfo.keySet()) {
-			return "- " + s + ", " + listRenfo.get(s) + " Répétitions.";
+		for (String s : listTraining.keySet()) {
+			return "- " + s + ", " + listTraining.get(s) + " Répétitions.";
 		}
 		return null;
 	}
 
-	// Musculation
 
-	/**
-	 * Affichage du choix de l'exercice de musculation choisi
-	 */
-	public void musculation_ToString() {
-		System.out.println("#####################################");
-		System.out.println(" ");
-		System.out.println("Session: ");
-		System.out.println(" ");
-		for (String s : listMuscu.keySet()) {
-			System.out.println("- " + s + ", " + listMuscu.get(s) + " Répétitions.");
-		}
-	}
-
-	// Gainage
-
-	/**
-	 * Affichage du choix de l'exercice de gainage choisi
-	 */
-	public void Gainage_ToString() {
-		System.out.println("#####################################");
-		System.out.println(" ");
-		System.out.println("Session: ");
-		System.out.println(" ");
-		for (String s : listGainage.keySet()) {
-			System.out.println("- " + s + ", " + listGainage.get(s) + " secondes.");
-		}
-	}
 }

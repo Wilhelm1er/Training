@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import Application.Challenge;
+import Application.Chrono;
 import Application.Training;
 import bdd.ChallengeBdd;
 import bdd.Poids;
@@ -24,20 +26,21 @@ public class Principal implements ActionListener {
 
 	private JFrame frame = new JFrame();
 
-	private JButton new_user = new JButton("Créer utilisateur");
-	private JButton connexion = new JButton("Connexion");
-	private JLabel erreur = new JLabel("Erreur, utilisateur inconnu ou mot de passe erroné");
-	private JTextField inputLogin = new JTextField("", 10);
-	private JPasswordField inputMdp = new JPasswordField("", 10);
 	private Utilisateur user = new Utilisateur();
-	private JLabel labelLogin = new JLabel("Login:");
-	private JLabel labelMdp = new JLabel("Mot de passe:");
+	JButton new_user = new JButton("Créer utilisateur");
+	JButton connexion = new JButton("Connexion");
+	JTextField inputLogin = new JTextField("", 8);
+	JPasswordField inputMdp = new JPasswordField("", 8);
+	JLabel erreur = new JLabel("Erreur, utilisateur inconnu ou mot de passe erroné");
+
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private String name = "";
 	TrainingBdd trainingBdd = new TrainingBdd();
 	ChallengeBdd challengeBdd = new ChallengeBdd();
 	Poids poids = new Poids();
 	Date date = new Date();
+	Challenge challenge = new Challenge();
+
 	java.sql.Date dateS = new java.sql.Date(date.getTime());
 	private JTextArea descriptionTraining = new JTextArea(20, 30);
 	private JLabel labelCorde = new JLabel("Temps de corde: ");
@@ -60,7 +63,7 @@ public class Principal implements ActionListener {
 		frame.setTitle("Training");
 		frame.setLayout(new BorderLayout());
 		// Définit sa taille : 400 pixels de large et 100 pixels de haut
-		frame.setSize(600, 400);
+		frame.setSize(300, 300);
 
 		login();
 
@@ -76,25 +79,41 @@ public class Principal implements ActionListener {
 	public void login() {
 		JPanel panelNorth = new JPanel();
 		JPanel panelSouth = new JPanel();
-		JPanel panelWest = new JPanel();
-		
+		JPanel panelCenter = new JPanel();
+
+		JLabel labelLogin = new JLabel("Login:");
+		JLabel labelMdp = new JLabel("Mot de passe:");
+		inputLogin.setSize(10, 20);
+		inputMdp.setSize(10, 20);
+
+		new_user.setSize(10, 20);
+		connexion.setSize(10, 20);
+
+		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		labelMdp.setHorizontalAlignment(SwingConstants.CENTER);
+		inputMdp.setHorizontalAlignment(SwingConstants.CENTER);
+		inputLogin.setHorizontalAlignment(SwingConstants.CENTER);
+
 		JLabel labelWelcome = new JLabel("Application training");
-		
+
 		panelNorth.add(labelWelcome);
-		
-		panelWest.setLayout(new GridLayout(10, 1));
+
+		panelCenter.setLayout(new GridLayout(6, 1));
+		panelSouth.setLayout(new GridLayout(6, 1));
 
 		inputLogin.setText("");
 		inputMdp.setText("");
 
 		frame.add(panelSouth, BorderLayout.SOUTH);
-		frame.add(panelWest, BorderLayout.WEST);
+		frame.add(panelCenter, BorderLayout.CENTER);
 
-		JLabel listUser = new JLabel("Utilisateurs enregistrés: ");
+		JLabel listUser = new JLabel("Utilisateurs connus: ");
+		listUser.setHorizontalAlignment(SwingConstants.CENTER);
 		panelSouth.add(listUser);
 
 		for (String s : user.selectAll()) {
 			JLabel label = new JLabel(s);
+			label.setHorizontalAlignment(SwingConstants.CENTER);
 			label.setVisible(true);
 			panelSouth.add(label);
 		}
@@ -105,15 +124,15 @@ public class Principal implements ActionListener {
 		new_user.addActionListener(this);
 		connexion.addActionListener(this);
 
-		panelWest.add(labelLogin);
-		panelWest.add(inputLogin);
-		panelWest.add(labelMdp);
-		panelWest.add(inputMdp);
+		panelCenter.add(labelLogin);
+		panelCenter.add(inputLogin);
+		panelCenter.add(labelMdp);
+		panelCenter.add(inputMdp);
 
-		panelWest.add(new_user);
-		panelWest.add(connexion);
+		panelCenter.add(new_user);
+		panelCenter.add(connexion);
 
-		panelWest.add(erreur);
+		panelCenter.add(erreur);
 
 	}
 
@@ -124,12 +143,13 @@ public class Principal implements ActionListener {
 		JPanel panelSouth = new JPanel();
 
 		frame.getContentPane().removeAll();
+		frame.setSize(600, 500);
 		frame.setLayout(new BorderLayout());
 		frame.add(panelNorth, BorderLayout.NORTH);
 		frame.add(panelCenter, BorderLayout.CENTER);
 		frame.add(panelWest, BorderLayout.WEST);
 		frame.add(panelSouth, BorderLayout.SOUTH);
-		
+
 		panelWest.setLayout(new GridLayout(20, 1));
 
 		JLabel labelTraining = new JLabel(typeTraining);
@@ -149,6 +169,7 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			panelCenter.add(descriptionTraining);
 			panelWest.add(labelCorde);
 			panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
@@ -162,6 +183,7 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			panelCenter.add(descriptionTraining);
 			panelWest.add(labelPause);
 			panelWest.add(inputPause);
 			panelWest.add(labelSerie);
@@ -175,6 +197,7 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			panelCenter.add(descriptionTraining);
 			panelWest.add(labelCorde);
 			panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
@@ -188,12 +211,13 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			
 			niveau.setText("Challenge");
 			panelWest.add(niveau);
 		}
 
 		panelWest.add(comboNiveau);
-		panelCenter.add(descriptionTraining);
+		
 		panelSouth.add(demarrer);
 		panelSouth.add(demarrerButton);
 
@@ -205,22 +229,21 @@ public class Principal implements ActionListener {
 		JPanel panel = new JPanel();
 		String[] colonne = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
 		JTable table = new JTable();
-		
+
 		DefaultTableModel model = new DefaultTableModel(colonne, 0);
 
 		model.setColumnIdentifiers(colonne);
-		
 
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(550,300));
+		scroll.setPreferredSize(new Dimension(550, 300));
 
 		panel.add(scroll);
 
 		frame.getContentPane().removeAll();
-		
-		DefaultTableCellRenderer custom = new DefaultTableCellRenderer(); 
+		frame.setSize(600, 500);
+
+		DefaultTableCellRenderer custom = new DefaultTableCellRenderer();
 		custom.setHorizontalAlignment(JLabel.CENTER); // centre les données de ton tableau
-		
 
 		for (List<String> d : trainingBdd.training_Selected(name)) {
 			model.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
@@ -260,10 +283,11 @@ public class Principal implements ActionListener {
 		model.setColumnIdentifiers(colonne);
 
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(550,300));
+		scroll.setPreferredSize(new Dimension(550, 300));
 		panelCenter.add(scroll);
 
 		frame.getContentPane().removeAll();
+		frame.setSize(600, 500);
 		frame.setLayout(new BorderLayout());
 		frame.add(panelNorth, BorderLayout.NORTH);
 		frame.add(panelCenter, BorderLayout.CENTER);
@@ -407,6 +431,7 @@ public class Principal implements ActionListener {
 				// System.out.println("Connexion réussie");
 				name = inputLogin.getText();
 				frame.getContentPane().removeAll();
+				frame.setSize(600, 500);
 				this.menu();
 				frame.revalidate();
 			} else {
@@ -415,12 +440,23 @@ public class Principal implements ActionListener {
 			}
 		}
 		if (arg0.getSource() == demarrerButton) {
-			System.out.println(("type training:"+typeTraining));
 			Training Training = new Training();
 			String level = (String) comboNiveau.getSelectedItem();
 			try {
-				Application.Timer Timer_Training = new Application.Timer(Training.training(level), typeTraining, name,
-						dateS, level);
+				if (typeTraining.equals("Challenge")) {
+					if(level.equals("Pompiers")) {
+						//frame.add(new Chrono(211));
+						challenge.startChallenge(name, dateS, level);
+					}
+					if(level.equals("FBI")) {
+						//frame.add(new Chrono(292));
+						challenge.startChallenge(name, dateS, level);
+					}
+					
+				} else {
+					Application.Timer Timer_Training = new Application.Timer(Training.training(typeTraining, level),
+							typeTraining, name, dateS, level);
+				}
 			} catch (InterruptedException e) {
 				System.out.println("ne fonctionne pas");
 				e.printStackTrace();

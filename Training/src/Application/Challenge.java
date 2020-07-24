@@ -46,8 +46,7 @@ public class Challenge {
 		System.out.println("#####################################");
 		System.out.println(" ");
 
-		System.out.println("      Dès que vous êtes prêt");
-		this.promptEnterKey();
+		//this.promptEnterKey();
 
 		try {
 			Clip clip = AudioSystem.getClip();
