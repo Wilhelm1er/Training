@@ -25,12 +25,25 @@ Lancement temporaire à partir du Main
 ## Roadmap
 
 - Pause à tout moment
-- Rapport statistique
+- Rapport:
+  - statistique
+  - Bug affichage rapports
+  - Entrer ou supprimer ligne rapports, poids
 - Interface graphique
   - gestion training
+  - Lister matériel
 - Bugs:
   - musculation: temps pause?, repos avant pause
 - Compte rendu fin exo
+- Training:
+  - Modification musculation
+  - Ajout training xav
+  - Création Timer
+- Gestion utilisateurs
+  - Modification mot de passe
+- Menu à propos, renvoyant vers git
+- Ajout autres activités
+  
 
 ## Contributeurs
 
