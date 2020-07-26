@@ -22,26 +22,25 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
-public class Principal implements ActionListener {
+public class Principal {
 
-	private JFrame frame = new JFrame();
-
+	private JFrame window = new JFrame();
 	private Utilisateur user = new Utilisateur();
-	JButton new_user = new JButton("Créer utilisateur");
-	JButton connexion = new JButton("Connexion");
-	JTextField inputLogin = new JTextField("", 8);
-	JPasswordField inputMdp = new JPasswordField("", 8);
-	JLabel erreur = new JLabel("Erreur, utilisateur inconnu ou mot de passe erroné");
+	private JButton new_user = new JButton("Créer utilisateur");
+	private JButton connexion = new JButton("Connexion");
+	private JTextField inputLogin = new JTextField("", 8);
+	private JPasswordField inputMdp = new JPasswordField("", 8);
+	private JLabel erreur = new JLabel("Erreur, utilisateur inconnu ou mot de passe erroné");
 
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private String name = "";
-	TrainingBdd trainingBdd = new TrainingBdd();
-	ChallengeBdd challengeBdd = new ChallengeBdd();
-	Poids poids = new Poids();
-	Date date = new Date();
-	Challenge challenge = new Challenge();
+	private TrainingBdd trainingBdd = new TrainingBdd();
+	private ChallengeBdd challengeBdd = new ChallengeBdd();
+	private Poids poids = new Poids();
+	private Date date = new Date();
+	private Challenge challenge = new Challenge();
 
-	java.sql.Date dateS = new java.sql.Date(date.getTime());
+	private java.sql.Date dateS = new java.sql.Date(date.getTime());
 	private JTextArea descriptionTraining = new JTextArea(20, 30);
 	private JLabel labelCorde = new JLabel("Temps de corde: ");
 	private JTextField inputCorde = new JTextField("45", 10);
@@ -55,22 +54,27 @@ public class Principal implements ActionListener {
 	private JLabel demarrer = new JLabel("Lancer session:");
 	private JButton demarrerButton = new JButton("Démarrer");
 	private String typeTraining;
+	private JScrollPane scrollChallenge;
+	private JScrollPane scrollTraining;
+	private JPanel panelData = new JPanel();
+	private JPanel panelNorthChoix = new JPanel();
+	private JPanel panelCenterTRaining = new JPanel();
 
 	public void principal() {
 
-		frame.getContentPane().removeAll();
+		window.getContentPane().removeAll();
 		// Définit un titre pour notre fenêtre
-		frame.setTitle("Training");
-		frame.setLayout(new BorderLayout());
+		window.setTitle("Training");
+		window.setLayout(new BorderLayout());
 		// Définit sa taille : 400 pixels de large et 100 pixels de haut
-		frame.setSize(300, 300);
+		window.setSize(300, 300);
 
 		login();
 
 		// Nous demandons maintenant à notre objet de se positionner au centre
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		window.setLocationRelativeTo(null);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setVisible(true);
 	}
 
 	/**
@@ -80,6 +84,7 @@ public class Principal implements ActionListener {
 		JPanel panelNorth = new JPanel();
 		JPanel panelSouth = new JPanel();
 		JPanel panelCenter = new JPanel();
+		Menu menu = new Menu();
 
 		JLabel labelLogin = new JLabel("Login:");
 		JLabel labelMdp = new JLabel("Mot de passe:");
@@ -88,6 +93,28 @@ public class Principal implements ActionListener {
 
 		new_user.setSize(10, 20);
 		connexion.setSize(10, 20);
+
+		new_user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (user.create_User(inputLogin.getText(), inputMdp.getText())) {
+				} else {
+					erreur.setVisible(true);
+				}
+			}
+		});
+		connexion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
+					name = inputLogin.getText();
+					window.getContentPane().removeAll();
+					window.setSize(600, 500);
+					menu();
+					window.revalidate();
+				} else {
+					erreur.setVisible(true);
+				}
+			}
+		});
 
 		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelMdp.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,9 +130,11 @@ public class Principal implements ActionListener {
 
 		inputLogin.setText("");
 		inputMdp.setText("");
-
-		frame.add(panelSouth, BorderLayout.SOUTH);
-		frame.add(panelCenter, BorderLayout.CENTER);
+		
+		
+		
+		window.add(panelSouth, BorderLayout.SOUTH);
+		window.add(panelCenter, BorderLayout.CENTER);
 
 		JLabel listUser = new JLabel("Utilisateurs connus: ");
 		listUser.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,10 +149,14 @@ public class Principal implements ActionListener {
 
 		inputMdp.setEchoChar('*');
 		erreur.setVisible(false);
+		
+		// UTILITE?
+		InputMap im = connexion.getInputMap();
+        im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
+        im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
 
-		new_user.addActionListener(this);
-		connexion.addActionListener(this);
-
+		window.getRootPane().setDefaultButton(connexion);
+		
 		panelCenter.add(labelLogin);
 		panelCenter.add(inputLogin);
 		panelCenter.add(labelMdp);
@@ -138,17 +171,17 @@ public class Principal implements ActionListener {
 
 	public void interfaceTraining(String type) {
 		JPanel panelNorth = new JPanel();
-		JPanel panelCenter = new JPanel();
+
 		JPanel panelWest = new JPanel();
 		JPanel panelSouth = new JPanel();
 
-		frame.getContentPane().removeAll();
-		frame.setSize(600, 500);
-		frame.setLayout(new BorderLayout());
-		frame.add(panelNorth, BorderLayout.NORTH);
-		frame.add(panelCenter, BorderLayout.CENTER);
-		frame.add(panelWest, BorderLayout.WEST);
-		frame.add(panelSouth, BorderLayout.SOUTH);
+		window.getContentPane().removeAll();
+		window.setSize(600, 500);
+		window.setLayout(new BorderLayout());
+		window.add(panelNorth, BorderLayout.NORTH);
+		window.add(panelCenterTRaining, BorderLayout.CENTER);
+		window.add(panelWest, BorderLayout.WEST);
+		window.add(panelSouth, BorderLayout.SOUTH);
 
 		panelWest.setLayout(new GridLayout(20, 1));
 
@@ -169,7 +202,7 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			panelCenter.add(descriptionTraining);
+			// panelCenter.add(descriptionTraining);
 			panelWest.add(labelCorde);
 			panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
@@ -183,7 +216,7 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			panelCenter.add(descriptionTraining);
+			// panelCenter.add(descriptionTraining);
 			panelWest.add(labelPause);
 			panelWest.add(inputPause);
 			panelWest.add(labelSerie);
@@ -197,7 +230,7 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			panelCenter.add(descriptionTraining);
+			// panelCenter.add(descriptionTraining);
 			panelWest.add(labelCorde);
 			panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
@@ -211,70 +244,142 @@ public class Principal implements ActionListener {
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			
+
 			niveau.setText("Challenge");
 			panelWest.add(niveau);
 		}
 
 		panelWest.add(comboNiveau);
-		
+
 		panelSouth.add(demarrer);
 		panelSouth.add(demarrerButton);
 
-		demarrerButton.addActionListener(this);
+		demarrerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Training Training = new Training();
+				String level = (String) comboNiveau.getSelectedItem();
+				try {
+					if (typeTraining.equals("Challenge")) {
+						if (level.equals("Pompiers")) {
+							// frame.add(new Chrono(211));
+							challenge.startChallenge(name, dateS, level);
+						}
+						if (level.equals("FBI")) {
+							// frame.add(new Chrono(292));
+							challenge.startChallenge(name, dateS, level);
+						}
 
+					} else {
+						Application.Timer Timer_Training = new Application.Timer(Training.training(typeTraining, level),
+								typeTraining, name, dateS, level);
+					}
+				} catch (InterruptedException f) {
+					System.out.println("ne fonctionne pas");
+					f.printStackTrace();
+				}
+			}
+		});
 	}
 
-	public JPanel interfaceRapports() {
-		JPanel panel = new JPanel();
-		String[] colonne = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
-		JTable table = new JTable();
+	public void interfaceRapports() {
+		panelData.removeAll();
+		JPanel panelNorthChoix = new JPanel();
+		JButton trainingButton = new JButton("Training");
+		JButton challengeButton = new JButton("Challenge");
 
-		DefaultTableModel model = new DefaultTableModel(colonne, 0);
+		window.getContentPane().removeAll();
 
-		model.setColumnIdentifiers(colonne);
+		window.setLayout(new BorderLayout());
+		window.add(panelNorthChoix, BorderLayout.NORTH);
 
-		JScrollPane scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(550, 300));
+		// panelWest.setLayout(new GridLayout(20,1));
 
-		panel.add(scroll);
+		panelNorthChoix.add(trainingButton);
+		panelNorthChoix.add(challengeButton);
 
-		frame.getContentPane().removeAll();
-		frame.setSize(600, 500);
+		challengeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelData.removeAll();
+				panelData.add(scrollChallenge);
+				panelData.repaint();
+				window.add(panelData, BorderLayout.CENTER);
+				window.revalidate();
+			}
+		});
+		trainingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelData.removeAll();
+				panelData.add(scrollTraining);
+				panelData.repaint();
+				window.add(panelData, BorderLayout.CENTER);
+				window.revalidate();
+			}
+		});
+
+		String[] colTraining = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
+		JTable tableTraining = new JTable();
+
+		DefaultTableModel modelTraining = new DefaultTableModel(colTraining, 0);
+
+		modelTraining.setColumnIdentifiers(colTraining);
+
+		scrollTraining = new JScrollPane(tableTraining);
+		scrollTraining.setPreferredSize(new Dimension(500, 300));
+
+		// panel.add(scrollTraining);
 
 		DefaultTableCellRenderer custom = new DefaultTableCellRenderer();
 		custom.setHorizontalAlignment(JLabel.CENTER); // centre les données de ton tableau
 
-		for (List<String> d : trainingBdd.training_Selected(name)) {
-			model.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
+		for (List<String> d : trainingBdd.affichageTraining(name)) {
+			modelTraining.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
 
 		}
-		table.setModel(model);
+		tableTraining.setModel(modelTraining);
 
-		TableColumn rope = table.getColumnModel().getColumn(4);
+		TableColumn rope = tableTraining.getColumnModel().getColumn(4);
 		rope.setCellRenderer(custom);
 		rope.setPreferredWidth(40);
-		TableColumn serie = table.getColumnModel().getColumn(2);
+		TableColumn serie = tableTraining.getColumnModel().getColumn(2);
 		serie.setCellRenderer(custom);
 		serie.setPreferredWidth(30);
-		TableColumn level = table.getColumnModel().getColumn(3);
+		TableColumn level = tableTraining.getColumnModel().getColumn(3);
 		level.setCellRenderer(custom);
 		level.setPreferredWidth(80);
 
-		panel.add(scroll);
+		// panel.add(scrollTraining);
 
-		for (String s : challengeBdd.affichageChallenge(name)) {
-			JLabel label = new JLabel(s);
-			label.setVisible(true);
-			panel.add(label);
+		String[] colChallenge = new String[] { "Date", "Challenge", "Temps", "Terminé" };
+		JTable tableChallenge = new JTable();
+
+		DefaultTableModel modelChallenge = new DefaultTableModel(colChallenge, 0);
+
+		modelChallenge.setColumnIdentifiers(colChallenge);
+
+		scrollChallenge = new JScrollPane(tableChallenge);
+		scrollChallenge.setPreferredSize(new Dimension(500, 300));
+
+		for (List<String> d : challengeBdd.affichageChallenge(name)) {
+			modelChallenge.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3) });
 		}
+		tableChallenge.setModel(modelChallenge);
 
-		return panel;
+		// panel.add(scrollChallenge);
+
 	}
 
 	public void interfacePoids() {
-		JPanel panelNorth = new JPanel();
-		JPanel panelCenter = new JPanel();
+
+		panelData.removeAll();
+		panelNorthChoix.removeAll();
+		window.getContentPane().removeAll();
+
+		JButton dataPoidsButton = new JButton("Données");
+		panelNorthChoix.add(dataPoidsButton);
+
+		window.setLayout(new BorderLayout());
+		window.add(panelNorthChoix, BorderLayout.NORTH);
+		window.add(panelData, BorderLayout.CENTER);
 
 		String[] colonne = new String[] { "Date", "Poids" };
 		JTable table = new JTable();
@@ -284,47 +389,49 @@ public class Principal implements ActionListener {
 
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setPreferredSize(new Dimension(550, 300));
-		panelCenter.add(scroll);
-
-		frame.getContentPane().removeAll();
-		frame.setSize(600, 500);
-		frame.setLayout(new BorderLayout());
-		frame.add(panelNorth, BorderLayout.NORTH);
-		frame.add(panelCenter, BorderLayout.CENTER);
 
 		JLabel labelPoids = new JLabel("Entrer votre poids: ");
 		JTextField textePoids = new JTextField(10);
-		JButton buttonPoids = new JButton("Enregistrer");
+		JButton ajoutPoids = new JButton("Enregistrer");
 
-		buttonPoids.addActionListener(new ActionListener() {
+		ajoutPoids.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Ajout du poids
 				String p = textePoids.getText();
-				double pds = Double.parseDouble(p);
-				poids.ajout(name, pds, dateS);
-				interfacePoids();
-				frame.revalidate();
+				try {
+					double pds = Double.parseDouble(p);
+					poids.ajout(name, pds, dateS);
+					interfacePoids();
+					window.revalidate();
+				} catch (NumberFormatException f) {
+					System.out.println(f);
+				}
+
+			}
+
+		});
+		dataPoidsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelData.removeAll();
+				panelData.add(scroll);
+				panelData.repaint();
+				window.add(panelData, BorderLayout.CENTER);
+				window.revalidate();
 			}
 		});
 
-		panelNorth.add(labelPoids);
-		panelNorth.add(textePoids);
-		panelNorth.add(buttonPoids);
+		panelNorthChoix.add(labelPoids);
+		panelNorthChoix.add(textePoids);
+		panelNorthChoix.add(ajoutPoids);
 
 		for (String d : poids.user_Selected(name).keySet()) {
 			model.addRow(new Object[] { d, poids.user_Selected(name).get(d) });
 
 		}
 		table.setModel(model);
-		panelCenter.add(scroll);
 	}
 
-	/**
-	 * Crée et active le menu.
-	 */
-
-	public void menu() {
-		// Menu
+	public void menu() { // Menu
 		JMenuBar menuBar = new JMenuBar();
 
 		JMenu menuFichier = new JMenu("Fichier");
@@ -344,9 +451,9 @@ public class Principal implements ActionListener {
 
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.setJMenuBar(null);
-				frame.revalidate();
+				window.getContentPane().removeAll();
+				window.setJMenuBar(null);
+				window.revalidate();
 				name = "";
 				principal();
 			}
@@ -354,14 +461,16 @@ public class Principal implements ActionListener {
 
 		rapports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.add(interfaceRapports());
-				frame.revalidate();
+				window.getContentPane().removeAll();
+				interfaceRapports();
+				window.revalidate();
 			}
 		});
 		poids.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				window.getContentPane().removeAll();
 				interfacePoids();
-				frame.revalidate();
+				window.revalidate();
 			}
 		});
 		menuUser.add(rapports);
@@ -379,28 +488,28 @@ public class Principal implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				typeTraining = "Renforcement";
 				interfaceTraining("Renforcement");
-				frame.revalidate();
+				window.revalidate();
 			}
 		});
 		musculation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				typeTraining = "Musculation";
 				interfaceTraining("Musculation");
-				frame.revalidate();
+				window.revalidate();
 			}
 		});
 		gainage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				typeTraining = "Gainage";
 				interfaceTraining("Gainage");
-				frame.revalidate();
+				window.revalidate();
 			}
 		});
 		challenge.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				typeTraining = "Challenge";
 				interfaceTraining("Challenge");
-				frame.revalidate();
+				window.revalidate();
 			}
 		});
 
@@ -413,55 +522,26 @@ public class Principal implements ActionListener {
 		menuBar.add(menuUser);
 		menuBar.add(menuTraining);
 
-		frame.setJMenuBar(menuBar);
+		window.setJMenuBar(menuBar);
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == new_user) {
-			if (user.create_User(inputLogin.getText(), inputMdp.getText())) {
-				// System.out.println("Création réussie de l'utilisateur");
-			} else {
-				// System.out.println("Création échouée de l'utilisateur");
-				erreur.setVisible(true);
-			}
-		}
+	public void processTraining(int time) {
+		JLabel timer = new JLabel();
+		// panelCenterTRaining
+		for (int i = 0; i < time; i--) {
+			time--;
+			timer.setText(String.valueOf(time));
+			window.revalidate();
 
-		if (arg0.getSource() == connexion) {
-			if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
-				// System.out.println("Connexion réussie");
-				name = inputLogin.getText();
-				frame.getContentPane().removeAll();
-				frame.setSize(600, 500);
-				this.menu();
-				frame.revalidate();
-			} else {
-				// System.out.println("Connexion échouée");
-				erreur.setVisible(true);
-			}
 		}
-		if (arg0.getSource() == demarrerButton) {
-			Training Training = new Training();
-			String level = (String) comboNiveau.getSelectedItem();
-			try {
-				if (typeTraining.equals("Challenge")) {
-					if(level.equals("Pompiers")) {
-						//frame.add(new Chrono(211));
-						challenge.startChallenge(name, dateS, level);
-					}
-					if(level.equals("FBI")) {
-						//frame.add(new Chrono(292));
-						challenge.startChallenge(name, dateS, level);
-					}
-					
-				} else {
-					Application.Timer Timer_Training = new Application.Timer(Training.training(typeTraining, level),
-							typeTraining, name, dateS, level);
-				}
-			} catch (InterruptedException e) {
-				System.out.println("ne fonctionne pas");
-				e.printStackTrace();
-			}
-		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getDureeCorde() {
@@ -493,5 +573,9 @@ public class Principal implements ActionListener {
 
 	public String getTypeTraining() {
 		return typeTraining;
+	}
+
+	public JFrame getFrame() {
+		return window;
 	}
 }

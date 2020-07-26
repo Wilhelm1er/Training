@@ -16,8 +16,8 @@ import Swing.Principal;
  */
 public class Timer {
 
-	bdd.TrainingBdd Training = new bdd.TrainingBdd();
-	Principal principal=new Principal();
+	private bdd.TrainingBdd Training = new bdd.TrainingBdd();
+	private Principal principal=new Principal();
 
 	private int duree_corde=principal.getDureeCorde();
 	private int duree_pause=principal.getDureePause();

@@ -82,7 +82,7 @@ public class TrainingBdd {
 	 * 
 	 * @param name
 	 */
-	public ArrayList<List<String>> training_Selected(String name) {
+	public ArrayList<List<String>> affichageTraining(String name) {
 
 		String sql2 = "SELECT date, entrainement, serie, level, tps_rope, temps,tps_pause FROM Training WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
