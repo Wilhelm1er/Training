@@ -20,6 +20,7 @@ import bdd.Utilisateur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Principal {
@@ -84,7 +85,7 @@ public class Principal {
 		JPanel panelNorth = new JPanel();
 		JPanel panelSouth = new JPanel();
 		JPanel panelCenter = new JPanel();
-		Menu menu = new Menu();
+		// Menu menu = new Menu();
 
 		JLabel labelLogin = new JLabel("Login:");
 		JLabel labelMdp = new JLabel("Mot de passe:");
@@ -130,9 +131,7 @@ public class Principal {
 
 		inputLogin.setText("");
 		inputMdp.setText("");
-		
-		
-		
+
 		window.add(panelSouth, BorderLayout.SOUTH);
 		window.add(panelCenter, BorderLayout.CENTER);
 
@@ -149,14 +148,14 @@ public class Principal {
 
 		inputMdp.setEchoChar('*');
 		erreur.setVisible(false);
-		
+
 		// UTILITE?
 		InputMap im = connexion.getInputMap();
-        im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
-        im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
+		im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
+		im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
 
 		window.getRootPane().setDefaultButton(connexion);
-		
+
 		panelCenter.add(labelLogin);
 		panelCenter.add(inputLogin);
 		panelCenter.add(labelMdp);
@@ -198,7 +197,8 @@ public class Principal {
 
 		if (type == "Renforcement") {
 			comboNiveau.removeAllItems();
-			String[] liste = { "Débutant", "Intermédiaire", "Confirmé", "Elite" };
+			comboNiveau.setSelectedItem("Choix");
+			String[] liste = { "Choix", "Débutant", "Intermédiaire", "Confirmé", "Elite" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
@@ -209,50 +209,58 @@ public class Principal {
 			panelWest.add(inputSerie);
 			niveau.setText("Level");
 			panelWest.add(niveau);
+
 		}
 		if (type == "Musculation") {
 			comboNiveau.removeAllItems();
-			String[] liste = { "Numéro 1", "Numéro 2" };
+			comboNiveau.setSelectedItem("Choix");
+			String[] liste = { "Choix", "Numéro 1", "Numéro 2" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			// panelCenter.add(descriptionTraining);
+
 			panelWest.add(labelPause);
 			panelWest.add(inputPause);
 			panelWest.add(labelSerie);
 			panelWest.add(inputSerie);
 			niveau.setText("Level");
 			panelWest.add(niveau);
+
 		}
 		if (type == "Gainage") {
 			comboNiveau.removeAllItems();
-			String[] liste = { "Numéro 1", "Numéro 2" };
+			comboNiveau.setSelectedItem("Choix");
+			String[] liste = { "Choix", "Routine 1", "Routine 2" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			// panelCenter.add(descriptionTraining);
-			panelWest.add(labelCorde);
-			panelWest.add(inputCorde);
+
+			// panelWest.add(labelCorde);
+			// panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
 			panelWest.add(inputSerie);
 			niveau.setText("Routine");
 			panelWest.add(niveau);
+
 		}
 		if (type == "Challenge") {
 			comboNiveau.removeAllItems();
-			String[] liste = { "FBI", "Pompiers" };
+			comboNiveau.setSelectedItem("Choix");
+			String[] liste = { "Choix", "FBI", "Pompiers" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
 
 			niveau.setText("Challenge");
 			panelWest.add(niveau);
+
 		}
 
 		panelWest.add(comboNiveau);
 
 		panelSouth.add(demarrer);
 		panelSouth.add(demarrerButton);
+		panelCenterTRaining.add(descriptionTraining);
 
 		demarrerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -277,6 +285,16 @@ public class Principal {
 					System.out.println("ne fonctionne pas");
 					f.printStackTrace();
 				}
+			}
+		});
+
+		comboNiveau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Training T = new Training();
+				String level = (String) comboNiveau.getSelectedItem();
+
+				descriptionTraining.setText(T.affichageTraining(level));
+				window.revalidate();
 			}
 		});
 	}
@@ -532,7 +550,6 @@ public class Principal {
 			time--;
 			timer.setText(String.valueOf(time));
 			window.revalidate();
-
 		}
 	}
 
