@@ -80,18 +80,19 @@ public class Timer {
 				System.out.println("#####################################");
 				System.out.println(" ");
 				for (String mapentry : List.keySet()) {
-					this.corde_a_sauter();
+					//this.corde_a_sauter();
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Secondes.");
 					this.pause(List.get(mapentry));
-					this.promptEnterKey();
+					this.pause(5);
+					//this.promptEnterKey();
 				}
 				if (i < nbre_serie) {
-					this.corde_a_sauter();
+					//this.corde_a_sauter();
 					System.out.println("PAUSE de 3min");
 					this.pause(180);
 				}
 			}
-			this.corde_a_sauter();
+			//this.corde_a_sauter();
 			break;
 		}
 		System.out.println("Session TERMINEE");
