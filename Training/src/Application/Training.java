@@ -104,6 +104,16 @@ public class Training {
 			str.append("Choisissez un niveau");
 			break;
 		case "Débutant":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Corde à sauter");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("Bras tendu coude: 10");
 			str.append("\n");
 			str.append("Tractions: 5");
@@ -114,8 +124,20 @@ public class Training {
 			str.append("\n");
 			str.append("Pompes: 5");
 			str.append("\n");
+			str.append("\n");
+			
 			break;
 		case "Intermédiaire":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Corde à sauter");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("Bras tendu coude: 12");
 			str.append("\n");
 			str.append("Tractions: 7");
@@ -128,6 +150,16 @@ public class Training {
 			str.append("\n");
 			break;
 		case "Confirmé":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Corde à sauter");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("Bras tendu coude: 20");
 			str.append("\n");
 			str.append("Tractions: 15");
@@ -140,6 +172,16 @@ public class Training {
 			str.append("\n");
 			break;
 		case "Elite":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Corde à sauter");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("Bras tendu coude: 25");
 			str.append("\n");
 			str.append("Tractions: 20");
@@ -152,6 +194,16 @@ public class Training {
 			str.append("\n");
 			break;
 		case "Numéro 1":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Barre à dips");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("Dips: 5");
 			str.append("\n");
 			str.append("Pompes pieds surélevés: 10");
@@ -162,6 +214,16 @@ public class Training {
 			str.append("\n");
 			break;
 		case "Numéro 2":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Barre à dips");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("Dips: 10");
 			str.append("\n");
 			str.append("Pompes pieds surélevés: 15");
@@ -172,6 +234,12 @@ public class Training {
 			str.append("\n");
 			break;
 		case "Routine 1":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("La Planche: 60s");
 			str.append("\n");
 			str.append("Superman: 60s");
@@ -184,6 +252,12 @@ public class Training {
 			str.append("\n");
 			break;
 		case "Routine 2":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
 			str.append("La Planche: 60s");
 			str.append("\n");
 			str.append("La Planche Latérale Gauche avec torsion: 30s");

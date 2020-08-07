@@ -262,7 +262,12 @@ public class Principal {
 		panelSouth.add(demarrerButton);
 		
 		panelCenterTRaining.add(descriptionTraining);
-
+		
+	//	
+// BUG AFFICHAGE JTEXTAREA
+	//	
+		
+		
 		demarrerButton.addActionListener(new ActionListener() {
 			{
 			panelCenterTRaining.remove(descriptionTraining);
