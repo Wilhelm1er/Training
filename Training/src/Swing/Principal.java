@@ -148,7 +148,10 @@ public class Principal {
 
 		inputMdp.setEchoChar('*');
 		erreur.setVisible(false);
-
+		
+		
+		
+// A CORRIGER
 		// UTILITE?
 		InputMap im = connexion.getInputMap();
 		im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
@@ -156,6 +159,10 @@ public class Principal {
 
 		window.getRootPane().setDefaultButton(connexion);
 
+		
+		
+		
+		
 		panelCenter.add(labelLogin);
 		panelCenter.add(inputLogin);
 		panelCenter.add(labelMdp);
@@ -294,8 +301,12 @@ public class Principal {
 							// frame.add(new Chrono(292));
 							challenge.startChallenge(name, dateS, level);
 						}
-
+// MAUVAISE DUREE DE PAUSE 45 au lieu de 30
 					} else {
+						System.out.println("type de training: " +typeTraining);
+						System.out.println("level: " +level);
+						System.out.println("nom: " +name);
+						System.out.println("date: " +dateS);
 						Application.Timer Timer_Training = new Application.Timer(Training.training(typeTraining, level),
 								typeTraining, name, dateS, level);
 					}

@@ -59,13 +59,13 @@ public class Training {
 			}}
 		if (type.equals("Musculation")) {
 			switch (level) {
-			case "Niveau 1":
+			case "Numéro 1":
 				listTraining.put("Dips", 5);
 				listTraining.put("Pompes pieds surélevés", 10);
 				listTraining.put("Pompes", 10);
 				listTraining.put("Tractions", 10);
 				break;
-			case "Niveau 2":
+			case "Numéro 2":
 				listTraining.put("Dips", 10);
 				listTraining.put("Pompes pieds surélevés", 15);
 				listTraining.put("Pompes", 15);

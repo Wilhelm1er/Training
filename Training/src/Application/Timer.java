@@ -61,9 +61,11 @@ public class Timer {
 				System.out.println("#####################################");
 				System.out.println(" ");
 				for (String mapentry : List.keySet()) {
+					for(i=0;i<6;i++) {
+					System.out.println("Série numéro: " + i+1 + "/6.");
 					System.out.println("Exercice: " + mapentry + " - " + List.get(mapentry) + " Répétitions.");
 					this.promptEnterKey();
-					this.pause(duree_pause);
+					this.pause(duree_pause);}
 				}
 				if (i < nbre_serie) {
 					System.out.println("PAUSE de 3min");
