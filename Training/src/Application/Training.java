@@ -16,9 +16,6 @@ public class Training {
 
 	private Map<String, Integer> listTraining = new LinkedHashMap<String, Integer>();
 
-	
-	// Renforcement
-
 	/**
 	 * Creation de la liste de l'exercice de renforcement musculaire suivant le
 	 * niveau de difficulté selectionné
@@ -97,7 +94,7 @@ public class Training {
 		}
 
 	/**
-	 * Affichage du choix de l'exercice de renforcement choisi
+	 * Affichage du choix de l'exercice choisi
 	 */
 	public String affichageTraining(String level) {
 		StringBuilder str = new StringBuilder();
@@ -198,11 +195,21 @@ public class Training {
 			str.append("La Planche 1 bras 1 jambe levée droit: 30s");
 			str.append("\n");
 			break;
+		case "FBI":
+			str.append("Challenge FBI");
+			str.append("\n");
+			str.append("Durée 3 min 31");
+			str.append("\n");
+			break;
+		case "Pompiers":
+			str.append("Challenge Pompiers");
+			str.append("\n");
+			str.append("Durée 4 min 50");
+			str.append("\n");
+			break;
 		default:
 			str.append("Choisissez un niveau");
 		}
 		return str.toString();
 	}
-
-
 }

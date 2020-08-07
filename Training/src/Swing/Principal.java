@@ -260,19 +260,32 @@ public class Principal {
 
 		panelSouth.add(demarrer);
 		panelSouth.add(demarrerButton);
+		
 		panelCenterTRaining.add(descriptionTraining);
 
 		demarrerButton.addActionListener(new ActionListener() {
+			{
+			panelCenterTRaining.remove(descriptionTraining);
+			panelCenterTRaining.validate();
+			//panelCenterTRaining.revalidate();
+			panelCenterTRaining.repaint();
+			window.revalidate();
+		}
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				Training Training = new Training();
 				String level = (String) comboNiveau.getSelectedItem();
 				try {
 					if (typeTraining.equals("Challenge")) {
+						
 						if (level.equals("Pompiers")) {
+							processTraining(211);
 							// frame.add(new Chrono(211));
 							challenge.startChallenge(name, dateS, level);
 						}
 						if (level.equals("FBI")) {
+							processTraining(292);
 							// frame.add(new Chrono(292));
 							challenge.startChallenge(name, dateS, level);
 						}
@@ -545,10 +558,12 @@ public class Principal {
 
 	public void processTraining(int time) {
 		JLabel timer = new JLabel();
-		// panelCenterTRaining
+		
+		panelCenterTRaining.add(timer);
 		for (int i = 0; i < time; i--) {
 			time--;
 			timer.setText(String.valueOf(time));
+			
 			window.revalidate();
 		}
 	}

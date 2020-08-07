@@ -15,11 +15,12 @@ import Swing.Principal;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException{
-		
-		Principal firstWindow=new Principal();
-		
-		//firstWindow.principal();
-		firstWindow.principal();
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	         @Override
+	         public void run() {
+	            new Principal().principal();  // Let the constructor do the job
+	         }
+	      });
 		
 		//Recuperation date du jour
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
