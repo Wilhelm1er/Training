@@ -31,9 +31,8 @@ Lancement temporaire à partir du Main
   - Entrer ou supprimer ligne rapports, poids
 - Interface graphique
   - gestion training
-  - Lister matériel
 - Bugs:
-  - musculation: temps pause?, repos avant pause
+  - musculation: temps pause?, repos avant pause, modif db
 - Compte rendu fin exo
 - Training:
   - Modification musculation
