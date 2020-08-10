@@ -17,10 +17,9 @@ import Listeners.LoginActionListener;
 import bdd.Utilisateur;
 
 public class Login {
-	private JFrame frame = new JFrame("Training App");
-	private Menu menu = new Menu();
+	private JFrame frameLogin = new JFrame("Login");
 	private Utilisateur user = new Utilisateur();
-
+	 
 	private JButton new_user = new JButton("Créer utilisateur");
 	private JButton connexion = new JButton("Connexion");
 	private JTextField inputLogin = new JTextField("", 8);
@@ -32,15 +31,14 @@ public class Login {
 	 * Crée et active l'interface de login.
 	 */
 	public void login() {
-
-		frame.getContentPane().removeAll();
-
-		frame.setLayout(new BorderLayout());
-		frame.setSize(300, 300);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-
+		
+		//frameLogin.getContentPane().removeAll();
+		frameLogin.setLayout(new BorderLayout());
+		frameLogin.setSize(300, 300);
+		frameLogin.setLocationRelativeTo(null);
+		frameLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameLogin.setVisible(true);
+		
 		JPanel panelNorth = new JPanel();
 		JPanel panelSouth = new JPanel();
 		JPanel panelCenter = new JPanel();
@@ -70,9 +68,11 @@ public class Login {
 
 		inputLogin.setText("");
 		inputMdp.setText("");
+		
+		frameLogin.add(panelSouth, BorderLayout.SOUTH);
+		frameLogin.add(panelCenter, BorderLayout.CENTER);
 
-		frame.add(panelSouth, BorderLayout.SOUTH);
-		frame.add(panelCenter, BorderLayout.CENTER);
+		frameLogin.getRootPane().setDefaultButton(connexion);
 
 		JLabel listUser = new JLabel("Utilisateurs connus: ");
 		listUser.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,18 +94,20 @@ public class Login {
 		im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
 		im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
 
-		frame.getRootPane().setDefaultButton(connexion);
-
 		panelCenter.add(labelLogin);
 		panelCenter.add(inputLogin);
 		panelCenter.add(labelMdp);
 		panelCenter.add(inputMdp);
-
+		
 		panelCenter.add(new_user);
 		panelCenter.add(connexion);
 
 		panelCenter.add(erreur);
+		
 
+	}
+	public JFrame getFrame() {
+		return frameLogin;
 	}
 
 	public JPasswordField getInputMdp() {
@@ -135,8 +137,11 @@ public class Login {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public JFrame getFrame() {
-		return frame;
+	
+	/*
+	 * public static void main(String[] args) throws InterruptedException{
+	 * javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	 * 
+	 * @Override public void run() { new Login().login(); } }); }
+	 */
 	}
-}

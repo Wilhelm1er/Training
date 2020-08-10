@@ -3,12 +3,14 @@ package Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Swing.InterfacePrincipal;
 import Swing.Login;
 import Swing.Menu;
 import bdd.Utilisateur;
 
 public class LoginActionListener implements ActionListener{
 	private Utilisateur user = new Utilisateur();
+	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
 	private Login l=new Login();
 	private Menu menu= new Menu();
 
@@ -27,12 +29,12 @@ public class LoginActionListener implements ActionListener{
 		else if (e.getSource()==l.getConnexion())
 		{
 			if (user.connexion_User(l.getInputLogin().getText(), l.getInputMdp().getText())) {
+				l.getFrame().dispose();
 				l.setName(l.getInputLogin().getText());
-				menu.setMenuUser(l.getName());
-				l.getFrame().getContentPane().removeAll();
-				l.getFrame().setSize(600, 500);
-				l.getFrame().setJMenuBar(menu.menu());
-				l.getFrame().revalidate();
+				IntGraphique.setName(l.getName());
+				IntGraphique.InterfaceGraphique();
+				
+
 			} else {
 				l.getErreur().setVisible(true);
 			}

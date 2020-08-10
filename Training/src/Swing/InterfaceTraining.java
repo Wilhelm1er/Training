@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import Listeners.InterfaceTrainingActionListener;
 
 public class InterfaceTraining {
-	private Login login = new Login();
+	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
 
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private JPanel panelCenterTRaining = new JPanel();
@@ -46,10 +46,10 @@ public class InterfaceTraining {
 		 * 500);
 		 */
 		//login.getFrame().setLayout(new BorderLayout());
-		login.getFrame().add(panelNorth, BorderLayout.NORTH);
-		login.getFrame().add(panelCenterTRaining, BorderLayout.CENTER);
-		login.getFrame().add(panelWest, BorderLayout.WEST);
-		login.getFrame().add(panelSouth, BorderLayout.SOUTH);
+		IntGraphique.getFrame().add(panelNorth, BorderLayout.NORTH);
+		IntGraphique.getFrame().add(panelCenterTRaining, BorderLayout.CENTER);
+		IntGraphique.getFrame().add(panelWest, BorderLayout.WEST);
+		IntGraphique.getFrame().add(panelSouth, BorderLayout.SOUTH);
 
 		panelWest.setLayout(new GridLayout(20, 1));
 
@@ -155,7 +155,7 @@ public class InterfaceTraining {
 			time--;
 			timer.setText(String.valueOf(time));
 
-			login.getFrame().revalidate();
+			IntGraphique.getFrame().revalidate();
 		}
 	}
 

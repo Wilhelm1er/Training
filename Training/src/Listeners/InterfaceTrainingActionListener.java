@@ -6,10 +6,12 @@ import java.util.Date;
 
 import Application.Challenge;
 import Application.Training;
+import Swing.InterfacePrincipal;
 import Swing.InterfaceTraining;
 import Swing.Login;
 
 public class InterfaceTrainingActionListener implements ActionListener {
+	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private Login l = new Login();
 	private Challenge challenge = new Challenge();
@@ -65,7 +67,7 @@ public class InterfaceTrainingActionListener implements ActionListener {
 			String level = (String) IntTraining.getComboNiveau().getSelectedItem();
 
 			IntTraining.getDescriptionTraining().setText(T.affichageTraining(level));
-			l.getFrame().revalidate();
+			IntGraphique.getFrame().revalidate();
 		}
 	}
 }

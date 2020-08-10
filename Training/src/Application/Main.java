@@ -2,10 +2,8 @@ package Application;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
-import Swing.Navigateur;
-import Swing.Principal;
+import Swing.Login;
 
 /**
  * Application de Training, Version Java de l'appli produite par Ghost en Python
@@ -20,8 +18,7 @@ public class Main {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	         @Override
 	         public void run() {
-	            //new Principal().principal();  
-	        	 new Navigateur().Navigateur();
+	        	new Login().login();
 	         }
 	      });
 		
@@ -31,8 +28,7 @@ public class Main {
 		java.sql.Date dateS = new java.sql.Date(date.getTime());
 		
 		System.out.println(" ");
-		System.out.println("#####################################");
+		System.out.println("Application lancée");
 		System.out.println(" ");
-		
 	}
 }

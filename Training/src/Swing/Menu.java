@@ -1,7 +1,5 @@
 package Swing;
 
-import Listeners.MenuActionListener;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -45,13 +43,6 @@ public class Menu {
 		menuBar.add(menuFichier);
 		menuBar.add(menuUser);
 		menuBar.add(menuTraining);
-
-		quitter.addActionListener(new MenuActionListener(this));
-		logout.addActionListener(new MenuActionListener(this));
-		renforcement.addActionListener(new MenuActionListener(this));
-		musculation.addActionListener(new MenuActionListener(this));
-		gainage.addActionListener(new MenuActionListener(this));
-		challenge.addActionListener(new MenuActionListener(this));
 
 		return menuBar;
 	}
