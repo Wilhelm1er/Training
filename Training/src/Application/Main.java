@@ -3,6 +3,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+
+import Swing.Navigateur;
 import Swing.Principal;
 
 /**
@@ -18,7 +20,8 @@ public class Main {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	         @Override
 	         public void run() {
-	            new Principal().principal();  // Let the constructor do the job
+	            //new Principal().principal();  
+	        	 new Navigateur().Navigateur();
 	         }
 	      });
 		
