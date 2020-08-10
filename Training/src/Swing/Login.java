@@ -19,7 +19,7 @@ import bdd.Utilisateur;
 public class Login {
 	private JFrame frameLogin = new JFrame("Login");
 	private Utilisateur user = new Utilisateur();
-	 
+
 	private JButton new_user = new JButton("Créer utilisateur");
 	private JButton connexion = new JButton("Connexion");
 	private JTextField inputLogin = new JTextField("", 8);
@@ -31,14 +31,13 @@ public class Login {
 	 * Crée et active l'interface de login.
 	 */
 	public void login() {
-		
-		//frameLogin.getContentPane().removeAll();
+
 		frameLogin.setLayout(new BorderLayout());
 		frameLogin.setSize(300, 300);
 		frameLogin.setLocationRelativeTo(null);
 		frameLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameLogin.setVisible(true);
-		
+
 		JPanel panelNorth = new JPanel();
 		JPanel panelSouth = new JPanel();
 		JPanel panelCenter = new JPanel();
@@ -47,17 +46,17 @@ public class Login {
 		JLabel labelMdp = new JLabel("Mot de passe:");
 		inputLogin.setSize(10, 20);
 		inputMdp.setSize(10, 20);
+		
+		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		labelMdp.setHorizontalAlignment(SwingConstants.CENTER);
+		inputMdp.setHorizontalAlignment(SwingConstants.CENTER);
+		inputLogin.setHorizontalAlignment(SwingConstants.CENTER);
 
 		new_user.setSize(10, 20);
 		connexion.setSize(10, 20);
 
 		new_user.addActionListener(new LoginActionListener(this));
 		connexion.addActionListener(new LoginActionListener(this));
-
-		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		labelMdp.setHorizontalAlignment(SwingConstants.CENTER);
-		inputMdp.setHorizontalAlignment(SwingConstants.CENTER);
-		inputLogin.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel labelWelcome = new JLabel("Application training");
 
@@ -68,7 +67,7 @@ public class Login {
 
 		inputLogin.setText("");
 		inputMdp.setText("");
-		
+
 		frameLogin.add(panelSouth, BorderLayout.SOUTH);
 		frameLogin.add(panelCenter, BorderLayout.CENTER);
 
@@ -98,14 +97,14 @@ public class Login {
 		panelCenter.add(inputLogin);
 		panelCenter.add(labelMdp);
 		panelCenter.add(inputMdp);
-		
+
 		panelCenter.add(new_user);
 		panelCenter.add(connexion);
 
 		panelCenter.add(erreur);
-		
 
 	}
+
 	public JFrame getFrame() {
 		return frameLogin;
 	}
@@ -137,11 +136,4 @@ public class Login {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	/*
-	 * public static void main(String[] args) throws InterruptedException{
-	 * javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	 * 
-	 * @Override public void run() { new Login().login(); } }); }
-	 */
-	}
+}

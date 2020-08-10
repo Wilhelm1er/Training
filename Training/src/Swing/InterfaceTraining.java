@@ -33,23 +33,15 @@ public class InterfaceTraining {
 	private JLabel demarrer = new JLabel("Lancer session:");
 	private JButton demarrerButton = new JButton("Démarrer");
 
-	private String name = "";
-
 	public void interfaceTraining(String type) {
+		System.out.println("type: "+type);
+		this.comboNiveau.setSelectedItem("Choix");
+		
+		IntGraphique.getFrame().getContentPane().removeAll();
+		
 		JPanel panelNorth = new JPanel();
-
 		JPanel panelWest = new JPanel();
 		JPanel panelSouth = new JPanel();
-
-		/*
-		 * login.getFrame().getContentPane().removeAll(); login.getFrame().setSize(600,
-		 * 500);
-		 */
-		//login.getFrame().setLayout(new BorderLayout());
-		IntGraphique.getFrame().add(panelNorth, BorderLayout.NORTH);
-		IntGraphique.getFrame().add(panelCenterTRaining, BorderLayout.CENTER);
-		IntGraphique.getFrame().add(panelWest, BorderLayout.WEST);
-		IntGraphique.getFrame().add(panelSouth, BorderLayout.SOUTH);
 
 		panelWest.setLayout(new GridLayout(20, 1));
 
@@ -57,20 +49,18 @@ public class InterfaceTraining {
 		panelNorth.add(labelTraining);
 
 		inputCorde.setHorizontalAlignment(JTextField.CENTER);
-
 		inputPause.setHorizontalAlignment(JTextField.CENTER);
-
 		inputSerie.setHorizontalAlignment(JTextField.CENTER);
 
 		JLabel niveau = new JLabel("");
 
 		if (type == "Renforcement") {
 			comboNiveau.removeAllItems();
-			comboNiveau.setSelectedItem("Choix");
 			String[] liste = { "Choix", "Débutant", "Intermédiaire", "Confirmé", "Elite" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
+			comboNiveau.setSelectedItem("Choix");
 			panelWest.add(labelCorde);
 			panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
@@ -81,12 +71,11 @@ public class InterfaceTraining {
 		}
 		if (type == "Musculation") {
 			comboNiveau.removeAllItems();
-			comboNiveau.setSelectedItem("Choix");
 			String[] liste = { "Choix", "Numéro 1", "Numéro 2" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-
+			comboNiveau.setSelectedItem("Choix");
 			panelWest.add(labelPause);
 			panelWest.add(inputPause);
 			panelWest.add(labelSerie);
@@ -97,12 +86,11 @@ public class InterfaceTraining {
 		}
 		if (type == "Gainage") {
 			comboNiveau.removeAllItems();
-			comboNiveau.setSelectedItem("Choix");
 			String[] liste = { "Choix", "Routine 1", "Routine 2" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-
+			comboNiveau.setSelectedItem("Choix");
 			panelWest.add(labelSerie);
 			panelWest.add(inputSerie);
 			niveau.setText("Routine");
@@ -111,23 +99,28 @@ public class InterfaceTraining {
 		}
 		if (type == "Challenge") {
 			comboNiveau.removeAllItems();
-			comboNiveau.setSelectedItem("Choix");
 			String[] liste = { "Choix", "FBI", "Pompiers" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-
+			
 			niveau.setText("Challenge");
 			panelWest.add(niveau);
 
 		}
 
+		IntGraphique.getFrame().add(panelNorth, BorderLayout.NORTH);
+		IntGraphique.getFrame().add(panelCenterTRaining, BorderLayout.CENTER);
+		IntGraphique.getFrame().add(panelWest, BorderLayout.WEST);
+		IntGraphique.getFrame().add(panelSouth, BorderLayout.SOUTH);
+		
 		panelWest.add(comboNiveau);
 
 		panelSouth.add(demarrer);
 		panelSouth.add(demarrerButton);
 
 		panelCenterTRaining.add(descriptionTraining);
+		IntGraphique.getFrame().revalidate();
 
 		//
 // BUG AFFICHAGE JTEXTAREA
@@ -159,6 +152,9 @@ public class InterfaceTraining {
 		}
 	}
 
+	public JPanel getPanelCenterTRaining() {
+		return panelCenterTRaining;
+	}
 	public int getDureeCorde() {
 		return dureeCorde;
 	}

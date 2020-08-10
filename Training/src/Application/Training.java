@@ -98,7 +98,9 @@ public class Training {
 	 */
 	public String affichageTraining(String level) {
 		StringBuilder str = new StringBuilder();
-
+		if(level==null) {
+			level="Choix";
+		}
 		switch (level) {
 		case "Choix":
 			str.append("Choisissez un niveau");
