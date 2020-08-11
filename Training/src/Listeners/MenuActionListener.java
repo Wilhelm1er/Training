@@ -34,10 +34,13 @@ public class MenuActionListener implements ActionListener {
 		} else if (e.getSource() == IntGraphique.getMenu().getRapports()) {
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntRapports.interfaceRapports());
+			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 		} else if (e.getSource() == IntGraphique.getMenu().getPoids()) {
+			IntGraphique.InterfaceGraphique();
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntPoids.interfacePoids());
+			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 			
 		} else if (e.getSource() == IntGraphique.getMenu().getRenforcement()) {
@@ -45,6 +48,7 @@ public class MenuActionListener implements ActionListener {
 			typeTraining = "Renforcement";}
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntTraining.interfaceTraining("Renforcement"));
+			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 			
 		} else if (e.getSource() == IntGraphique.getMenu().getMusculation()) {
@@ -52,19 +56,21 @@ public class MenuActionListener implements ActionListener {
 			typeTraining = "Musculation";}
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntTraining.interfaceTraining("Musculation"));
-			
+			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 		} else if (e.getSource() == IntGraphique.getMenu().getGainage()) {
 			if(!typeTraining.equals("Gainage")){
 			typeTraining = "Gainage";}
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntTraining.interfaceTraining("Gainage"));
+			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 		} else if (e.getSource() == IntGraphique.getMenu().getChallenge()) {
 			if(!typeTraining.equals("Challenge")){
 			typeTraining = "Challenge";}
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntTraining.interfaceTraining("Challenge"));
+			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 		}
 	}

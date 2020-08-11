@@ -8,6 +8,8 @@ import java.util.Scanner;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import InterfaceGraphique.InterfaceTraining;
+
 /**
  * Methode d'affichage en fonction de l'entrainement selectionné
  * 
@@ -15,10 +17,11 @@ import javax.sound.sampled.Clip;
 public class Timer {
 
 	private bdd.TrainingBdd Training = new bdd.TrainingBdd();
-
-	private int duree_corde=principal.getDureeCorde();
-	private int duree_pause=principal.getDureePause();
-	private int nbre_serie=principal.getNbreSerie();
+	private InterfaceTraining IntTraining = new InterfaceTraining();
+	
+	private int duree_corde=IntTraining.getDureeCorde();
+	private int duree_pause=IntTraining.getDureePause();
+	private int nbre_serie=IntTraining.getNbreSerie();
 	private File bip = new File("resources/buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 

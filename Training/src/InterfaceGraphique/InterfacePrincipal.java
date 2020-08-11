@@ -16,7 +16,7 @@ public class InterfacePrincipal {
 
 	public void InterfaceGraphique() {
 		framePrincipal.getContentPane().removeAll();
-		framePrincipal.revalidate();
+		
 		menu.setMenuUser(name);
 		framePrincipal.setJMenuBar(menu.menu());
 
