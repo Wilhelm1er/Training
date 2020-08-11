@@ -18,9 +18,9 @@ import Listeners.TrainingActionListener;
  * @author Wilhelm1er
  */
 public class InterfaceTraining {
-
-	private JPanel panelCenterTRaining = new JPanel();
+	
 	private JPanel panelTraining = new JPanel();
+	private JPanel panelCenterTRaining = new JPanel();
 
 	private String typeTraining;
 	private JTextArea descriptionTraining = new JTextArea(20, 30);
@@ -48,34 +48,14 @@ public class InterfaceTraining {
 	 * @return panel de l'interface relative aux Trainings
 	 */
 	public JPanel interfaceTraining(String type) {
-
+		typeTraining=type;
 		panelTraining.removeAll();
 
+		panelTraining.setLayout(new BorderLayout());
 		JPanel panelNorth = new JPanel();
 		JPanel panelWest = new JPanel();
 		JPanel panelSouth = new JPanel();
-
-		panelWest.setLayout(new GridLayout(20, 1));
-
-		panelTraining.add(panelNorth, BorderLayout.NORTH);
-		panelTraining.add(panelWest, BorderLayout.WEST);
-		panelTraining.add(panelSouth, BorderLayout.SOUTH);
-
-		panelCenterTRaining.add(descriptionTraining);
-		panelTraining.add(panelCenterTRaining, BorderLayout.EAST);
-
-		JLabel labelTraining = new JLabel(typeTraining);
-		panelNorth.add(labelTraining);
-
-		panelSouth.add(demarrer);
-		panelSouth.add(demarrerButton);
-
-		inputCorde.setHorizontalAlignment(JTextField.CENTER);
-		inputPause.setHorizontalAlignment(JTextField.CENTER);
-		inputSerie.setHorizontalAlignment(JTextField.CENTER);
-
-		panelWest.add(comboNiveau);
-
+		
 		if (type == "Renforcement") {
 			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
@@ -102,8 +82,6 @@ public class InterfaceTraining {
 			comboNiveau.setSelectedItem("Choix");
 			panelWest.add(labelPause);
 			panelWest.add(inputPause);
-			panelWest.add(labelSerie);
-			panelWest.add(inputSerie);
 			niveau.setText("Numéro: ");
 			panelWest.add(niveau);
 
@@ -134,7 +112,32 @@ public class InterfaceTraining {
 
 		}
 
-		panelTraining.revalidate();
+		panelWest.setLayout(new GridLayout(10,1));
+
+		panelTraining.add(panelNorth, BorderLayout.NORTH);
+		panelTraining.add(panelWest, BorderLayout.WEST);
+		panelTraining.add(panelSouth, BorderLayout.SOUTH);
+		panelTraining.add(panelCenterTRaining, BorderLayout.CENTER);
+	
+		panelCenterTRaining.add(descriptionTraining);
+		
+		JLabel labelTraining = new JLabel(type);
+		panelNorth.add(labelTraining);
+		
+		System.out.println(type);
+		
+		panelSouth.add(demarrer);
+		panelSouth.add(demarrerButton);
+
+		inputCorde.setHorizontalAlignment(JTextField.CENTER);
+		inputPause.setHorizontalAlignment(JTextField.CENTER);
+		inputSerie.setHorizontalAlignment(JTextField.CENTER);	
+
+		
+		panelWest.add(comboNiveau);
+		
+		
+		panelTraining.repaint();
 
 		//
 // BUG AFFICHAGE JTEXTAREA

@@ -30,7 +30,7 @@ public class InterfacePrincipale {
 		framePrincipal.setJMenuBar(menu.menu());
 
 		framePrincipal.setSize(600, 500);
-		framePrincipal.setLayout(new BorderLayout());
+		//framePrincipal.setLayout(new BorderLayout());
 		framePrincipal.setLocationRelativeTo(null);
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.setVisible(true);

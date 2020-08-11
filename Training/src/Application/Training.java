@@ -111,13 +111,16 @@ public class Training {
 		case "Débutant":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Barre de traction");
 			str.append("\n");
 			str.append("Corde à sauter");
 			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
+			str.append("\n");
 			str.append("\n");
 			str.append("Bras tendu coude: 10");
 			str.append("\n");
@@ -129,11 +132,11 @@ public class Training {
 			str.append("\n");
 			str.append("Pompes: 5");
 			str.append("\n");
-			str.append("\n");
 			
 			break;
 		case "Intermédiaire":
 			str.append("Matériels:");
+			str.append("\n");
 			str.append("\n");
 			str.append("Barre de traction");
 			str.append("\n");
@@ -141,7 +144,9 @@ public class Training {
 			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
+			str.append("\n");
 			str.append("\n");
 			str.append("Bras tendu coude: 12");
 			str.append("\n");
@@ -157,13 +162,16 @@ public class Training {
 		case "Confirmé":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Barre de traction");
 			str.append("\n");
 			str.append("Corde à sauter");
 			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
+			str.append("\n");
 			str.append("\n");
 			str.append("Bras tendu coude: 20");
 			str.append("\n");
@@ -179,13 +187,16 @@ public class Training {
 		case "Elite":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Barre de traction");
 			str.append("\n");
 			str.append("Corde à sauter");
 			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
+			str.append("\n");
 			str.append("\n");
 			str.append("Bras tendu coude: 25");
 			str.append("\n");
@@ -201,49 +212,58 @@ public class Training {
 		case "Numéro 1":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Barre de traction");
 			str.append("\n");
 			str.append("Barre à dips");
 			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
 			str.append("\n");
-			str.append("Dips: 5");
 			str.append("\n");
-			str.append("Pompes pieds surélevés: 10");
+			str.append(" - 6x 5 Dips");
 			str.append("\n");
-			str.append("Pompes: 10");
+			str.append(" - 6x 10 Pompes pieds surélevés");
 			str.append("\n");
-			str.append("Tractions: 10");
+			str.append(" - 6x 10 Pompes");
+			str.append("\n");
+			str.append(" - 6x 10 Tractions");
 			str.append("\n");
 			break;
 		case "Numéro 2":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Barre de traction");
 			str.append("\n");
 			str.append("Barre à dips");
 			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
 			str.append("\n");
-			str.append("Dips: 10");
 			str.append("\n");
-			str.append("Pompes pieds surélevés: 15");
+			str.append(" - 6x 10 Dips");
 			str.append("\n");
-			str.append("Pompes: 15");
+			str.append(" - 6x 15 Pompes pieds surélevés");
 			str.append("\n");
-			str.append("Tractions: 15");
+			str.append(" - 6x 15 Pompes");
+			str.append("\n");
+			str.append(" - 6x 15 Tractions");
 			str.append("\n");
 			break;
 		case "Routine 1":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
+			str.append("\n");
 			str.append("\n");
 			str.append("La Planche: 60s");
 			str.append("\n");
@@ -259,9 +279,12 @@ public class Training {
 		case "Routine 2":
 			str.append("Matériels:");
 			str.append("\n");
+			str.append("\n");
 			str.append("Tapis");
 			str.append("\n");
+			str.append("\n");
 			str.append("Exercices:");
+			str.append("\n");
 			str.append("\n");
 			str.append("La Planche: 60s");
 			str.append("\n");
