@@ -28,7 +28,7 @@ public class Challenge {
 	 * @param date Date du jour
 	 * @param type Challenge selectionné
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException 
 	 * 
 	 */
 	public void startChallenge(String name, Date date, String type) throws InterruptedException {
@@ -99,8 +99,11 @@ public class Challenge {
 	/**
 	 * Methode pour afficher la durée restante
 	 * 
-	 * @param int en secondes.
-	 */
+	 * @param time Temps en secondes.
+	 * 
+	 * @throws InterruptedException 
+	 * 
+	 * */
 	public void timer(int time) throws InterruptedException {
 		for (int i = time; i > 0; i--) {
 			System.out.println(i);

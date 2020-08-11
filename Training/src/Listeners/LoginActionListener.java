@@ -6,14 +6,23 @@ import java.awt.event.ActionListener;
 import BaseDeDonnées.Utilisateur;
 import InterfaceGraphique.Login;
 import InterfaceGraphique.Menu;
-import InterfaceGraphique.InterfacePrincipal;
-
+import InterfaceGraphique.InterfacePrincipale;
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class LoginActionListener implements ActionListener {
 	private Utilisateur user = new Utilisateur();
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
+	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 	private Login l = new Login();
 	private Menu menu = new Menu();
 
+	/**
+	 * Listeners des boutons de l'interface de login
+	 * 
+	 * @param login Référence a l'interface de Login
+	 */
 	public LoginActionListener(Login login) {
 		this.l = login;
 	}

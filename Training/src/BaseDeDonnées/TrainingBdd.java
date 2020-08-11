@@ -31,8 +31,13 @@ public class TrainingBdd {
 	/**
 	 * Enregistrement d'un entrainement
 	 *
-	 * @param name
-	 * @param capacity
+	 * @param name Nom de l'utilisateur
+	 * @param date Date du jour
+	 * @param entrainement Training effectué
+	 * @param serie Série effectué
+	 * @param rope Temps de corde à sauter
+	 * @param level Intensité de l'entrainement
+	 * @param time Temps de l'entrainement
 	 */
 
 	public void ajout_training(String name, Date date, String entrainement, int serie, int rope, String level, long time) {
@@ -55,8 +60,13 @@ public class TrainingBdd {
 	/**
 	 * Enregistrement d'un entrainement musculation ou gainage
 	 *
-	 * @param name
-	 * @param capacity
+	 * @param name Nom de l'utilisateur
+	 * @param date Date du jour
+	 * @param entrainement Training réalisé
+	 * @param serie Série réalisé
+	 * @param pause Temps de pause
+	 * @param level Intensité de l'entrainement
+	 * @param time Temps de l'entrainement réalisé
 	 */
 
 	public void ajout_autre(String name, Date date, String entrainement, int serie, int pause, String level, long time) {
@@ -80,7 +90,9 @@ public class TrainingBdd {
 	/**
 	 * Affichage contenu des derniers trainings pour un utilisateur
 	 * 
-	 * @param name
+	 * @param name Nom de l'utilisateur
+	 * 
+	 * @return ArrayList Liste des entrainements réalisé par l'utilisateur
 	 */
 	public ArrayList<List<String>> affichageTraining(String name) {
 

@@ -6,12 +6,17 @@ import java.awt.event.ActionListener;
 import InterfaceGraphique.Login;
 import InterfaceGraphique.InterfacePoids;
 import InterfaceGraphique.InterfaceTraining;
-import InterfaceGraphique.InterfacePrincipal;
+import InterfaceGraphique.InterfacePrincipale;
 import InterfaceGraphique.InterfaceRapports;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class MenuActionListener implements ActionListener {
 
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
+	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 	private Login login = new Login();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private InterfacePoids IntPoids = new InterfacePoids();
@@ -19,7 +24,12 @@ public class MenuActionListener implements ActionListener {
 
 	private String typeTraining;
 
-	public MenuActionListener(InterfacePrincipal IntGraphique) {
+	/**
+	 * Listeners des boutons du menu
+	 * 
+	 * @param IntGraphique Référence à l'interface principale
+	 */
+	public MenuActionListener(InterfacePrincipale IntGraphique) {
 		this.IntGraphique = IntGraphique;
 	}
 

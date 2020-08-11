@@ -35,9 +35,9 @@ public class PoidsBdd {
 	/**
 	 * ajout poids
 	 *
-	 * @param name
-	 * @param poids
-	 * @param date
+	 * @param name Nom de l'utilisateur
+	 * @param poids Poids entré par l'utilisateur
+	 * @param date Date du jour
 	 */
 	public void ajout(String name, Double poids, Date date) {
 
@@ -62,7 +62,9 @@ public class PoidsBdd {
 	/**
 	 * Affichage contenu table poids pour un utilisateur
 	 * 
-	 * @param name
+	 * @param name Nom de l'utilisateur
+	 * 
+	 * @return Map Contenu des entrées poids pour l'utilisateur donné
 	 */
 	public Map<String,Double> user_Selected(String name) {
 

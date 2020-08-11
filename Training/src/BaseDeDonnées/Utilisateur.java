@@ -116,7 +116,7 @@ public class Utilisateur {
 	/**
 	 * Affichage contenu table utilisateur
 	 * 
-	 * @return ArrayList<String> Liste des utilisateurs de la base de données
+	 * @return ArrayList Liste des utilisateurs de la base de données
 	 */
 	public ArrayList<String> selectAll() {
 		

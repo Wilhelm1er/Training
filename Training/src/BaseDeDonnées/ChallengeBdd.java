@@ -59,9 +59,9 @@ public class ChallengeBdd {
 	/**
 	 * Affichage contenu des challenges effectués par l'utilisateur
 	 * 
-	 * @param name
+	 * @param name Nom de l'utilisateur
 	 * 
-	 * @return ArrayList<List<String>>  Contenant la liste des challenges réalisés par l'utilisateur
+	 * @return ArrayList Contenant la liste des challenges réalisés par l'utilisateur
 	 */
 	public ArrayList<List<String>> affichageChallenge(String name) {
 

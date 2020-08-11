@@ -7,21 +7,31 @@ import java.util.Date;
 import Application.Challenge;
 import Application.Training;
 import InterfaceGraphique.Login;
-import InterfaceGraphique.InterfacePrincipal;
+import InterfaceGraphique.InterfacePrincipale;
 import InterfaceGraphique.InterfaceTraining;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class TrainingActionListener implements ActionListener {
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
+	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private Challenge challenge = new Challenge();
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
 	private String level = "";
 	
+	/**
+	 * Listener des boutons de l'interface relative aux Trainings
+	 * 
+	 * @param interfaceTraining Référence à l'interface relative aux Trainings
+	 */
 	public TrainingActionListener(InterfaceTraining interfaceTraining) {
 		this.IntTraining = interfaceTraining;
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

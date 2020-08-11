@@ -16,6 +16,11 @@ import javax.swing.SwingConstants;
 import BaseDeDonnées.Utilisateur;
 import Listeners.LoginActionListener;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class Login {
 	private JFrame frameLogin = new JFrame("Login");
 	private Utilisateur user = new Utilisateur();

@@ -15,8 +15,14 @@ import javax.swing.table.DefaultTableModel;
 import BaseDeDonnées.PoidsBdd;
 import Listeners.PoidsActionListener;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
+
 public class InterfacePoids {
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
+	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 	private PoidsBdd poids = new PoidsBdd();
 	
 	private JPanel panelPoids = new JPanel();
@@ -31,6 +37,12 @@ public class InterfacePoids {
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
 
+	/**
+	 * Panel d'affichage de l'interface relative au Poids
+	 *
+	 * @return panel de l'interface relative au Poids
+	 * 
+	 */
 	public JPanel interfacePoids() {
 
 		panelPoids.removeAll();

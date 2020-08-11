@@ -12,6 +12,11 @@ import javax.swing.JTextField;
 
 import Listeners.TrainingActionListener;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class InterfaceTraining {
 
 	private JPanel panelCenterTRaining = new JPanel();
@@ -36,6 +41,12 @@ public class InterfaceTraining {
 	private JLabel demarrer = new JLabel("Lancer session:");
 	private JButton demarrerButton = new JButton("Démarrer");
 
+	/**
+	 * Panel d'affichage de l'interface relative aux Trainings
+	 *
+	 * @param type entrainement selectionné
+	 * @return panel de l'interface relative aux Trainings
+	 */
 	public JPanel interfaceTraining(String type) {
 
 		panelTraining.removeAll();

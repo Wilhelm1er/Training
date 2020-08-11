@@ -6,18 +6,30 @@ import java.awt.event.ActionListener;
 
 import BaseDeDonnées.PoidsBdd;
 import InterfaceGraphique.InterfacePoids;
-import InterfaceGraphique.InterfacePrincipal;
+import InterfaceGraphique.InterfacePrincipale;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class PoidsActionListener implements ActionListener {
 
 	private InterfacePoids IntPoids = new InterfacePoids();
 	private PoidsBdd poids = new PoidsBdd();
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
+	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 
+	/**
+	 * Listeners des boutons de l'interface relative aux Poids
+	 * 
+	 * @param interfacePoids Référence à l'interface relative aux Poids
+	 */
+	
 	public PoidsActionListener(InterfacePoids interfacePoids) {
 		this.IntPoids = interfacePoids;
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == IntPoids.getAjoutPoids()) {

@@ -4,18 +4,28 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import InterfaceGraphique.InterfacePrincipal;
+import InterfaceGraphique.InterfacePrincipale;
 import InterfaceGraphique.InterfaceRapports;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class RapportsActionListener implements ActionListener {
 
 	private InterfaceRapports IntRapports = new InterfaceRapports();
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
-
+	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
+	
+	/**
+	 * Listener des boutons de l'interface relative aux Rapports
+	 * 
+	 * @param interfaceRapports Référence à l'interface relative aux Rapports
+	 */
 	public RapportsActionListener(InterfaceRapports interfaceRapports) {
 		this.IntRapports = interfaceRapports;
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == IntRapports.getTrainingButton()) {

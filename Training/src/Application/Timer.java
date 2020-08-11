@@ -148,6 +148,7 @@ public class Timer {
 	/**
 	 * Methode d'affichage de l'exercice corde à sauter
 	 * 
+	 * @throws InterruptedException
 	 */
 	public void corde_a_sauter() throws InterruptedException {
 		System.out.println("CORDE A SAUTER");
@@ -163,7 +164,9 @@ public class Timer {
 	/**
 	 * Methode pour creer une pause
 	 * 
-	 * @param int en secondes.
+	 * @param time Temps en secondes.
+	 * 
+	 * @throws InterruptedException
 	 */
 	public void pause(int time) throws InterruptedException {
 		for (int i = time; i > 0; i--) {

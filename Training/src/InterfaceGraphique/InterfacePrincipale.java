@@ -7,13 +7,22 @@ import javax.swing.JPanel;
 
 import Listeners.MenuActionListener;
 
-public class InterfacePrincipal {
+/**
+ * Interface principale
+ * 
+ * @author Wilhelm1er
+ */
+public class InterfacePrincipale {
 
 	private JFrame framePrincipal = new JFrame("Training App");
 	private Menu menu = new Menu();
 
 	private String name;
 
+	/**
+	 * Frame d'affichage de l'interface principale
+	 *
+	 */
 	public void InterfaceGraphique() {
 		framePrincipal.getContentPane().removeAll();
 		

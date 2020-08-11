@@ -4,6 +4,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+/**
+ * Interface relative au Poids
+ * 
+ * @author Wilhelm1er
+ */
 public class Menu {
 
 	JMenuItem rapports = new JMenuItem("Rapports");
@@ -19,6 +24,8 @@ public class Menu {
 
 	/**
 	 * Crée et active le menu.
+	 * 
+	 * @return JMenuBar le menu de l'interface principale
 	 */
 
 	public JMenuBar menu() {
