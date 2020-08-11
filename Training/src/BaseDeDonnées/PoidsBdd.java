@@ -1,4 +1,4 @@
-package bdd;
+package BaseDeDonnées;
 
 import java.sql.Connection;
 import java.sql.Date;

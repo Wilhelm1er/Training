@@ -14,7 +14,7 @@ import javax.sound.sampled.Clip;
 
 public class Challenge {
 
-	private bdd.ChallengeBdd challenge = new bdd.ChallengeBdd();
+	private BaseDeDonnées.ChallengeBdd challenge = new BaseDeDonnées.ChallengeBdd();
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
 	private String termine = "";
 	private File file;

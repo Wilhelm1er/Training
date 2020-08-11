@@ -4,9 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import BaseDeDonnées.PoidsBdd;
 import InterfaceGraphique.InterfacePoids;
 import InterfaceGraphique.InterfacePrincipal;
-import bdd.PoidsBdd;
 
 public class PoidsActionListener implements ActionListener {
 

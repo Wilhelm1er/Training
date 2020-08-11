@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import bdd.ChallengeBdd;
-import bdd.TrainingBdd;
+import BaseDeDonnées.ChallengeBdd;
+import BaseDeDonnées.TrainingBdd;
 
 public class InterfaceRapports {
 	private InterfacePrincipal IntGraphique = new InterfacePrincipal();

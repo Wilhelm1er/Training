@@ -16,7 +16,7 @@ import InterfaceGraphique.InterfaceTraining;
  */
 public class Timer {
 
-	private bdd.TrainingBdd Training = new bdd.TrainingBdd();
+	private BaseDeDonnées.TrainingBdd Training = new BaseDeDonnées.TrainingBdd();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	
 	private int duree_corde=IntTraining.getDureeCorde();

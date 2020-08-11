@@ -13,8 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
+import BaseDeDonnées.Utilisateur;
 import Listeners.LoginActionListener;
-import bdd.Utilisateur;
 
 public class Login {
 	private JFrame frameLogin = new JFrame("Login");

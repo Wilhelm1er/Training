@@ -12,8 +12,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import BaseDeDonnées.PoidsBdd;
 import Listeners.PoidsActionListener;
-import bdd.PoidsBdd;
 
 public class InterfacePoids {
 	private InterfacePrincipal IntGraphique = new InterfacePrincipal();

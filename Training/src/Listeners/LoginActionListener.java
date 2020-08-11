@@ -3,10 +3,10 @@ package Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import BaseDeDonnées.Utilisateur;
 import InterfaceGraphique.Login;
 import InterfaceGraphique.Menu;
 import InterfaceGraphique.InterfacePrincipal;
-import bdd.Utilisateur;
 
 public class LoginActionListener implements ActionListener {
 	private Utilisateur user = new Utilisateur();
