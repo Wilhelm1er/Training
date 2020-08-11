@@ -13,11 +13,11 @@ import javax.swing.JTextField;
 import Listeners.InterfaceTrainingActionListener;
 
 public class InterfaceTraining {
-	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
-
+	
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private JPanel panelCenterTRaining = new JPanel();
 	private String typeTraining;
+	private JPanel ContentPane = new JPanel();
 
 	private JTextArea descriptionTraining = new JTextArea(20, 30);
 
@@ -27,34 +27,44 @@ public class InterfaceTraining {
 	private JTextField inputPause = new JTextField("30", 10);
 	private JLabel labelSerie = new JLabel("Nombre de série: ");
 	private JTextField inputSerie = new JTextField("1", 10);
+	private JLabel niveau = new JLabel("");
 	private int dureeCorde = 45;
 	private int dureePause = 30;
 	private int nbreSerie = 1;
 	private JLabel demarrer = new JLabel("Lancer session:");
 	private JButton demarrerButton = new JButton("Démarrer");
 
-	public void interfaceTraining(String type) {
-		System.out.println("type: "+type);
-		this.comboNiveau.setSelectedItem("Choix");
-		
-		IntGraphique.getFrame().getContentPane().removeAll();
-		
+	public JPanel interfaceTraining(String type) {
+	
+		ContentPane.removeAll();
+
 		JPanel panelNorth = new JPanel();
 		JPanel panelWest = new JPanel();
 		JPanel panelSouth = new JPanel();
 
 		panelWest.setLayout(new GridLayout(20, 1));
 
+		ContentPane.add(panelNorth, BorderLayout.NORTH);
+		ContentPane.add(panelWest, BorderLayout.WEST);
+		ContentPane.add(panelSouth, BorderLayout.SOUTH);
+
+		panelCenterTRaining.add(descriptionTraining);
+		ContentPane.add(panelCenterTRaining, BorderLayout.EAST);
+
 		JLabel labelTraining = new JLabel(typeTraining);
 		panelNorth.add(labelTraining);
+
+		panelSouth.add(demarrer);
+		panelSouth.add(demarrerButton);
 
 		inputCorde.setHorizontalAlignment(JTextField.CENTER);
 		inputPause.setHorizontalAlignment(JTextField.CENTER);
 		inputSerie.setHorizontalAlignment(JTextField.CENTER);
 
-		JLabel niveau = new JLabel("");
+		panelWest.add(comboNiveau);
 
 		if (type == "Renforcement") {
+			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
 			String[] liste = { "Choix", "Débutant", "Intermédiaire", "Confirmé", "Elite" };
 			for (int i = 0; i < liste.length; i++) {
@@ -65,11 +75,12 @@ public class InterfaceTraining {
 			panelWest.add(inputCorde);
 			panelWest.add(labelSerie);
 			panelWest.add(inputSerie);
-			niveau.setText("Level");
+			niveau.setText("Niveau: ");
 			panelWest.add(niveau);
 
 		}
 		if (type == "Musculation") {
+			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
 			String[] liste = { "Choix", "Numéro 1", "Numéro 2" };
 			for (int i = 0; i < liste.length; i++) {
@@ -80,11 +91,12 @@ public class InterfaceTraining {
 			panelWest.add(inputPause);
 			panelWest.add(labelSerie);
 			panelWest.add(inputSerie);
-			niveau.setText("Level");
+			niveau.setText("Numéro: ");
 			panelWest.add(niveau);
 
 		}
 		if (type == "Gainage") {
+			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
 			String[] liste = { "Choix", "Routine 1", "Routine 2" };
 			for (int i = 0; i < liste.length; i++) {
@@ -93,43 +105,32 @@ public class InterfaceTraining {
 			comboNiveau.setSelectedItem("Choix");
 			panelWest.add(labelSerie);
 			panelWest.add(inputSerie);
-			niveau.setText("Routine");
+			niveau.setText("Routine: ");
 			panelWest.add(niveau);
 
 		}
 		if (type == "Challenge") {
+			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
 			String[] liste = { "Choix", "FBI", "Pompiers" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
-			
-			niveau.setText("Challenge");
+			niveau.setText("Challenge: ");
 			panelWest.add(niveau);
 
 		}
 
-		IntGraphique.getFrame().add(panelNorth, BorderLayout.NORTH);
-		IntGraphique.getFrame().add(panelCenterTRaining, BorderLayout.CENTER);
-		IntGraphique.getFrame().add(panelWest, BorderLayout.WEST);
-		IntGraphique.getFrame().add(panelSouth, BorderLayout.SOUTH);
-		
-		panelWest.add(comboNiveau);
-
-		panelSouth.add(demarrer);
-		panelSouth.add(demarrerButton);
-
-		panelCenterTRaining.add(descriptionTraining);
-		IntGraphique.getFrame().revalidate();
+		ContentPane.revalidate();
 
 		//
 // BUG AFFICHAGE JTEXTAREA
 		//
 
 		demarrerButton.addActionListener(new InterfaceTrainingActionListener(this));
-
 		comboNiveau.addActionListener(new InterfaceTrainingActionListener(this));
 
+		return ContentPane;
 	}
 
 	public JComboBox<String> getComboNiveau() {
@@ -148,13 +149,14 @@ public class InterfaceTraining {
 			time--;
 			timer.setText(String.valueOf(time));
 
-			IntGraphique.getFrame().revalidate();
+			ContentPane.revalidate();
 		}
 	}
 
 	public JPanel getPanelCenterTRaining() {
 		return panelCenterTRaining;
 	}
+
 	public int getDureeCorde() {
 		return dureeCorde;
 	}

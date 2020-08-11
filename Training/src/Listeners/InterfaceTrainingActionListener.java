@@ -25,9 +25,12 @@ public class InterfaceTrainingActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		  IntTraining.getPanelCenterTRaining().remove(IntTraining.getDescriptionTraining());
-		  IntTraining.getPanelCenterTRaining().validate(); 
-		  IntTraining.getPanelCenterTRaining().repaint(); IntGraphique.getFrame().revalidate();
+		/*
+		 * IntTraining.getPanelCenterTRaining().remove(IntTraining.
+		 * getDescriptionTraining()); IntTraining.getPanelCenterTRaining().validate();
+		 * IntTraining.getPanelCenterTRaining().repaint();
+		 * IntGraphique.getFrame().revalidate();
+		 */
 		 
 		if (e.getSource() == IntTraining.getDemarrerButton()) {
 			Training Training = new Training();
