@@ -47,7 +47,7 @@ public class MenuActionListener implements ActionListener {
 			IntGraphique.getFrame().getContentPane().repaint();
 			IntGraphique.getFrame().revalidate();
 		} else if (e.getSource() == IntGraphique.getMenu().getPoids()) {
-			IntGraphique.InterfaceGraphique();
+			IntGraphique.interfacePrincipale();
 			IntGraphique.getFrame().getContentPane().removeAll();
 			IntGraphique.getFrame().add(IntPoids.interfacePoids());
 			IntGraphique.getFrame().getContentPane().repaint();

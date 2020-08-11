@@ -16,7 +16,6 @@ public class LoginActionListener implements ActionListener {
 	private Utilisateur user = new Utilisateur();
 	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 	private Login l = new Login();
-	private Menu menu = new Menu();
 
 	/**
 	 * Listeners des boutons de l'interface de login
@@ -39,7 +38,7 @@ public class LoginActionListener implements ActionListener {
 				l.getFrame().dispose();
 				l.setName(l.getInputLogin().getText());
 				IntGraphique.setName(l.getName());
-				IntGraphique.InterfaceGraphique();
+				IntGraphique.interfacePrincipale();
 
 			} else {
 				l.getErreur().setVisible(true);

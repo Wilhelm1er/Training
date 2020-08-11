@@ -18,7 +18,6 @@ import Listeners.TrainingActionListener;
  * @author Wilhelm1er
  */
 public class InterfaceTraining {
-	
 	private JPanel panelTraining = new JPanel();
 	private JPanel panelCenterTRaining = new JPanel();
 
@@ -31,10 +30,10 @@ public class InterfaceTraining {
 	private JTextField inputPause = new JTextField("30", 10);
 	private JLabel labelSerie = new JLabel("Nombre de série: ");
 	private JTextField inputSerie = new JTextField("1", 10);
-	
+
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private JLabel niveau = new JLabel("");
-	
+
 	private int dureeCorde = 45;
 	private int dureePause = 30;
 	private int nbreSerie = 1;
@@ -48,14 +47,14 @@ public class InterfaceTraining {
 	 * @return panel de l'interface relative aux Trainings
 	 */
 	public JPanel interfaceTraining(String type) {
-		typeTraining=type;
+		typeTraining = type;
 		panelTraining.removeAll();
-
+		
 		panelTraining.setLayout(new BorderLayout());
 		JPanel panelNorth = new JPanel();
 		JPanel panelWest = new JPanel();
 		JPanel panelSouth = new JPanel();
-		
+
 		if (type == "Renforcement") {
 			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
@@ -112,31 +111,27 @@ public class InterfaceTraining {
 
 		}
 
-		panelWest.setLayout(new GridLayout(10,1));
+		panelWest.setLayout(new GridLayout(10, 1));
 
 		panelTraining.add(panelNorth, BorderLayout.NORTH);
 		panelTraining.add(panelWest, BorderLayout.WEST);
 		panelTraining.add(panelSouth, BorderLayout.SOUTH);
 		panelTraining.add(panelCenterTRaining, BorderLayout.CENTER);
-	
+
 		panelCenterTRaining.add(descriptionTraining);
-		
+
 		JLabel labelTraining = new JLabel(type);
 		panelNorth.add(labelTraining);
-		
-		System.out.println(type);
-		
+
 		panelSouth.add(demarrer);
 		panelSouth.add(demarrerButton);
 
 		inputCorde.setHorizontalAlignment(JTextField.CENTER);
 		inputPause.setHorizontalAlignment(JTextField.CENTER);
-		inputSerie.setHorizontalAlignment(JTextField.CENTER);	
+		inputSerie.setHorizontalAlignment(JTextField.CENTER);
 
-		
 		panelWest.add(comboNiveau);
-		
-		
+
 		panelTraining.repaint();
 
 		//

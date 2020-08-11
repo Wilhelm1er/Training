@@ -1,9 +1,6 @@
 package InterfaceGraphique;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import Listeners.MenuActionListener;
 
@@ -16,16 +13,16 @@ public class InterfacePrincipale {
 
 	private JFrame framePrincipal = new JFrame("Training App");
 	private Menu menu = new Menu();
-
+	
 	private String name;
 
 	/**
 	 * Frame d'affichage de l'interface principale
 	 *
 	 */
-	public void InterfaceGraphique() {
+	public void interfacePrincipale() {
 		framePrincipal.getContentPane().removeAll();
-		
+		System.out.println("nom: "+name);
 		menu.setMenuUser(name);
 		framePrincipal.setJMenuBar(menu.menu());
 

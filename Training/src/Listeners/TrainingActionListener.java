@@ -6,7 +6,6 @@ import java.util.Date;
 
 import Application.Challenge;
 import Application.Training;
-import InterfaceGraphique.Login;
 import InterfaceGraphique.InterfacePrincipale;
 import InterfaceGraphique.InterfaceTraining;
 
@@ -16,7 +15,7 @@ import InterfaceGraphique.InterfaceTraining;
  * @author Wilhelm1er
  */
 public class TrainingActionListener implements ActionListener {
-	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
+	private InterfacePrincipale IntPrincipale = new InterfacePrincipale();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private Challenge challenge = new Challenge();
 	private Date date = new Date();
@@ -41,7 +40,8 @@ public class TrainingActionListener implements ActionListener {
 		 * IntTraining.getPanelCenterTRaining().repaint();
 		 * IntGraphique.getFrame().revalidate();
 		 */
-		 
+		
+		 System.out.println("nom: "+IntPrincipale.getName());
 		if (e.getSource() == IntTraining.getDemarrerButton()) {
 			Training Training = new Training();
 			level = (String) IntTraining.getComboNiveau().getSelectedItem();
@@ -51,22 +51,22 @@ public class TrainingActionListener implements ActionListener {
 					if (level.equals("Pompiers")) {
 						IntTraining.processTraining(211);
 						// frame.add(new Chrono(211));
-						challenge.startChallenge(IntGraphique.getName(), dateS, level);
+						challenge.startChallenge(IntPrincipale.getName(), dateS, level);
 					}
 					if (level.equals("FBI")) {
 						IntTraining.processTraining(292);
 						// frame.add(new Chrono(292));
-						challenge.startChallenge(IntGraphique.getName(), dateS, level);
+						challenge.startChallenge(IntPrincipale.getName(), dateS, level);
 					}
 //MAUVAISE DUREE DE PAUSE 45 au lieu de 30
 				} else {
 					System.out.println("type de training: " + IntTraining.getTypeTraining());
 					System.out.println("level: " + level);
-					System.out.println("nom: " + IntGraphique.getName());
+					System.out.println("nom: " + IntPrincipale.getName());
 					System.out.println("date: " + dateS);
 					Application.Timer Timer_Training = new Application.Timer(
 							Training.training(IntTraining.getTypeTraining(), level), IntTraining.getTypeTraining(),
-							IntGraphique.getName(), dateS, level);
+							IntPrincipale.getName(), dateS, level);
 				}
 			} catch (InterruptedException f) {
 				System.out.println("ne fonctionne pas");
@@ -77,7 +77,7 @@ public class TrainingActionListener implements ActionListener {
 			Training T = new Training();
 			level = (String) IntTraining.getComboNiveau().getSelectedItem();
 			IntTraining.getDescriptionTraining().setText(T.affichageTraining(level));
-			IntGraphique.getFrame().revalidate();
+			IntPrincipale.getFrame().revalidate();
 		}
 	}
 }
