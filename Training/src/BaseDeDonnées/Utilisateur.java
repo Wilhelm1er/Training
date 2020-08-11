@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class Utilisateur {
 	/**
-	 * Connect to the test.db database
+	 * Connect to the entrainements.db database
 	 *
-	 * @return the Connection object
+	 * @return Connection à la base de données
 	 */
 	private Connection connect() {
 		String url = "jdbc:sqlite:resources/entrainements.db";
@@ -29,8 +29,10 @@ public class Utilisateur {
 	/**
 	 * Creation d'un utilisateur
 	 *
-	 * @param name
-	 * @param capacity
+	 * @param name Nom de l'utilisateur
+	 * @param mdp Mot de passe de l'utilisateur
+	 * 
+	 * @return true or false Si utilisateur connu ou non
 	 */
 	public boolean create_User(String name, String mdp) {
 		Connection conn = null;
@@ -72,8 +74,10 @@ public class Utilisateur {
 	/**
 	 * Connexion d'un utilisateur
 	 *
-	 * @param name
-	 * @param capacity
+	 * @param name Nom de l'utilisateur
+	 * @param mdp Mot de passe de l'utilisateur
+	 * 
+	 * @return true or false Si connexion possible ou non
 	 */
 	public boolean connexion_User(String name, String mdp) {
 		Connection conn = null;
@@ -111,6 +115,8 @@ public class Utilisateur {
 
 	/**
 	 * Affichage contenu table utilisateur
+	 * 
+	 * @return ArrayList<String> Liste des utilisateurs de la base de données
 	 */
 	public ArrayList<String> selectAll() {
 		

@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 /**
  * Gestion des challenges
  * 
+ * @author Wilhelm1er
  */
 
 public class Challenge {
@@ -21,7 +22,11 @@ public class Challenge {
 	private int time;
 
 	/**
-	 * Methode pour lancer le challenge
+	 * Méthode pour lancer le challenge
+	 * 
+	 * @param name Nom de l'utilisateur
+	 * @param date Date du jour
+	 * @param type Challenge selectionné
 	 * 
 	 * @throws InterruptedException
 	 * 

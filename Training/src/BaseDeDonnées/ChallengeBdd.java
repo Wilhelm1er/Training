@@ -14,7 +14,7 @@ public class ChallengeBdd {
 	/**
 	 * Connect to the entrainements.db database
 	 *
-	 * @return the Connection object
+	 * @return Connection à la base de données
 	 */
 	private Connection connect() {
 		String url = "jdbc:sqlite:resources/entrainements.db";
@@ -31,8 +31,12 @@ public class ChallengeBdd {
 	/**
 	 * Enregistrement d'un challenge
 	 *
-	 * @param name
-	 * @param capacity
+	 * @param name Nom de l'utilisateur
+	 * @param date Date du jour
+	 * @param type Challenge selectionné
+	 * @param time Durée du challenge réalisé
+	 * @param termine Si le challenge a été terminé
+	 * 
 	 */
 
 	public void ajout(String name, Date date, String type, long time, String termine) {
@@ -56,6 +60,8 @@ public class ChallengeBdd {
 	 * Affichage contenu des challenges effectués par l'utilisateur
 	 * 
 	 * @param name
+	 * 
+	 * @return ArrayList<List<String>>  Contenant la liste des challenges réalisés par l'utilisateur
 	 */
 	public ArrayList<List<String>> affichageChallenge(String name) {
 

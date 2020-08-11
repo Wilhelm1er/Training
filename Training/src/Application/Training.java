@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Methodes liées aux entrainements selectionnés
+ * Méthodes liées aux entrainements selectionnés
  * 
  * @author Wilhelm1er
  */
@@ -15,12 +15,12 @@ public class Training {
 	private Map<String, Integer> listTraining = new LinkedHashMap<String, Integer>();
 
 	/**
-	 * Creation de la liste de l'exercice de renforcement musculaire suivant le
-	 * niveau de difficulté selectionné
+	 * Creation de la liste de l'entrainement suivant le niveau de difficulté selectionné
 	 * 
 	 * @param level Niveau de difficulté selectionné
-	 * @return List_1 Liste générée correspondant au niveau de l'entrainement de
-	 *         renforcement selectionné
+	 * @param type  Entrainement selectionné
+	 * 
+	 * @return listTraining Liste générée correspondant à l'entrainement et son niveau de difficulté
 	 */
 	public Map<String, Integer> training(String type,String level) {
 		
@@ -92,7 +92,12 @@ public class Training {
 		}
 
 	/**
-	 * Affichage du choix de l'exercice choisi
+	 * Affichage en fonction de l'intensité d'entrainement choisi
+	 * 
+	 * @param level Niveau d'intensité
+	 * 
+	 * @return String Texte récapitulatif des exercices et du matériel nécessaire
+	 * 
 	 */
 	public String affichageTraining(String level) {
 		StringBuilder str = new StringBuilder();

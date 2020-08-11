@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class PoidsBdd {
 	/**
-	 * Connect to the test.db database
+	 * Connect to the entrainements.db database
 	 *
-	 * @return the Connection object
+	 * @return Connection à la base de données
 	 */
 	private Connection connect() {
 		String url = "jdbc:sqlite:resources/entrainements.db";
