@@ -4,8 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import Swing.Principal;
-
 /**
  * Methodes liées aux entrainements selectionnés
  * 

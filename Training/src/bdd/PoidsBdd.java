@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Poids {
+public class PoidsBdd {
 	/**
 	 * Connect to the test.db database
 	 *

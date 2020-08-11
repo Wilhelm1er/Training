@@ -3,7 +3,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import Swing.Login;
+import InterfaceGraphique.Login;
 
 /**
  * Application de Training, Version Java de l'appli produite par Ghost en Python

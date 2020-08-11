@@ -1,4 +1,4 @@
-package Swing;
+package InterfaceGraphique;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;

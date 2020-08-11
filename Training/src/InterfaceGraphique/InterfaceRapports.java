@@ -1,4 +1,4 @@
-package Swing;
+package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,57 +15,54 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import bdd.ChallengeBdd;
+import bdd.TrainingBdd;
+
 public class InterfaceRapports {
-	panelData.removeAll();
-	JPanel panelNorthChoix = new JPanel();
-	JButton trainingButton = new JButton("Training");
-	JButton challengeButton = new JButton("Challenge");
+	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
+	private TrainingBdd trainingBdd = new TrainingBdd();
+	private ChallengeBdd challengeBdd = new ChallengeBdd();
+	
+	private JPanel panelRapports = new JPanel();
+	private JPanel panelNorthChoix = new JPanel();
+	
+	private JButton trainingButton = new JButton("Training");
+	private JButton challengeButton = new JButton("Challenge");
+	
+	private JTable tableTraining = new JTable();
+	private JScrollPane scrollTraining = new JScrollPane(tableTraining);
+	private JTable tableChallenge = new JTable();
+	private JScrollPane scrollChallenge = new JScrollPane(tableChallenge);
+	
+	
+	public JPanel interfaceRapports() {
+		
+	
+		panelRapports.removeAll();
+	
 
-	window.getContentPane().removeAll();
-
-	window.setLayout(new BorderLayout());
-	window.add(panelNorthChoix, BorderLayout.NORTH);
+	
+	panelRapports.setLayout(new BorderLayout());
+	panelRapports.add(panelNorthChoix, BorderLayout.NORTH);
 
 	// panelWest.setLayout(new GridLayout(20,1));
 
 	panelNorthChoix.add(trainingButton);
 	panelNorthChoix.add(challengeButton);
 
-	challengeButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			panelData.removeAll();
-			panelData.add(scrollChallenge);
-			panelData.repaint();
-			window.add(panelData, BorderLayout.CENTER);
-			window.revalidate();
-		}
-	});
-	trainingButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			panelData.removeAll();
-			panelData.add(scrollTraining);
-			panelData.repaint();
-			window.add(panelData, BorderLayout.CENTER);
-			window.revalidate();
-		}
-	});
-
 	String[] colTraining = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
-	JTable tableTraining = new JTable();
 
 	DefaultTableModel modelTraining = new DefaultTableModel(colTraining, 0);
 
 	modelTraining.setColumnIdentifiers(colTraining);
 
-	scrollTraining = new JScrollPane(tableTraining);
 	scrollTraining.setPreferredSize(new Dimension(500, 300));
 
-	// panel.add(scrollTraining);
 
 	DefaultTableCellRenderer custom = new DefaultTableCellRenderer();
 	custom.setHorizontalAlignment(JLabel.CENTER); // centre les données de ton tableau
 
-	for (List<String> d : trainingBdd.affichageTraining(name)) {
+	for (List<String> d : trainingBdd.affichageTraining(IntGraphique.getName())) {
 		modelTraining.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
 
 	}
@@ -81,21 +78,35 @@ public class InterfaceRapports {
 	level.setCellRenderer(custom);
 	level.setPreferredWidth(80);
 
-	// panel.add(scrollTraining);
-
 	String[] colChallenge = new String[] { "Date", "Challenge", "Temps", "Terminé" };
-	JTable tableChallenge = new JTable();
+	
 
 	DefaultTableModel modelChallenge = new DefaultTableModel(colChallenge, 0);
 
 	modelChallenge.setColumnIdentifiers(colChallenge);
-
-	scrollChallenge = new JScrollPane(tableChallenge);
+	
 	scrollChallenge.setPreferredSize(new Dimension(500, 300));
 
-	for (List<String> d : challengeBdd.affichageChallenge(name)) {
+	for (List<String> d : challengeBdd.affichageChallenge(IntGraphique.getName())) {
 		modelChallenge.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3) });
 	}
 	tableChallenge.setModel(modelChallenge);
-
+	
+	return panelRapports;
+}
+	public JButton getTrainingButton() {
+		return trainingButton;
+	}
+	public JButton getChallengeButton() {
+		return challengeButton;
+	}
+	public JPanel getPanelRapports() {
+		return panelRapports;
+	}
+	public JScrollPane getScrollTraining() {
+		return scrollTraining;
+	}
+	public JScrollPane getScrollChallenge() {
+		return scrollChallenge;
+	}
 }

@@ -8,8 +8,6 @@ import java.util.Scanner;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import Swing.Principal;
-
 /**
  * Methode d'affichage en fonction de l'entrainement selectionné
  * 
@@ -17,7 +15,6 @@ import Swing.Principal;
 public class Timer {
 
 	private bdd.TrainingBdd Training = new bdd.TrainingBdd();
-	private Principal principal=new Principal();
 
 	private int duree_corde=principal.getDureeCorde();
 	private int duree_pause=principal.getDureePause();

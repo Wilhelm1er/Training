@@ -1,4 +1,4 @@
-package Swing;
+package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -10,15 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Listeners.InterfaceTrainingActionListener;
+import Listeners.TrainingActionListener;
 
 public class InterfaceTraining {
-	
-	private JComboBox<String> comboNiveau = new JComboBox<String>();
-	private JPanel panelCenterTRaining = new JPanel();
-	private String typeTraining;
-	private JPanel ContentPane = new JPanel();
 
+	private JPanel panelCenterTRaining = new JPanel();
+	private JPanel panelTraining = new JPanel();
+
+	private String typeTraining;
 	private JTextArea descriptionTraining = new JTextArea(20, 30);
 
 	private JLabel labelCorde = new JLabel("Temps de corde: ");
@@ -27,7 +26,10 @@ public class InterfaceTraining {
 	private JTextField inputPause = new JTextField("30", 10);
 	private JLabel labelSerie = new JLabel("Nombre de série: ");
 	private JTextField inputSerie = new JTextField("1", 10);
+	
+	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private JLabel niveau = new JLabel("");
+	
 	private int dureeCorde = 45;
 	private int dureePause = 30;
 	private int nbreSerie = 1;
@@ -35,8 +37,8 @@ public class InterfaceTraining {
 	private JButton demarrerButton = new JButton("Démarrer");
 
 	public JPanel interfaceTraining(String type) {
-	
-		ContentPane.removeAll();
+
+		panelTraining.removeAll();
 
 		JPanel panelNorth = new JPanel();
 		JPanel panelWest = new JPanel();
@@ -44,12 +46,12 @@ public class InterfaceTraining {
 
 		panelWest.setLayout(new GridLayout(20, 1));
 
-		ContentPane.add(panelNorth, BorderLayout.NORTH);
-		ContentPane.add(panelWest, BorderLayout.WEST);
-		ContentPane.add(panelSouth, BorderLayout.SOUTH);
+		panelTraining.add(panelNorth, BorderLayout.NORTH);
+		panelTraining.add(panelWest, BorderLayout.WEST);
+		panelTraining.add(panelSouth, BorderLayout.SOUTH);
 
 		panelCenterTRaining.add(descriptionTraining);
-		ContentPane.add(panelCenterTRaining, BorderLayout.EAST);
+		panelTraining.add(panelCenterTRaining, BorderLayout.EAST);
 
 		JLabel labelTraining = new JLabel(typeTraining);
 		panelNorth.add(labelTraining);
@@ -121,16 +123,16 @@ public class InterfaceTraining {
 
 		}
 
-		ContentPane.revalidate();
+		panelTraining.revalidate();
 
 		//
 // BUG AFFICHAGE JTEXTAREA
 		//
 
-		demarrerButton.addActionListener(new InterfaceTrainingActionListener(this));
-		comboNiveau.addActionListener(new InterfaceTrainingActionListener(this));
+		demarrerButton.addActionListener(new TrainingActionListener(this));
+		comboNiveau.addActionListener(new TrainingActionListener(this));
 
-		return ContentPane;
+		return panelTraining;
 	}
 
 	public JComboBox<String> getComboNiveau() {
@@ -149,7 +151,7 @@ public class InterfaceTraining {
 			time--;
 			timer.setText(String.valueOf(time));
 
-			ContentPane.revalidate();
+			panelTraining.revalidate();
 		}
 	}
 

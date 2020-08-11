@@ -1,4 +1,4 @@
-package Swing;
+package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

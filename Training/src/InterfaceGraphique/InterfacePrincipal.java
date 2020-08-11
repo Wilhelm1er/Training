@@ -1,8 +1,9 @@
-package Swing;
+package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import Listeners.MenuActionListener;
 
@@ -14,6 +15,8 @@ public class InterfacePrincipal {
 	private String name;
 
 	public void InterfaceGraphique() {
+		framePrincipal.getContentPane().removeAll();
+		framePrincipal.revalidate();
 		menu.setMenuUser(name);
 		framePrincipal.setJMenuBar(menu.menu());
 
@@ -31,6 +34,8 @@ public class InterfacePrincipal {
 		menu.getMusculation().addActionListener(new MenuActionListener(this));
 		menu.getGainage().addActionListener(new MenuActionListener(this));
 		menu.getChallenge().addActionListener(new MenuActionListener(this));
+		menu.getPoids().addActionListener(new MenuActionListener(this));
+		menu.getRapports().addActionListener(new MenuActionListener(this));
 
 	}
 

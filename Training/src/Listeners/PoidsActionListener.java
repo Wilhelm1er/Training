@@ -4,18 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Swing.InterfacePoids;
-import Swing.InterfacePrincipal;
-import bdd.Poids;
+import InterfaceGraphique.InterfacePoids;
+import InterfaceGraphique.InterfacePrincipal;
+import bdd.PoidsBdd;
 
-public class InterfacePoidsActionListener implements ActionListener {
+public class PoidsActionListener implements ActionListener {
 
 	private InterfacePoids IntPoids = new InterfacePoids();
-	private Poids poids = new Poids();
+	private PoidsBdd poids = new PoidsBdd();
 	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
 
-	public InterfacePoidsActionListener(InterfacePoids IntPoids) {
-		this.IntPoids = IntPoids;
+	public PoidsActionListener(InterfacePoids interfacePoids) {
+		this.IntPoids = interfacePoids;
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class InterfacePoidsActionListener implements ActionListener {
 			try {
 				double pds = Double.parseDouble(p);
 				poids.ajout(IntGraphique.getName(), pds, IntPoids.getDateS());
-				IntPoids.InterfacePoids();
-				IntPoids.getContentPane().revalidate();
+				IntPoids.interfacePoids();
+				IntPoids.getPanelPoids().repaint();
 			} catch (NumberFormatException f) {
 				System.out.println(f);
 			}
@@ -35,11 +35,11 @@ public class InterfacePoidsActionListener implements ActionListener {
 		}
 
 		else if (e.getSource() == IntPoids.getDataPoidsButton()) {
-			panelData.removeAll();
-			panelData.add(scroll);
-			panelData.repaint();
-			ContentPane.add(panelData, BorderLayout.CENTER);
-			ContentPane.revalidate();
+			IntPoids.getPanelCenter().removeAll();
+			IntPoids.getPanelCenter().add(IntPoids.getScroll());
+			IntPoids.getPanelCenter().repaint();
+			IntPoids.getPanelPoids().add(IntPoids.getPanelCenter(), BorderLayout.CENTER);
+			IntPoids.getPanelPoids().repaint();
 		}
 
 	}

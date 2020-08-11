@@ -6,11 +6,11 @@ import java.util.Date;
 
 import Application.Challenge;
 import Application.Training;
-import Swing.InterfacePrincipal;
-import Swing.InterfaceTraining;
-import Swing.Login;
+import InterfaceGraphique.Login;
+import InterfaceGraphique.InterfacePrincipal;
+import InterfaceGraphique.InterfaceTraining;
 
-public class InterfaceTrainingActionListener implements ActionListener {
+public class TrainingActionListener implements ActionListener {
 	private InterfacePrincipal IntGraphique = new InterfacePrincipal();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private Challenge challenge = new Challenge();
@@ -18,8 +18,8 @@ public class InterfaceTrainingActionListener implements ActionListener {
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
 	private String level = "";
 	
-	public InterfaceTrainingActionListener(InterfaceTraining IntTraining) {
-		this.IntTraining = IntTraining;
+	public TrainingActionListener(InterfaceTraining interfaceTraining) {
+		this.IntTraining = interfaceTraining;
 	}
 
 	@Override

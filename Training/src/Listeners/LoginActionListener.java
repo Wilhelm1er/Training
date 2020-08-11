@@ -3,9 +3,9 @@ package Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Swing.InterfacePrincipal;
-import Swing.Login;
-import Swing.Menu;
+import InterfaceGraphique.Login;
+import InterfaceGraphique.Menu;
+import InterfaceGraphique.InterfacePrincipal;
 import bdd.Utilisateur;
 
 public class LoginActionListener implements ActionListener {
