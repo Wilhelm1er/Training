@@ -1,7 +1,4 @@
 package Application;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import InterfaceGraphique.Login;
 
@@ -21,11 +18,6 @@ public class Main {
 	        	new Login().login();
 	         }
 	      });
-		
-		//Recuperation date du jour
-		DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		java.sql.Date dateS = new java.sql.Date(date.getTime());
 		
 		System.out.println(" ");
 		System.out.println("Application lancée");

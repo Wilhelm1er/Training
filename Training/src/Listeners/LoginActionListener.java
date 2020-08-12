@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import BaseDeDonnées.Utilisateur;
 import InterfaceGraphique.Login;
-import InterfaceGraphique.Menu;
 import InterfaceGraphique.InterfacePrincipale;
 /**
  * Interface relative au Poids
@@ -36,8 +35,7 @@ public class LoginActionListener implements ActionListener {
 		} else if (e.getSource() == l.getConnexion()) {
 			if (user.connexion_User(l.getInputLogin().getText(), l.getInputMdp().getText())) {
 				l.getFrame().dispose();
-				l.setName(l.getInputLogin().getText());
-				IntGraphique.setName(l.getName());
+				IntGraphique.setName(l.getInputLogin().getText());
 				IntGraphique.interfacePrincipale();
 
 			} else {

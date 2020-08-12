@@ -11,7 +11,7 @@ import Listeners.MenuActionListener;
  */
 public class InterfacePrincipale {
 
-	private JFrame framePrincipal = new JFrame("Training App");
+	private JFrame intPrincipale = new JFrame("Training App");
 	private Menu menu = new Menu();
 	
 	private String name;
@@ -21,18 +21,17 @@ public class InterfacePrincipale {
 	 *
 	 */
 	public void interfacePrincipale() {
-		framePrincipal.getContentPane().removeAll();
+		intPrincipale.getContentPane().removeAll();
 		System.out.println("nom: "+name);
 		menu.setMenuUser(name);
-		framePrincipal.setJMenuBar(menu.menu());
+		intPrincipale.setJMenuBar(menu.menu());
 
-		framePrincipal.setSize(600, 500);
-		//framePrincipal.setLayout(new BorderLayout());
-		framePrincipal.setLocationRelativeTo(null);
-		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		framePrincipal.setVisible(true);
+		intPrincipale.setSize(600, 500);
+		intPrincipale.setLocationRelativeTo(null);
+		intPrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		intPrincipale.setVisible(true);
 
-		framePrincipal.revalidate();
+		intPrincipale.revalidate();
 
 		menu.getQuitter().addActionListener(new MenuActionListener(this));
 		menu.getLogout().addActionListener(new MenuActionListener(this));
@@ -42,11 +41,10 @@ public class InterfacePrincipale {
 		menu.getChallenge().addActionListener(new MenuActionListener(this));
 		menu.getPoids().addActionListener(new MenuActionListener(this));
 		menu.getRapports().addActionListener(new MenuActionListener(this));
-
 	}
 
 	public JFrame getFrame() {
-		return framePrincipal;
+		return intPrincipale;
 	}
 
 	public Menu getMenu() {

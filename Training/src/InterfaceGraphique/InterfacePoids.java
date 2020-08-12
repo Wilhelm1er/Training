@@ -36,6 +36,9 @@ public class InterfacePoids {
 
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
+	
+	private String name;
+
 
 	/**
 	 * Panel d'affichage de l'interface relative au Poids
@@ -110,6 +113,14 @@ public class InterfacePoids {
 
 	public JScrollPane getScroll() {
 		return scroll;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

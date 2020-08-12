@@ -37,8 +37,10 @@ public class InterfaceTraining {
 	private int dureeCorde = 45;
 	private int dureePause = 30;
 	private int nbreSerie = 1;
-	private JLabel demarrer = new JLabel("Lancer session:");
-	private JButton demarrerButton = new JButton("Démarrer");
+	private JLabel labelOk = new JLabel("Lancer session:");
+	private JButton okButton = new JButton("OK");
+	private String name;
+
 
 	/**
 	 * Panel d'affichage de l'interface relative aux Trainings
@@ -47,7 +49,7 @@ public class InterfaceTraining {
 	 * @return panel de l'interface relative aux Trainings
 	 */
 	public JPanel interfaceTraining(String type) {
-		typeTraining = type;
+		typeTraining=type;
 		panelTraining.removeAll();
 		
 		panelTraining.setLayout(new BorderLayout());
@@ -123,8 +125,8 @@ public class InterfaceTraining {
 		JLabel labelTraining = new JLabel(type);
 		panelNorth.add(labelTraining);
 
-		panelSouth.add(demarrer);
-		panelSouth.add(demarrerButton);
+		panelSouth.add(labelOk);
+		panelSouth.add(okButton);
 
 		inputCorde.setHorizontalAlignment(JTextField.CENTER);
 		inputPause.setHorizontalAlignment(JTextField.CENTER);
@@ -134,11 +136,7 @@ public class InterfaceTraining {
 
 		panelTraining.repaint();
 
-		//
-// BUG AFFICHAGE JTEXTAREA
-		//
-
-		demarrerButton.addActionListener(new TrainingActionListener(this));
+		okButton.addActionListener(new TrainingActionListener(this));
 		comboNiveau.addActionListener(new TrainingActionListener(this));
 
 		return panelTraining;
@@ -147,9 +145,12 @@ public class InterfaceTraining {
 	public JComboBox<String> getComboNiveau() {
 		return comboNiveau;
 	}
+	public String getComboNiveauItem() {
+		return (String) comboNiveau.getSelectedItem();
+	}
 
-	public JButton getDemarrerButton() {
-		return demarrerButton;
+	public JButton getOkButton() {
+		return okButton;
 	}
 
 	public void processTraining(int time) {
@@ -191,11 +192,19 @@ public class InterfaceTraining {
 	}
 
 	public String getTypeTraining() {
-		return typeTraining;
+		return this.typeTraining;
 	}
 
 	public JTextArea getDescriptionTraining() {
 		return descriptionTraining;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int setNbreSerie() {

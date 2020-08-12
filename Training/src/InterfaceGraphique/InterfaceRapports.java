@@ -39,6 +39,8 @@ public class InterfaceRapports {
 	private JScrollPane scrollTraining = new JScrollPane(tableTraining);
 	private JTable tableChallenge = new JTable();
 	private JScrollPane scrollChallenge = new JScrollPane(tableChallenge);
+	private String name;
+
 
 	/**
 	 * Panel d'affichage de l'interface relative aux Rapports
@@ -102,6 +104,14 @@ public class InterfaceRapports {
 
 	public JButton getTrainingButton() {
 		return trainingButton;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public JButton getChallengeButton() {

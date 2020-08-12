@@ -17,7 +17,7 @@ public class PoidsActionListener implements ActionListener {
 
 	private InterfacePoids IntPoids = new InterfacePoids();
 	private PoidsBdd poids = new PoidsBdd();
-	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
+	private InterfacePrincipale IntPrincipale = new InterfacePrincipale();
 
 	/**
 	 * Listeners des boutons de l'interface relative aux Poids
@@ -29,7 +29,6 @@ public class PoidsActionListener implements ActionListener {
 		this.IntPoids = interfacePoids;
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == IntPoids.getAjoutPoids()) {
@@ -37,9 +36,10 @@ public class PoidsActionListener implements ActionListener {
 			String p = IntPoids.getTextePoids().getText();
 			try {
 				double pds = Double.parseDouble(p);
-				poids.ajout(IntGraphique.getName(), pds, IntPoids.getDateS());
+				poids.ajout(IntPrincipale.getName(), pds, IntPoids.getDateS());
 				IntPoids.interfacePoids();
 				IntPoids.getPanelPoids().repaint();
+				IntPrincipale.getFrame().revalidate();
 			} catch (NumberFormatException f) {
 				System.out.println(f);
 			}
@@ -52,6 +52,7 @@ public class PoidsActionListener implements ActionListener {
 			IntPoids.getPanelCenter().repaint();
 			IntPoids.getPanelPoids().add(IntPoids.getPanelCenter(), BorderLayout.CENTER);
 			IntPoids.getPanelPoids().repaint();
+			IntPrincipale.getFrame().revalidate();
 		}
 
 	}
