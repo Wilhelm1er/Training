@@ -34,9 +34,9 @@ public class InterfaceTraining {
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private JLabel niveau = new JLabel("");
 
-	private int dureeCorde = 45;
-	private int dureePause = 30;
-	private int nbreSerie = 1;
+	private int dureeCorde;
+	private int dureePause;
+	private int nbreSerie;
 	private JLabel labelOk = new JLabel("Lancer session:");
 	private JButton okButton = new JButton("OK");
 	private String name;
@@ -153,42 +153,28 @@ public class InterfaceTraining {
 		return okButton;
 	}
 
-	public void processTraining(int time) {
-		JLabel timer = new JLabel();
-
-		panelCenterTRaining.add(timer);
-		for (int i = 0; i < time; i--) {
-			time--;
-			timer.setText(String.valueOf(time));
-
-			panelTraining.revalidate();
-		}
-	}
+	
+	  public void processTraining(int time) { JLabel timer = new JLabel();
+	  
+	  panelCenterTRaining.add(timer); for (int i = 0; i < time; i--) { time--;
+	  timer.setText(String.valueOf(time));
+	  
+	  panelTraining.revalidate(); } }
+	 
 
 	public JPanel getPanelCenterTRaining() {
 		return panelCenterTRaining;
 	}
 
 	public int getDureeCorde() {
-		return dureeCorde;
+		return Integer.parseInt(inputCorde.getText());
 	}
-
-	public int setDureeCorde() {
-		dureeCorde = Integer.parseInt(inputCorde.getText());
-		return dureeCorde;
-	}
-
 	public int getDureePause() {
-		return dureeCorde;
-	}
-
-	public int setDureePause() {
-		dureePause = Integer.parseInt(inputPause.getText());
-		return dureePause;
+		return Integer.parseInt(inputPause.getText());
 	}
 
 	public int getNbreSerie() {
-		return nbreSerie;
+		return Integer.parseInt(inputSerie.getText());
 	}
 
 	public String getTypeTraining() {

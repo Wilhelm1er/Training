@@ -2,12 +2,23 @@ package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
+import Application.Training;
 import Listeners.SessionActionListener;
 
 public class InterfaceSession {
@@ -17,8 +28,8 @@ public class InterfaceSession {
 	private JPanel panelCenter = new JPanel();
 	private JPanel panelSouth = new JPanel();
 	private JLabel labelExercice = new JLabel("Exercice: ");
-	private JLabel exercice = new JLabel("");
-	private JLabel labelCurrent = new JLabel("Décompte: ");
+	private JLabel exercice = new JLabel(" ");
+	private JLabel labelCurrent = new JLabel(" ");
 	private JLabel timeCurrent = new JLabel("00:00");
 	private JLabel labelSession = new JLabel("Temps total: ");
 	private JLabel timeSession = new JLabel("00:00");
@@ -31,6 +42,17 @@ public class InterfaceSession {
 	private JButton pauseButton = new JButton("Pause");
 	private String name;
 	private String level;
+	private int duree_corde ;
+	private int duree_pause;
+	private int nbre_serie;	
+	private long diff;
+
+	private File bip = new File("resources/buzzer1.wav");
+	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
+	private Map<String, Integer> List = new LinkedHashMap<String, Integer>();
+	private Training Training = new Training();
+	private Date date = new Date();
+	private java.sql.Date dateS = new java.sql.Date(date.getTime());
 
 	/**
 	 * Frame d'affichage de l'interface session
@@ -74,6 +96,129 @@ public class InterfaceSession {
 		frameSession.add(panelPrincipal);
 		frameSession.revalidate();
 		
+	}
+	public void sessionTraining()
+			throws InterruptedException {
+
+			switch (typeTraining) {
+			case "Renforcement":
+				// Temps de debut d'entrainement
+				timestamp_1 = new Timestamp(System.currentTimeMillis());
+				
+				for (int i = 1; i <= nbre_serie; i++) {
+					serie.setText(i+" / "+nbre_serie);
+					panelPrincipal.repaint();
+
+					for (String mapentry : List.keySet()) {
+						this.corde_a_sauter();
+						timeCurrent.setText("");
+						exercice.setText(mapentry);
+						panelPrincipal.repaint();
+						labelCurrent.setText("Répétitions: "+Training.training(typeTraining, level).get(mapentry));
+						panelPrincipal.repaint();
+						
+						this.promptEnterKey();
+					}
+					if (i < nbre_serie) {
+						this.corde_a_sauter();
+						System.out.println("PAUSE de 3min");
+						this.pause(180);
+					}
+				}
+				this.corde_a_sauter();
+
+				break;
+			case "Musculation":
+				typeTraining="Musculation";
+				panelPrincipal.repaint();
+				for (int i = 1; i <= nbre_serie; i++) {
+					serie.setText(i+" / "+nbre_serie);
+					panelPrincipal.repaint();
+				}
+				break;
+			case "Gainage":
+				typeTraining="Gainage";
+				panelPrincipal.repaint();
+				for (int i = 1; i <= nbre_serie; i++) {
+					serie.setText(i+" / "+nbre_serie);
+					panelPrincipal.repaint();
+				}
+
+				break;
+			}
+		}
+
+/**
+* Methode d'attente d'appui sur la touche ENTRER
+* 
+*/
+public void promptEnterKey() {
+System.out.println(" ");
+System.out.println(" Appuyer sur \"ENTRER\" pour continuer");
+System.out.println("#####################################");
+System.out.println(" ");
+try {
+System.in.read();
+} catch (IOException e) {
+e.printStackTrace();
+}
+}
+
+	/**
+	 * Methode d'affichage de l'exercice corde à sauter
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void corde_a_sauter() throws InterruptedException {
+		exercice.setText("Corde à sauter");
+		panelPrincipal.repaint();
+		for (int i = duree_corde; i > 0; i--) {
+			labelCurrent.setText("Temps restant");
+			timeCurrent.setText("" + i);
+			panelPrincipal.repaint();
+			Thread.sleep(1000);
+			if (i == 5) {
+				this.bip();
+			}
+		}
+	}		
+	/**
+	 * Methode pour creer une pause
+	 * 
+	 * @param time Temps en secondes.
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void pause(int time) throws InterruptedException {
+		exercice.setText("Pause");
+		panelPrincipal.repaint();
+		for (int i = time; i > 0; i--) {
+			labelCurrent.setText("Temps restant");
+			timeCurrent.setText("" + i);
+			panelPrincipal.repaint();
+			Thread.sleep(1000);
+			if (i == 5) {
+				this.bip();
+			}
+		}
+	}
+
+	/**
+	 * Methode pour jouer le bip sonore
+	 * 
+	 */
+	public void bip() {
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(bip));
+			clip.start();
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+	}
+
+	public Map<String, Integer> getList() {
+		return List;
 	}
 
 	public JLabel getExercice() {
@@ -183,5 +328,41 @@ public class InterfaceSession {
 				s.session();
 			}
 		});
+	}
+	public int getDuree_corde() {
+		return duree_corde;
+	}
+
+	public void setDuree_corde(int duree_corde) {
+		this.duree_corde = duree_corde;
+	}
+
+	public int getNbre_serie() {
+		return nbre_serie;
+	}
+	public void setNbre_serie(int nbre_serie) {
+		this.nbre_serie = nbre_serie;
+	}
+	public int getDuree_pause() {
+		return duree_pause;
+	}
+
+	public void setDuree_pause(int duree_pause) {
+		this.duree_pause = duree_pause;
+	}
+	public void setList(Map<String, Integer> list) {
+		List = list;
+	}
+	public Timestamp getTimestamp_1() {
+		return timestamp_1;
+	}
+	public void setTimestamp_1(Timestamp timestamp_1) {
+		this.timestamp_1 = timestamp_1;
+	}
+	public long getDiff() {
+		return diff;
+	}
+	public void setDiff(long diff) {
+		this.diff = diff;
 	}
 }
