@@ -41,7 +41,7 @@ public class InterfaceSession {
 		panelPrincipal.setLayout(new BorderLayout());
 		frameSession.setSize(400, 300);
 		frameSession.setLocationRelativeTo(null);
-		frameSession.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameSession.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameSession.setVisible(true);
 		frameSession.revalidate();
 		
