@@ -43,9 +43,9 @@ public class InterfaceSession {
 	private JButton terminerButton = new JButton("Terminer");
 	private String name;
 	private String level;
-	private int duree_corde;
-	private int duree_pause;
-	private int nbre_serie;
+	private int dureeCorde;
+	private int dureePause;
+	private int nbreSerie;
 	private long diff;
 	private boolean next;
 
@@ -73,25 +73,23 @@ public class InterfaceSession {
 				Timestamp timestamp_3 = new Timestamp(System.currentTimeMillis());
 				// Conversion de la durée de l'entrainement.
 				tempsTotal = timestamp_3.getTime() - timestamp_1.getTime();
-				int sec = (int) (tempsTotal / 1000) % 60;
-				int min = (int) ((tempsTotal / (1000 * 60)) % 60);
-				int h = (int) ((tempsTotal / (1000 * 60 * 60)) % 24);
+				
 				// System.out.println(h + ":" + min + ":" + sec);
 
 				switch (typeTraining) {
 				case "Renforcement":
 					// Ajout training dans la BDD
-					TrainingBdd.ajout_training(name, dateS, typeTraining, nbre_serie, duree_corde, level, tempsTotal);
+					TrainingBdd.ajout_training(name, dateS, typeTraining, nbreSerie, dureeCorde, level, tempsTotal);
 					break;
 				case "Musculation":
 					// Ajout training dans la BDD
-					TrainingBdd.ajout_autre(name, dateS, typeTraining, nbre_serie, duree_pause, level, tempsTotal);
+					TrainingBdd.ajout_autre(name, dateS, typeTraining, nbreSerie, dureePause, level, tempsTotal);
 					break;
 				case "Gainage":
 					// Ajout training dans la BDD
 					// BUG CAR PAS DE DUREE DE CORDE DANS L EXO GAINAGE
 
-					TrainingBdd.ajout_training(name, dateS, typeTraining, nbre_serie, duree_corde, level, tempsTotal);
+					TrainingBdd.ajout_training(name, dateS, typeTraining, nbreSerie, dureeCorde, level, tempsTotal);
 					break;
 
 				}
@@ -103,6 +101,14 @@ public class InterfaceSession {
 			return null;
 		}
 	};
+	public long getTempsTotal() {
+		return tempsTotal;
+	}
+
+	public void setTempsTotal(long tempsTotal) {
+		this.tempsTotal = tempsTotal;
+	}
+
 	private SwingWorker<Object, Object> chronoWorker = new SwingWorker<Object, Object>() {
 
 		@Override
@@ -183,8 +189,8 @@ public class InterfaceSession {
 			// Temps de debut d'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
 
-			for (int i = 1; i <= nbre_serie; i++) {
-				serie.setText(i + " / " + nbre_serie);
+			for (int i = 1; i <= nbreSerie; i++) {
+				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
 
 				for (String mapentry : List.keySet()) {
@@ -200,7 +206,7 @@ public class InterfaceSession {
 						Thread.sleep(1000);
 					}
 				}
-				if (i < nbre_serie) {
+				if (i < nbreSerie) {
 					this.corde_a_sauter();
 					labelCurrent.setText("Pause de 3min ");
 					this.pause(180);
@@ -217,8 +223,8 @@ public class InterfaceSession {
 			panelCenter.setLayout(new GridLayout(5, 2));
 			typeTraining = "Musculation";
 			panelPrincipal.repaint();
-			for (int i = 1; i <= nbre_serie; i++) {
-				serie.setText(i + " / " + nbre_serie);
+			for (int i = 1; i <= nbreSerie; i++) {
+				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
 			for (String mapentry : List.keySet()) {
 				for(int j=1;j<7;j++) {
@@ -237,9 +243,11 @@ public class InterfaceSession {
 				while (!next) {
 					Thread.sleep(1000);
 				}
+				exercice.setText("Pause");
+				this.pause(dureePause);
 			}
 			}
-			if (i < nbre_serie) {
+			if (i < nbreSerie) {
 				labelCurrent.setText("Pause de 3min ");
 				this.pause(180);
 			}
@@ -252,8 +260,8 @@ public class InterfaceSession {
 		case "Gainage":
 			typeTraining = "Gainage";
 			panelPrincipal.repaint();
-			for (int i = 1; i <= nbre_serie; i++) {
-				serie.setText(i + " / " + nbre_serie);
+			for (int i = 1; i <= nbreSerie; i++) {
+				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
 			}
 
@@ -278,7 +286,7 @@ public class InterfaceSession {
 	public void corde_a_sauter() throws InterruptedException {
 		exercice.setText("Corde à sauter");
 		panelPrincipal.repaint();
-		for (int i = duree_corde; i > 0; i--) {
+		for (int i = dureeCorde; i > 0; i--) {
 			labelCurrent.setText("Temps restant");
 			timeCurrent.setText("" + i);
 			panelPrincipal.repaint();
@@ -440,27 +448,27 @@ public class InterfaceSession {
 	}
 
 	public int getDuree_corde() {
-		return duree_corde;
+		return dureeCorde;
 	}
 
 	public void setDuree_corde(int duree_corde) {
-		this.duree_corde = duree_corde;
+		this.dureeCorde = duree_corde;
 	}
 
 	public int getNbre_serie() {
-		return nbre_serie;
+		return nbreSerie;
 	}
 
 	public void setNbre_serie(int nbre_serie) {
-		this.nbre_serie = nbre_serie;
+		this.nbreSerie = nbre_serie;
 	}
 
 	public int getDuree_pause() {
-		return duree_pause;
+		return dureePause;
 	}
 
 	public void setDuree_pause(int duree_pause) {
-		this.duree_pause = duree_pause;
+		this.dureePause = duree_pause;
 	}
 
 	public void setList(Map<String, Integer> list) {

@@ -6,6 +6,7 @@ import java.util.Date;
 
 import Application.Challenge;
 import Application.Training;
+import InterfaceGraphique.CompteRendu;
 import InterfaceGraphique.InterfaceSession;
 import InterfaceGraphique.InterfaceTraining;
 
@@ -16,6 +17,7 @@ import InterfaceGraphique.InterfaceTraining;
  */
 public class SessionActionListener implements ActionListener {
 	private InterfaceSession IntSession = new InterfaceSession();
+	private CompteRendu cR = new CompteRendu();
 	private Challenge challenge = new Challenge();
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
@@ -40,8 +42,11 @@ public class SessionActionListener implements ActionListener {
 			//
 
 		} else if (e.getSource() == IntSession.getTerminerButton()) {
-
+			cR.setTempsTotal(IntSession.getTempsTotal());
+			cR.getTypeTraining().setText(IntSession.getTypeTraining());
+			cR.CompteRendu();
 			IntSession.getFrame().dispose();
+			
 
 		} else if (e.getSource() == IntSession.getDemarrerButton()) {
 			Training Training = new Training();
