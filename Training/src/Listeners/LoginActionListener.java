@@ -13,7 +13,7 @@ import InterfaceGraphique.InterfacePrincipale;
  */
 public class LoginActionListener implements ActionListener {
 	private Utilisateur user = new Utilisateur();
-	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
+	private InterfacePrincipale IntPrincipale = new InterfacePrincipale();
 	private Login l = new Login();
 
 	/**
@@ -35,8 +35,8 @@ public class LoginActionListener implements ActionListener {
 		} else if (e.getSource() == l.getConnexion()) {
 			if (user.connexion_User(l.getInputLogin().getText(), l.getInputMdp().getText())) {
 				l.getFrame().dispose();
-				IntGraphique.setName(l.getInputLogin().getText());
-				IntGraphique.interfacePrincipale();
+				IntPrincipale.setName(l.getInputLogin().getText());
+				IntPrincipale.interfacePrincipale();
 
 			} else {
 				l.getErreur().setVisible(true);

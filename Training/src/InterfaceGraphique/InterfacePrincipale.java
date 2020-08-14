@@ -22,7 +22,6 @@ public class InterfacePrincipale {
 	 */
 	public void interfacePrincipale() {
 		intPrincipale.getContentPane().removeAll();
-		System.out.println("nom: "+name);
 		menu.setMenuUser(name);
 		intPrincipale.setJMenuBar(menu.menu());
 

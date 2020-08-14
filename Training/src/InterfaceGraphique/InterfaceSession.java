@@ -2,13 +2,14 @@ package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -30,7 +31,7 @@ public class InterfaceSession {
 	private JLabel labelExercice = new JLabel("Exercice: ");
 	private JLabel exercice = new JLabel(" ");
 	private JLabel labelCurrent = new JLabel(" ");
-	private JLabel timeCurrent = new JLabel("00:00");
+	private JLabel timeCurrent = new JLabel(" ");
 	private JLabel labelSession = new JLabel("Temps total: ");
 	private JLabel timeSession = new JLabel("00:00");
 	private String typeTraining = new String(" ");
@@ -38,14 +39,16 @@ public class InterfaceSession {
 	private JLabel serie = new JLabel(" ");
 	private JLabel labelSerie = new JLabel("Série: ");
 	private JButton demarrerButton = new JButton("Démarrer");
-	private JButton arreterButton = new JButton("Arrêter");
+	private JButton continuerButton = new JButton("Continuer");
 	private JButton pauseButton = new JButton("Pause");
+	private JButton terminerButton = new JButton("Terminer");
 	private String name;
 	private String level;
-	private int duree_corde ;
+	private int duree_corde;
 	private int duree_pause;
-	private int nbre_serie;	
+	private int nbre_serie;
 	private long diff;
+	private boolean next;
 
 	private File bip = new File("resources/buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
@@ -54,27 +57,92 @@ public class InterfaceSession {
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
 
+	private long tempsTotal;
+
+	private BaseDeDonnées.TrainingBdd TrainingBdd = new BaseDeDonnées.TrainingBdd();
+
+	private SwingWorker<Object, Object> worker1 = new SwingWorker<Object, Object>() {
+
+		@Override
+		protected Object doInBackground() throws Exception {
+
+			if (!level.equals("Choix")) {
+				List = Training.training(typeTraining, level);
+				chronoWorker.execute();
+				sessionTraining();
+
+				Timestamp timestamp_3 = new Timestamp(System.currentTimeMillis());
+				// Conversion de la durée de l'entrainement.
+				tempsTotal = timestamp_3.getTime() - timestamp_1.getTime();
+				int sec = (int) (tempsTotal / 1000) % 60;
+				int min = (int) ((tempsTotal / (1000 * 60)) % 60);
+				int h = (int) ((tempsTotal / (1000 * 60 * 60)) % 24);
+				// System.out.println(h + ":" + min + ":" + sec);
+
+				switch (typeTraining) {
+				case "Renforcement":
+					// Ajout training dans la BDD
+					TrainingBdd.ajout_training(name, dateS, typeTraining, nbre_serie, duree_corde, level, tempsTotal);
+					break;
+				case "Musculation":
+					// Ajout training dans la BDD
+					TrainingBdd.ajout_autre(name, dateS, typeTraining, nbre_serie, duree_pause, level, tempsTotal);
+					break;
+				case "Gainage":
+					// Ajout training dans la BDD
+					// BUG CAR PAS DE DUREE DE CORDE DANS L EXO GAINAGE
+
+					TrainingBdd.ajout_training(name, dateS, typeTraining, nbre_serie, duree_corde, level, tempsTotal);
+					break;
+
+				}
+				chronoWorker.cancel(true);
+			} else {
+				//
+
+			}
+			return null;
+		}
+	};
+	private SwingWorker<Object, Object> chronoWorker = new SwingWorker<Object, Object>() {
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			for (;;) {
+				// Prise de l'instant de fin de l'entrainement
+				Timestamp timestamp_2 = new Timestamp(System.currentTimeMillis());
+				// Conversion de la durée de l'entrainement.
+				diff = timestamp_2.getTime() - timestamp_1.getTime();
+				int seconds = (int) (diff / 1000) % 60;
+				int minutes = (int) ((diff / (1000 * 60)) % 60);
+				int hours = (int) ((diff / (1000 * 60 * 60)) % 24);
+				timeSession.setText(hours + ":" + minutes + ":" + seconds);
+				panelPrincipal.repaint();
+			}
+		}
+	};
+
 	/**
 	 * Frame d'affichage de l'interface session
 	 *
 	 */
 	public void session() {
-		//frameSession.getContentPane().removeAll();
+		// frameSession.getContentPane().removeAll();
 		panelPrincipal.setLayout(new BorderLayout());
 		frameSession.setSize(400, 300);
 		frameSession.setLocationRelativeTo(null);
 		frameSession.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameSession.setVisible(true);
 		frameSession.revalidate();
-		
+
 		panelPrincipal.add(panelNorth, BorderLayout.NORTH);
 		panelPrincipal.add(panelCenter, BorderLayout.CENTER);
 		panelPrincipal.add(panelSouth, BorderLayout.SOUTH);
-		
+
 		panelNorth.add(labelTypeTraining);
-		
-		panelCenter.setLayout(new GridLayout(2, 5));
-		
+
+		panelCenter.setLayout(new GridLayout(4, 2));
+
 		panelCenter.add(labelSession);
 		panelCenter.add(timeSession);
 		panelCenter.add(labelSerie);
@@ -83,86 +151,144 @@ public class InterfaceSession {
 		panelCenter.add(exercice);
 		panelCenter.add(labelCurrent);
 		panelCenter.add(timeCurrent);
-		
-		panelSouth.add(demarrerButton);
+
+		pauseButton.setVisible(false);
+		continuerButton.setVisible(false);
+		terminerButton.setVisible(false);
+
 		panelSouth.add(pauseButton);
-		panelSouth.add(arreterButton);
-		
+		panelSouth.add(continuerButton);
+		panelSouth.add(demarrerButton);
+
+		panelSouth.add(terminerButton);
+
 		panelPrincipal.repaint();
-		
-		arreterButton.addActionListener(new SessionActionListener(this));
+
+		continuerButton.addActionListener(new SessionActionListener(this));
 		demarrerButton.addActionListener(new SessionActionListener(this));
-		
+		pauseButton.addActionListener(new SessionActionListener(this));
+		terminerButton.addActionListener(new SessionActionListener(this));
+
 		frameSession.add(panelPrincipal);
 		frameSession.revalidate();
-		
+
 	}
-	public void sessionTraining()
-			throws InterruptedException {
 
-			switch (typeTraining) {
-			case "Renforcement":
-				// Temps de debut d'entrainement
-				timestamp_1 = new Timestamp(System.currentTimeMillis());
-				
-				for (int i = 1; i <= nbre_serie; i++) {
-					serie.setText(i+" / "+nbre_serie);
-					panelPrincipal.repaint();
+	public void sessionTraining() throws InterruptedException {
+		demarrerButton.setVisible(false);
+		pauseButton.setVisible(true);
+		continuerButton.setVisible(true);
 
-					for (String mapentry : List.keySet()) {
-						this.corde_a_sauter();
-						timeCurrent.setText("");
-						exercice.setText(mapentry);
-						panelPrincipal.repaint();
-						labelCurrent.setText("Répétitions: "+Training.training(typeTraining, level).get(mapentry));
-						panelPrincipal.repaint();
-						
-						this.promptEnterKey();
-					}
-					if (i < nbre_serie) {
-						this.corde_a_sauter();
-						System.out.println("PAUSE de 3min");
-						this.pause(180);
-					}
-				}
-				this.corde_a_sauter();
+		switch (typeTraining) {
+		case "Renforcement":
+			// Temps de debut d'entrainement
+			timestamp_1 = new Timestamp(System.currentTimeMillis());
 
-				break;
-			case "Musculation":
-				typeTraining="Musculation";
+			for (int i = 1; i <= nbre_serie; i++) {
+				serie.setText(i + " / " + nbre_serie);
 				panelPrincipal.repaint();
-				for (int i = 1; i <= nbre_serie; i++) {
-					serie.setText(i+" / "+nbre_serie);
-					panelPrincipal.repaint();
-				}
-				break;
-			case "Gainage":
-				typeTraining="Gainage";
-				panelPrincipal.repaint();
-				for (int i = 1; i <= nbre_serie; i++) {
-					serie.setText(i+" / "+nbre_serie);
-					panelPrincipal.repaint();
-				}
 
-				break;
+				for (String mapentry : List.keySet()) {
+					next = false;
+					this.corde_a_sauter();
+					timeCurrent.setText("");
+					exercice.setText(mapentry);
+					panelPrincipal.repaint();
+					labelCurrent.setText("Répétitions: ");
+					timeCurrent.setText("" + Training.training(typeTraining, level).get(mapentry));
+					panelPrincipal.repaint();
+					while (!next) {
+						Thread.sleep(1000);
+					}
+
+					// this.promptEnterKey();
+				}
+				if (i < nbre_serie) {
+					this.corde_a_sauter();
+					labelCurrent.setText("Pause de 3min ");
+					this.pause(180);
+				}
 			}
-		}
+			this.corde_a_sauter();
 
-/**
-* Methode d'attente d'appui sur la touche ENTRER
-* 
-*/
-public void promptEnterKey() {
-System.out.println(" ");
-System.out.println(" Appuyer sur \"ENTRER\" pour continuer");
-System.out.println("#####################################");
-System.out.println(" ");
-try {
-System.in.read();
-} catch (IOException e) {
-e.printStackTrace();
-}
-}
+			pauseButton.setVisible(false);
+			continuerButton.setVisible(false);
+			terminerButton.setVisible(true);
+
+			break;
+		case "Musculation":
+			typeTraining = "Musculation";
+			panelPrincipal.repaint();
+			for (int i = 1; i <= nbre_serie; i++) {
+				serie.setText(i + " / " + nbre_serie);
+				panelPrincipal.repaint();
+			}
+			terminerButton.setVisible(true);
+			break;
+		case "Gainage":
+			typeTraining = "Gainage";
+			panelPrincipal.repaint();
+			for (int i = 1; i <= nbre_serie; i++) {
+				serie.setText(i + " / " + nbre_serie);
+				panelPrincipal.repaint();
+			}
+
+			terminerButton.setVisible(true);
+			break;
+		}
+	}
+
+	public boolean getNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+
+	/**
+	 * Methode d'attente d'appui sur la touche ENTRER
+	 * 
+	 */
+	public void promptEnterKey() {
+		System.out.println(" ");
+		System.out.println(" Appuyer sur \"ENTRER\" pour continuer");
+		System.out.println("#####################################");
+		System.out.println(" ");
+		try {
+			System.in.read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * inputMdp.addKeyListener(new KeyListener(){
+	 * 
+	 * 
+	 * public void keyPressed(KeyEvent e) {
+	 * 
+	 * if (e.getKeyCode() == KeyEvent.VK_ENTER)
+	 * 
+	 * if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
+	 * frameLogin.dispose(); IntPrincipale.setName(inputLogin.getText());
+	 * IntPrincipale.interfacePrincipale();
+	 * 
+	 * } else { erreur.setVisible(true); }
+	 * 
+	 * }
+	 */
+	/*
+	 * @Override public void keyTyped(KeyEvent e) { // TODO Auto-generated method
+	 * stub
+	 * 
+	 * }
+	 * 
+	 * @Override public void keyReleased(KeyEvent e) { // TODO Auto-generated method
+	 * stub
+	 * 
+	 * } });
+	 */
 
 	/**
 	 * Methode d'affichage de l'exercice corde à sauter
@@ -181,7 +307,8 @@ e.printStackTrace();
 				this.bip();
 			}
 		}
-	}		
+	}
+
 	/**
 	 * Methode pour creer une pause
 	 * 
@@ -229,13 +356,14 @@ e.printStackTrace();
 		this.exercice = exercice;
 	}
 
-	public JButton getArreterButton() {
-		return arreterButton;
+	public JButton getContinuerButton() {
+		return continuerButton;
 	}
 
-	public void setArreterButton(JButton stopButton) {
-		this.arreterButton = stopButton;
+	public void setContinuerButton(JButton stopButton) {
+		this.continuerButton = stopButton;
 	}
+
 	public JButton getDemarrerButton() {
 		return demarrerButton;
 	}
@@ -271,6 +399,7 @@ e.printStackTrace();
 	public String getTypeTraining() {
 		return typeTraining;
 	}
+
 	public JLabel getLabelTypeTraining() {
 		return labelTypeTraining;
 	}
@@ -329,6 +458,7 @@ e.printStackTrace();
 			}
 		});
 	}
+
 	public int getDuree_corde() {
 		return duree_corde;
 	}
@@ -340,9 +470,11 @@ e.printStackTrace();
 	public int getNbre_serie() {
 		return nbre_serie;
 	}
+
 	public void setNbre_serie(int nbre_serie) {
 		this.nbre_serie = nbre_serie;
 	}
+
 	public int getDuree_pause() {
 		return duree_pause;
 	}
@@ -350,19 +482,40 @@ e.printStackTrace();
 	public void setDuree_pause(int duree_pause) {
 		this.duree_pause = duree_pause;
 	}
+
 	public void setList(Map<String, Integer> list) {
 		List = list;
 	}
+
 	public Timestamp getTimestamp_1() {
 		return timestamp_1;
 	}
+
 	public void setTimestamp_1(Timestamp timestamp_1) {
 		this.timestamp_1 = timestamp_1;
 	}
+
 	public long getDiff() {
 		return diff;
 	}
+
 	public void setDiff(long diff) {
 		this.diff = diff;
+	}
+
+	public SwingWorker<Object, Object> getWorker1() {
+		return worker1;
+	}
+
+	public void setWorker1(SwingWorker<Object, Object> worker1) {
+		this.worker1 = worker1;
+	}
+
+	public JButton getTerminerButton() {
+		return terminerButton;
+	}
+
+	public void setTerminerButton(JButton terminerButton) {
+		this.terminerButton = terminerButton;
 	}
 }

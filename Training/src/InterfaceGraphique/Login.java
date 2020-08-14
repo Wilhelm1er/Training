@@ -2,6 +2,8 @@ package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.InputMap;
 import javax.swing.JButton;
@@ -24,6 +26,7 @@ import Listeners.LoginActionListener;
 public class Login {
 	private JFrame frameLogin = new JFrame("Login");
 	private Utilisateur user = new Utilisateur();
+	private InterfacePrincipale IntPrincipale = new InterfacePrincipale();
 
 	private JButton new_user = new JButton("Créer utilisateur");
 	private JButton connexion = new JButton("Connexion");
@@ -62,6 +65,35 @@ public class Login {
 
 		new_user.addActionListener(new LoginActionListener(this));
 		connexion.addActionListener(new LoginActionListener(this));
+		inputMdp.addKeyListener(new KeyListener(){
+
+			
+public void keyPressed(KeyEvent e) {
+
+if (e.getKeyCode() == KeyEvent.VK_ENTER)
+
+	if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
+		frameLogin.dispose();
+		IntPrincipale.setName(inputLogin.getText());
+		IntPrincipale.interfacePrincipale();
+
+	} else {
+		erreur.setVisible(true);
+	}
+
+}
+
+@Override
+public void keyTyped(KeyEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void keyReleased(KeyEvent e) {
+	// TODO Auto-generated method stub
+	
+} });
 
 		JLabel labelWelcome = new JLabel("Application training");
 
@@ -76,7 +108,7 @@ public class Login {
 		frameLogin.add(panelSouth, BorderLayout.SOUTH);
 		frameLogin.add(panelCenter, BorderLayout.CENTER);
 
-		frameLogin.getRootPane().setDefaultButton(connexion);
+		//frameLogin.getRootPane().setDefaultButton(connexion);
 
 		JLabel listUser = new JLabel("Utilisateurs connus: ");
 		listUser.setHorizontalAlignment(SwingConstants.CENTER);
@@ -91,12 +123,6 @@ public class Login {
 
 		inputMdp.setEchoChar('*');
 		erreur.setVisible(false);
-
-// A CORRIGER
-		// UTILITE?
-		InputMap im = connexion.getInputMap();
-		im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
-		im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
 
 		panelCenter.add(labelLogin);
 		panelCenter.add(inputLogin);

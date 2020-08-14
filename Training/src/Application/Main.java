@@ -11,16 +11,12 @@ import InterfaceGraphique.Login;
 
 public class Main {
 
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	         @Override
-	         public void run() {
-	        	new Login().login();
-	         }
-	      });
-		
-		System.out.println(" ");
-		System.out.println("Application lancée");
-		System.out.println(" ");
+			@Override
+			public void run() {
+				new Login().login();
+			}
+		});
 	}
 }
