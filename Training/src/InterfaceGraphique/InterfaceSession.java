@@ -2,10 +2,7 @@ package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -38,6 +35,8 @@ public class InterfaceSession {
 	private JLabel labelTypeTraining = new JLabel(typeTraining);
 	private JLabel serie = new JLabel(" ");
 	private JLabel labelSerie = new JLabel("Série: ");
+	private JLabel serieMuscu = new JLabel(" / 6");
+	private JLabel labelSerieMuscu = new JLabel("Série: ");
 	private JButton demarrerButton = new JButton("Démarrer");
 	private JButton continuerButton = new JButton("Continuer");
 	private JButton pauseButton = new JButton("Pause");
@@ -200,8 +199,6 @@ public class InterfaceSession {
 					while (!next) {
 						Thread.sleep(1000);
 					}
-
-					// this.promptEnterKey();
 				}
 				if (i < nbre_serie) {
 					this.corde_a_sauter();
@@ -217,13 +214,40 @@ public class InterfaceSession {
 
 			break;
 		case "Musculation":
+			panelCenter.setLayout(new GridLayout(5, 2));
 			typeTraining = "Musculation";
 			panelPrincipal.repaint();
 			for (int i = 1; i <= nbre_serie; i++) {
 				serie.setText(i + " / " + nbre_serie);
 				panelPrincipal.repaint();
+			for (String mapentry : List.keySet()) {
+				for(int j=1;j<7;j++) {
+					
+				next = false;
+				panelCenter.add(labelSerieMuscu);
+				panelCenter.add(serieMuscu);
+				serieMuscu.setText(j+" / 6");
+				panelPrincipal.repaint();
+				timeCurrent.setText("");
+				exercice.setText(mapentry);
+				panelPrincipal.repaint();
+				labelCurrent.setText("Répétitions: ");
+				timeCurrent.setText("" + Training.training(typeTraining, level).get(mapentry));
+				panelPrincipal.repaint();
+				while (!next) {
+					Thread.sleep(1000);
+				}
 			}
-			terminerButton.setVisible(true);
+			}
+			if (i < nbre_serie) {
+				labelCurrent.setText("Pause de 3min ");
+				this.pause(180);
+			}
+		}
+
+		pauseButton.setVisible(false);
+		continuerButton.setVisible(false);
+		terminerButton.setVisible(true);
 			break;
 		case "Gainage":
 			typeTraining = "Gainage";
@@ -245,50 +269,6 @@ public class InterfaceSession {
 	public void setNext(boolean next) {
 		this.next = next;
 	}
-
-	/**
-	 * Methode d'attente d'appui sur la touche ENTRER
-	 * 
-	 */
-	public void promptEnterKey() {
-		System.out.println(" ");
-		System.out.println(" Appuyer sur \"ENTRER\" pour continuer");
-		System.out.println("#####################################");
-		System.out.println(" ");
-		try {
-			System.in.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/*
-	 * inputMdp.addKeyListener(new KeyListener(){
-	 * 
-	 * 
-	 * public void keyPressed(KeyEvent e) {
-	 * 
-	 * if (e.getKeyCode() == KeyEvent.VK_ENTER)
-	 * 
-	 * if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
-	 * frameLogin.dispose(); IntPrincipale.setName(inputLogin.getText());
-	 * IntPrincipale.interfacePrincipale();
-	 * 
-	 * } else { erreur.setVisible(true); }
-	 * 
-	 * }
-	 */
-	/*
-	 * @Override public void keyTyped(KeyEvent e) { // TODO Auto-generated method
-	 * stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void keyReleased(KeyEvent e) { // TODO Auto-generated method
-	 * stub
-	 * 
-	 * } });
-	 */
 
 	/**
 	 * Methode d'affichage de l'exercice corde à sauter
