@@ -24,15 +24,19 @@ Lancement temporaire à partir du Main
 
 ## Roadmap
 
+- Profil utilisateur:
+  - Affichage fiche personnel
+  - Modification mot de passe
+  - Poids
 - Rapport:
-  - statistique
+  - Personnal best
+  - Statistique
   - Bug affichage rapports
   - Entrer ou supprimer ligne rapports, poids
-- Compte rendu fin exo
+- Compte rendu:
+  - Completer données affichées
 - Training:
   - Ajout training xav
-- Gestion utilisateurs
-  - Modification mot de passe
 - Menu à propos, renvoyant vers git
 - Ajout autres activités
 
