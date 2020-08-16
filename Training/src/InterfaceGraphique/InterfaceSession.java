@@ -48,7 +48,7 @@ public class InterfaceSession {
 	private long diff;
 	private boolean next;
 	private File file;
-	private String termine=" ";
+	
 	private int time;
 
 	private File bip = new File("resources/buzzer1.wav");
@@ -60,6 +60,7 @@ public class InterfaceSession {
 	private BaseDeDonnées.ChallengeBdd challenge = new BaseDeDonnées.ChallengeBdd();
 
 	private long tempsTotal;
+	private String termine=" ";
 
 	private BaseDeDonnées.TrainingBdd TrainingBdd = new BaseDeDonnées.TrainingBdd();
 
@@ -72,33 +73,19 @@ public class InterfaceSession {
 				if (level.equals("Pompiers")) {
 					chronoWorker.execute();
 					sessionTraining();
-					
-					// Prise de l'instant de fin de l'entrainement
-					Timestamp timestamp_2 = new Timestamp(System.currentTimeMillis());
 
-					System.out.println("Session TERMINEE");
-					System.out.println(" ");
-
-					// Conversion de la durée de l'entrainement.
-					long diff = timestamp_2.getTime() - timestamp_1.getTime();
-
-					int seconds = (int) (diff / 1000) ;
-
-					if (seconds >= time) {
-						System.out.println("Félicitation " + name);
-						termine = "OUI";
-					}
-					if (seconds < time) {
-						int seconds2 = (int) (diff / 1000) % 60;
-						int minutes = (int) ((diff / (1000 * 60)) % 60);
-						int hours = (int) ((diff / (1000 * 60 * 60)) % 24);
-						System.out.println("Dommage " + name);
-						System.out.println("Vous avez tenu: " + minutes + " minutes " + seconds2 + " secondes.");
-						termine = "NON";
-					}
 					Timestamp timestamp_3 = new Timestamp(System.currentTimeMillis());
 					// Conversion de la durée de l'entrainement.
 					tempsTotal = timestamp_3.getTime() - timestamp_1.getTime();
+					
+					int seconds = (int) (tempsTotal / 1000) ;
+					
+					if (seconds >= time) {
+						termine = "OUI";
+					}
+					if (seconds < time) {
+						termine = "NON";
+					}
 					// Ajout dans la BDD
 					challenge.ajout(name, dateS, level, tempsTotal, termine);
 				chronoWorker.cancel(true);
@@ -311,6 +298,8 @@ public class InterfaceSession {
 			terminerButton.setVisible(true);
 			break;
 		case "Challenge":
+			terminerButton.setVisible(true);
+			continuerButton.setVisible(false);
 			labelSerie.setVisible(false);
 			labelExercice.setVisible(false);
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
@@ -328,7 +317,6 @@ public class InterfaceSession {
 				Clip clip = AudioSystem.getClip();
 				clip.open(AudioSystem.getAudioInputStream(file));
 				clip.start();
-				System.out.println("          En cours   ...   ");
 				while (!next) {
 					Thread.sleep(1000);
 				}
@@ -337,7 +325,6 @@ public class InterfaceSession {
 				exc.printStackTrace();
 			}
 			continuerButton.setVisible(false);
-			terminerButton.setVisible(true);
 			break;
 		}
 	}
@@ -589,5 +576,12 @@ public class InterfaceSession {
 
 	public void setTerminerButton(JButton terminerButton) {
 		this.terminerButton = terminerButton;
+	}
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
 	}
 }
