@@ -31,10 +31,10 @@ public class ChallengeBdd {
 	/**
 	 * Enregistrement d'un challenge
 	 *
-	 * @param name Nom de l'utilisateur
-	 * @param date Date du jour
-	 * @param type Challenge selectionné
-	 * @param time Durée du challenge réalisé
+	 * @param name    Nom de l'utilisateur
+	 * @param date    Date du jour
+	 * @param type    Challenge selectionné
+	 * @param time    Durée du challenge réalisé
 	 * @param termine Si le challenge a été terminé
 	 * 
 	 */
@@ -42,7 +42,6 @@ public class ChallengeBdd {
 	public void ajout(String name, Date date, String type, long time, String termine) {
 		String sql = "INSERT INTO Challenge(user_id,date,type,temps,termine) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?)";
 
-		
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, name);
 			pstmt.setDate(2, date);
@@ -61,13 +60,14 @@ public class ChallengeBdd {
 	 * 
 	 * @param name Nom de l'utilisateur
 	 * 
-	 * @return ArrayList Contenant la liste des challenges réalisés par l'utilisateur
+	 * @return ArrayList Contenant la liste des challenges réalisés par
+	 *         l'utilisateur
 	 */
 	public ArrayList<List<String>> affichageChallenge(String name) {
 
 		ArrayList<List<String>> challenge = new ArrayList<List<String>>();
-		String result="";
-		
+		String result = "";
+
 		String sql2 = "SELECT date, type, temps, termine FROM Challenge WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
@@ -76,21 +76,20 @@ public class ChallengeBdd {
 
 			// loop through the result set
 			while (rs.next()) {
-				List<String> listChallenge= new ArrayList<String>();
+				List<String> listChallenge = new ArrayList<String>();
 				String str = rs.getString("date");
 				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 				Date date = new Date(Long.parseLong(str));
-				
+
 				int seconds = (int) (rs.getLong("temps") / 1000) % 60;
 				int minutes = (int) ((rs.getLong("temps") / (1000 * 60)) % 60);
 				int hours = (int) ((rs.getLong("temps") / (1000 * 60 * 60)) % 24);
-				
+
 				listChallenge.add(sf.format(date));
 				listChallenge.add(rs.getString("type"));
 				listChallenge.add(minutes + " min " + seconds + " sec");
 				listChallenge.add(rs.getString("termine"));
 
-				
 				challenge.add(listChallenge);
 			}
 		} catch (SQLException e) {

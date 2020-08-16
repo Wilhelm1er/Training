@@ -14,15 +14,17 @@ public class Training {
 	private Map<String, Integer> listTraining = new LinkedHashMap<String, Integer>();
 
 	/**
-	 * Creation de la liste de l'entrainement suivant le niveau de difficulté selectionné
+	 * Creation de la liste de l'entrainement suivant le niveau de difficulté
+	 * selectionné
 	 * 
 	 * @param level Niveau de difficulté selectionné
 	 * @param type  Entrainement selectionné
 	 * 
-	 * @return listTraining Liste générée correspondant à l'entrainement et son niveau de difficulté
+	 * @return listTraining Liste générée correspondant à l'entrainement et son
+	 *         niveau de difficulté
 	 */
-	public Map<String, Integer> training(String type,String level) {
-		
+	public Map<String, Integer> training(String type, String level) {
+
 		if (type.equals("Renforcement")) {
 			switch (level) {
 			case "Débutant":
@@ -53,7 +55,8 @@ public class Training {
 				listTraining.put("Mountain Climbers", 30);
 				listTraining.put("Pompes", 20);
 				break;
-			}}
+			}
+		}
 		if (type.equals("Musculation")) {
 			switch (level) {
 			case "Numéro 1":
@@ -68,7 +71,8 @@ public class Training {
 				listTraining.put("Pompes", 15);
 				listTraining.put("Tractions", 15);
 				break;
-			}}
+			}
+		}
 		if (type.equals("Gainage")) {
 			switch (level) {
 			case "Routine 1":
@@ -85,10 +89,11 @@ public class Training {
 				listTraining.put("La Planche 1 bras 1 jambe levée gauche", 30);
 				listTraining.put("La Planche 1 bras 1 jambe levée droit", 30);
 				break;
-			}}
-		
-		return listTraining;
+			}
 		}
+
+		return listTraining;
+	}
 
 	/**
 	 * Affichage en fonction de l'intensité d'entrainement choisi
@@ -100,8 +105,8 @@ public class Training {
 	 */
 	public String affichageTraining(String level) {
 		StringBuilder str = new StringBuilder();
-		if(level==null) {
-			level="Choix";
+		if (level == null) {
+			level = "Choix";
 		}
 		switch (level) {
 		case "Choix":
@@ -131,7 +136,7 @@ public class Training {
 			str.append("\n");
 			str.append("Pompes: 5");
 			str.append("\n");
-			
+
 			break;
 		case "Intermédiaire":
 			str.append("Matériels:");

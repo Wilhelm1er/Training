@@ -24,7 +24,7 @@ import Listeners.PoidsActionListener;
 public class InterfacePoids {
 	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
 	private PoidsBdd poids = new PoidsBdd();
-	
+
 	private JPanel panelPoids = new JPanel();
 	private JPanel panelCenter = new JPanel();
 
@@ -36,9 +36,8 @@ public class InterfacePoids {
 
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
-	
-	private String name;
 
+	private String name;
 
 	/**
 	 * Panel d'affichage de l'interface relative au Poids

@@ -24,7 +24,7 @@ public class PoidsActionListener implements ActionListener {
 	 * 
 	 * @param interfacePoids Référence à l'interface relative aux Poids
 	 */
-	
+
 	public PoidsActionListener(InterfacePoids interfacePoids) {
 		this.IntPoids = interfacePoids;
 	}

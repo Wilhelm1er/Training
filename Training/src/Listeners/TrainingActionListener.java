@@ -17,7 +17,7 @@ public class TrainingActionListener implements ActionListener {
 	private InterfacePrincipale IntPrincipale = new InterfacePrincipale();
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private InterfaceSession IntSession = new InterfaceSession();
-	
+
 	private String level = "";
 
 	/**
@@ -40,9 +40,9 @@ public class TrainingActionListener implements ActionListener {
 			IntSession.setDuree_corde(IntTraining.getDureeCorde());
 			IntSession.setDuree_pause(IntTraining.getDureePause());
 			IntSession.setNbre_serie(IntTraining.getNbreSerie());
-			IntSession.getSerie().setText(" / "+IntTraining.getNbreSerie());
+			IntSession.getSerie().setText(" / " + IntTraining.getNbreSerie());
 			IntSession.session();
-			
+
 		} else if (e.getSource() == IntTraining.getComboNiveau()) {
 			Training T = new Training();
 			level = (String) IntTraining.getComboNiveau().getSelectedItem();

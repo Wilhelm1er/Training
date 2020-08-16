@@ -30,7 +30,7 @@ public class Utilisateur {
 	 * Creation d'un utilisateur
 	 *
 	 * @param name Nom de l'utilisateur
-	 * @param mdp Mot de passe de l'utilisateur
+	 * @param mdp  Mot de passe de l'utilisateur
 	 * 
 	 * @return true or false Si utilisateur connu ou non
 	 */
@@ -75,7 +75,7 @@ public class Utilisateur {
 	 * Connexion d'un utilisateur
 	 *
 	 * @param name Nom de l'utilisateur
-	 * @param mdp Mot de passe de l'utilisateur
+	 * @param mdp  Mot de passe de l'utilisateur
 	 * 
 	 * @return true or false Si connexion possible ou non
 	 */
@@ -119,10 +119,10 @@ public class Utilisateur {
 	 * @return ArrayList Liste des utilisateurs de la base de données
 	 */
 	public ArrayList<String> selectAll() {
-		
+
 		ArrayList<String> user = new ArrayList<String>();
-		String result="";
-		
+		String result = "";
+
 		String sql = "SELECT name FROM Utilisateur";
 
 		try (Connection conn = this.connect();
@@ -131,7 +131,7 @@ public class Utilisateur {
 
 			// loop through the result set
 			while (rs.next()) {
-				result=rs.getString("name") + "\t";
+				result = rs.getString("name") + "\t";
 				user.add(result);
 			}
 		} catch (SQLException e) {

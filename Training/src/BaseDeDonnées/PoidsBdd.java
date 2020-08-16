@@ -31,9 +31,9 @@ public class PoidsBdd {
 	/**
 	 * ajout poids
 	 *
-	 * @param name Nom de l'utilisateur
+	 * @param name  Nom de l'utilisateur
 	 * @param poids Poids entré par l'utilisateur
-	 * @param date Date du jour
+	 * @param date  Date du jour
 	 */
 	public void ajout(String name, Double poids, Date date) {
 
@@ -62,12 +62,12 @@ public class PoidsBdd {
 	 * 
 	 * @return Map Contenu des entrées poids pour l'utilisateur donné
 	 */
-	public Map<String,Double> user_Selected(String name) {
+	public Map<String, Double> user_Selected(String name) {
 
-		Map<String,Double> poids = new LinkedHashMap<String,Double>();
+		Map<String, Double> poids = new LinkedHashMap<String, Double>();
 		String result;
 		Double mesure;
-		
+
 		String sql2 = "SELECT Poids, Date FROM Poids WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
@@ -79,11 +79,11 @@ public class PoidsBdd {
 				String str = rs.getString("date");
 				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 				Date date = new Date(Long.parseLong(str));
-				
-				result=sf.format(date);
-				mesure=rs.getDouble("Poids");
-				
-				poids.put(result,mesure);
+
+				result = sf.format(date);
+				mesure = rs.getDouble("Poids");
+
+				poids.put(result, mesure);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

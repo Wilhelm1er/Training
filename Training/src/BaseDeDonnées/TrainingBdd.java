@@ -31,16 +31,17 @@ public class TrainingBdd {
 	/**
 	 * Enregistrement d'un entrainement
 	 *
-	 * @param name Nom de l'utilisateur
-	 * @param date Date du jour
+	 * @param name         Nom de l'utilisateur
+	 * @param date         Date du jour
 	 * @param entrainement Training effectué
-	 * @param serie Série effectué
-	 * @param rope Temps de corde à sauter
-	 * @param level Intensité de l'entrainement
-	 * @param time Temps de l'entrainement
+	 * @param serie        Série effectué
+	 * @param rope         Temps de corde à sauter
+	 * @param level        Intensité de l'entrainement
+	 * @param time         Temps de l'entrainement
 	 */
 
-	public void ajout_training(String name, Date date, String entrainement, int serie, int rope, String level, long time) {
+	public void ajout_training(String name, Date date, String entrainement, int serie, int rope, String level,
+			long time) {
 		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,tps_rope,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?,?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -57,19 +58,21 @@ public class TrainingBdd {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	/**
 	 * Enregistrement d'un entrainement musculation
 	 *
-	 * @param name Nom de l'utilisateur
-	 * @param date Date du jour
+	 * @param name         Nom de l'utilisateur
+	 * @param date         Date du jour
 	 * @param entrainement Training réalisé
-	 * @param serie Série réalisé
-	 * @param pause Temps de pause
-	 * @param level Intensité de l'entrainement
-	 * @param time Temps de l'entrainement réalisé
+	 * @param serie        Série réalisé
+	 * @param pause        Temps de pause
+	 * @param level        Intensité de l'entrainement
+	 * @param time         Temps de l'entrainement réalisé
 	 */
 
-	public void ajout_muscu(String name, Date date, String entrainement, int serie, int pause, String level, long time) {
+	public void ajout_muscu(String name, Date date, String entrainement, int serie, int pause, String level,
+			long time) {
 		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,tps_pause,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?,?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -86,16 +89,17 @@ public class TrainingBdd {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	/**
 	 * Enregistrement d'un entrainement gainage
 	 *
-	 * @param name Nom de l'utilisateur
-	 * @param date Date du jour
+	 * @param name         Nom de l'utilisateur
+	 * @param date         Date du jour
 	 * @param entrainement Training réalisé
-	 * @param serie Série réalisé
-	 * @param pause Temps de pause
-	 * @param level Intensité de l'entrainement
-	 * @param time Temps de l'entrainement réalisé
+	 * @param serie        Série réalisé
+	 * @param pause        Temps de pause
+	 * @param level        Intensité de l'entrainement
+	 * @param time         Temps de l'entrainement réalisé
 	 */
 
 	public void ajout_gainage(String name, Date date, String entrainement, int serie, String level, long time) {
@@ -114,7 +118,7 @@ public class TrainingBdd {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Affichage contenu des derniers trainings pour un utilisateur
 	 * 
@@ -127,38 +131,38 @@ public class TrainingBdd {
 		String sql2 = "SELECT date, entrainement, serie, level, tps_rope, temps,tps_pause FROM Training WHERE user_id=(SELECT user_id from Utilisateur WHERE name = ?)";
 
 		ArrayList<List<String>> training = new ArrayList<List<String>>();
-		
-		//String result="";
-		
+
+		// String result="";
+
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql2)) {
 			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
 
 			// loop through the result set
 			while (rs.next()) {
-				List<String> listTraining= new ArrayList<String>();
-				
+				List<String> listTraining = new ArrayList<String>();
+
 				String str = rs.getString("date");
 				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 				Date date = new Date(Long.parseLong(str));
-				
+
 				int seconds = (int) (rs.getLong("temps") / 1000) % 60;
 				int minutes = (int) ((rs.getLong("temps") / (1000 * 60)) % 60);
 				int hours = (int) ((rs.getLong("temps") / (1000 * 60 * 60)) % 24);
-				
+
 				listTraining.add(sf.format(date));
 				listTraining.add(rs.getString("entrainement"));
 				listTraining.add(String.valueOf(rs.getInt("serie")));
 				listTraining.add(rs.getString("level"));
-				
-				if(rs.getInt("tps_rope")!=0) {
+
+				if (rs.getInt("tps_rope") != 0) {
 					listTraining.add(String.valueOf(rs.getInt("tps_rope")));
-						}
-				if(rs.getInt("tps_pause")!=0) {
+				}
+				if (rs.getInt("tps_pause") != 0) {
 					listTraining.add(String.valueOf(rs.getInt("tps_pause")));
-					}
+				}
 				listTraining.add(minutes + " min " + seconds + " sec");
-				
+
 				training.add(listTraining);
 			}
 		} catch (SQLException e) {

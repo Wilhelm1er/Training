@@ -40,7 +40,6 @@ public class InterfaceRapports {
 	private JScrollPane scrollChallenge = new JScrollPane(tableChallenge);
 	private String name;
 
-
 	/**
 	 * Panel d'affichage de l'interface relative aux Rapports
 	 *

@@ -14,7 +14,7 @@ public class InterfacePrincipale {
 
 	private JFrame intPrincipale = new JFrame("Training App");
 	private Menu menu = new Menu();
-	
+
 	private String name;
 
 	/**

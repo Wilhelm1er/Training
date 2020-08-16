@@ -49,7 +49,7 @@ public class InterfaceSession {
 	private long diff;
 	private boolean next;
 	private File file;
-	
+
 	private int time;
 
 	private File bip = new File("resources/buzzer1.wav");
@@ -61,7 +61,7 @@ public class InterfaceSession {
 	private BaseDeDonnées.ChallengeBdd challenge = new BaseDeDonnées.ChallengeBdd();
 
 	private long tempsTotal;
-	private String termine=" ";
+	private String termine = " ";
 
 	private BaseDeDonnées.TrainingBdd TrainingBdd = new BaseDeDonnées.TrainingBdd();
 
@@ -78,9 +78,9 @@ public class InterfaceSession {
 					Timestamp timestamp_3 = new Timestamp(System.currentTimeMillis());
 					// Conversion de la durée de l'entrainement.
 					tempsTotal = timestamp_3.getTime() - timestamp_1.getTime();
-					
-					int seconds = (int) (tempsTotal / 1000) ;
-					
+
+					int seconds = (int) (tempsTotal / 1000);
+
 					if (seconds >= time) {
 						termine = "OUI";
 					}
@@ -89,8 +89,8 @@ public class InterfaceSession {
 					}
 					// Ajout dans la BDD
 					challenge.ajout(name, dateS, level, tempsTotal, termine);
-				chronoWorker.cancel(true);
-			}
+					chronoWorker.cancel(true);
+				}
 			}
 			if (!level.equals("Choix")) {
 				List = Training.training(typeTraining, level);
@@ -578,6 +578,7 @@ public class InterfaceSession {
 	public void setTerminerButton(JButton terminerButton) {
 		this.terminerButton = terminerButton;
 	}
+
 	public int getTime() {
 		return time;
 	}

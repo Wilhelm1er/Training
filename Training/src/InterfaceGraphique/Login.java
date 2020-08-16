@@ -53,7 +53,7 @@ public class Login {
 		JLabel labelMdp = new JLabel("Mot de passe:");
 		inputLogin.setSize(10, 20);
 		inputMdp.setSize(10, 20);
-		
+
 		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelMdp.setHorizontalAlignment(SwingConstants.CENTER);
 		inputMdp.setHorizontalAlignment(SwingConstants.CENTER);
@@ -64,36 +64,36 @@ public class Login {
 
 		new_user.addActionListener(new LoginActionListener(this));
 		connexion.addActionListener(new LoginActionListener(this));
-		inputMdp.addKeyListener(new KeyListener(){
+		inputMdp.addKeyListener(new KeyListener() {
 
-			
-@Override
-public void keyPressed(KeyEvent e) {
+			@Override
+			public void keyPressed(KeyEvent e) {
 
-if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
 
-	if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
-		frameLogin.dispose();
-		IntPrincipale.setName(inputLogin.getText());
-		IntPrincipale.interfacePrincipale();
+					if (user.connexion_User(inputLogin.getText(), inputMdp.getText())) {
+						frameLogin.dispose();
+						IntPrincipale.setName(inputLogin.getText());
+						IntPrincipale.interfacePrincipale();
 
-	} else {
-		erreur.setVisible(true);
-	}
+					} else {
+						erreur.setVisible(true);
+					}
 
-}
+			}
 
-@Override
-public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
-	
-}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-@Override
-public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
-	
-} });
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		JLabel labelWelcome = new JLabel("Application training");
 
@@ -108,7 +108,7 @@ public void keyReleased(KeyEvent e) {
 		frameLogin.add(panelSouth, BorderLayout.SOUTH);
 		frameLogin.add(panelCenter, BorderLayout.CENTER);
 
-		//frameLogin.getRootPane().setDefaultButton(connexion);
+		// frameLogin.getRootPane().setDefaultButton(connexion);
 
 		JLabel listUser = new JLabel("Utilisateurs connus: ");
 		listUser.setHorizontalAlignment(SwingConstants.CENTER);

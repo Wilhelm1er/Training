@@ -16,7 +16,7 @@ public class RapportsActionListener implements ActionListener {
 
 	private InterfaceRapports IntRapports = new InterfaceRapports();
 	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
-	
+
 	/**
 	 * Listener des boutons de l'interface relative aux Rapports
 	 * 
@@ -25,7 +25,7 @@ public class RapportsActionListener implements ActionListener {
 	public RapportsActionListener(InterfaceRapports interfaceRapports) {
 		this.IntRapports = interfaceRapports;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == IntRapports.getTrainingButton()) {
