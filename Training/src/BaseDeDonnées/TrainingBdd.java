@@ -110,8 +110,8 @@ public class TrainingBdd {
 			pstmt.setDate(2, date);
 			pstmt.setString(3, entrainement);
 			pstmt.setInt(4, serie);
-			pstmt.setString(6, level);
-			pstmt.setLong(7, time);
+			pstmt.setString(5, level);
+			pstmt.setLong(6, time);
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -161,7 +161,7 @@ public class TrainingBdd {
 				if (rs.getInt("tps_pause") != 0) {
 					listTraining.add(String.valueOf(rs.getInt("tps_pause")));
 				}
-				listTraining.add(minutes + " min " + seconds + " sec");
+				listTraining.add(minutes + "min " + seconds+"sec");
 
 				training.add(listTraining);
 			}

@@ -76,18 +76,20 @@ public class Training {
 		if (type.equals("Gainage")) {
 			switch (level) {
 			case "Routine 1":
-				listTraining.put("La Planche", 60);
-				listTraining.put("Superman", 60);
-				listTraining.put("La Planche Latérale Gauche", 45);
-				listTraining.put("La Planche Latérale Droite", 45);
-				listTraining.put("La Planche Dos", 60);
+				listTraining.put("Planche bras tendu 1", 60);
+				listTraining.put("Planche coude 1", 30);
+				listTraining.put("Planche un pied levé /30s", 60);
+				listTraining.put("Coté Gauche/Droite", 60);
+				listTraining.put("Planche bras tendu 2", 30);
+				listTraining.put("Planche coude 2", 60);
 				break;
 			case "Routine 2":
-				listTraining.put("La Planche", 60);
-				listTraining.put("La Planche Latérale Gauche avec torsion", 30);
-				listTraining.put("La Planche Latérale Droite avec torsion", 30);
-				listTraining.put("La Planche 1 bras 1 jambe levée gauche", 30);
-				listTraining.put("La Planche 1 bras 1 jambe levée droit", 30);
+				listTraining.put("Planche bras tendu 1", 90);
+				listTraining.put("Planche coude 1", 90);
+				listTraining.put("Planche un pied levé /45s", 90);
+				listTraining.put("Coté Gauche/Droite", 90);
+				listTraining.put("Planche bras tendu 2", 60);
+				listTraining.put("Planche coude 2", 90);
 				break;
 			}
 		}
@@ -269,15 +271,17 @@ public class Training {
 			str.append("Exercices:");
 			str.append("\n");
 			str.append("\n");
-			str.append("La Planche: 60s");
+			str.append("Planche bras tendu: 60s");
 			str.append("\n");
-			str.append("Superman: 60s");
+			str.append("Planche coude: 60s");
 			str.append("\n");
-			str.append("La Planche Latérale Gauche: 45s");
+			str.append("Planche un pied levé /30s: 60s");
 			str.append("\n");
-			str.append("La Planche Latérale Droite: 45s");
+			str.append("Coté Gauche/Droite /30sec: 60s");
 			str.append("\n");
-			str.append("La Planche Dos: 60s");
+			str.append("Planche bras tendu: 30s");
+			str.append("\n");
+			str.append("Planche coude: 60s");
 			str.append("\n");
 			break;
 		case "Routine 2":
@@ -290,15 +294,17 @@ public class Training {
 			str.append("Exercices:");
 			str.append("\n");
 			str.append("\n");
-			str.append("La Planche: 60s");
+			str.append("Planche bras tendu: 1min30");
 			str.append("\n");
-			str.append("La Planche Latérale Gauche avec torsion: 30s");
+			str.append("Planche coude: 1min30");
 			str.append("\n");
-			str.append("La Planche Latérale Droite avec torsion: 30s");
+			str.append("Planche un pied levé /45s: 1min30");
 			str.append("\n");
-			str.append("La Planche 1 bras 1 jambe levée gauche: 30s");
+			str.append("Coté Gauche/Droite /45sec: 1min30");
 			str.append("\n");
-			str.append("La Planche 1 bras 1 jambe levée droit: 30s");
+			str.append("Planche bras tendu: 45s");
+			str.append("\n");
+			str.append("Planche coude: 1min30");
 			str.append("\n");
 			break;
 		case "FBI":

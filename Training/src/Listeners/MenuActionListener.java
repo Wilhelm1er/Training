@@ -7,6 +7,7 @@ import InterfaceGraphique.Login;
 import InterfaceGraphique.InterfacePoids;
 import InterfaceGraphique.InterfaceTraining;
 import InterfaceGraphique.InterfacePrincipale;
+import InterfaceGraphique.InterfaceProfil;
 import InterfaceGraphique.InterfaceRapports;
 
 /**
@@ -21,7 +22,8 @@ public class MenuActionListener implements ActionListener {
 	private InterfaceTraining IntTraining = new InterfaceTraining();
 	private InterfacePoids IntPoids = new InterfacePoids();
 	private InterfaceRapports IntRapports = new InterfaceRapports();
-	private String name=login.getName();
+	private InterfaceProfil IntProfil = new InterfaceProfil();
+	private String name = login.getName();
 	private String typeTraining;
 
 	/**
@@ -35,7 +37,7 @@ public class MenuActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		typeTraining="";
+		typeTraining = "";
 		if (e.getSource() == IntPrincipale.getMenu().getQuitter()) {
 			System.exit(0);
 		} else if (e.getSource() == IntPrincipale.getMenu().getLogout()) {
@@ -47,42 +49,51 @@ public class MenuActionListener implements ActionListener {
 			IntPrincipale.getFrame().add(IntRapports.interfaceRapports());
 			IntPrincipale.getFrame().getContentPane().repaint();
 			IntPrincipale.getFrame().revalidate();
+		} else if (e.getSource() == IntPrincipale.getMenu().getProfil()) {
+			IntPrincipale.getFrame().getContentPane().removeAll();
+			IntProfil.setName(IntPrincipale.getName());
+			IntPrincipale.getFrame().add(IntProfil.interfaceProfil());
+			IntPrincipale.getFrame().getContentPane().repaint();
+			IntPrincipale.getFrame().revalidate();
 		} else if (e.getSource() == IntPrincipale.getMenu().getPoids()) {
-			//IntPrincipale.interfacePrincipale(name);
 			IntPrincipale.getFrame().getContentPane().removeAll();
 			IntPoids.setName(IntPrincipale.getName());
 			IntPrincipale.getFrame().add(IntPoids.interfacePoids());
 			IntPrincipale.getFrame().getContentPane().repaint();
 			IntPrincipale.getFrame().revalidate();
-			
+
 		} else if (e.getSource() == IntPrincipale.getMenu().getRenforcement()) {
-			if(!typeTraining.equals("Renforcement")){
-			typeTraining = "Renforcement";}
+			if (!typeTraining.equals("Renforcement")) {
+				typeTraining = "Renforcement";
+			}
 			IntPrincipale.getFrame().getContentPane().removeAll();
 			IntTraining.setName(IntPrincipale.getName());
 			IntPrincipale.getFrame().add(IntTraining.interfaceTraining("Renforcement"));
 			IntPrincipale.getFrame().getContentPane().repaint();
 			IntPrincipale.getFrame().revalidate();
-			
+
 		} else if (e.getSource() == IntPrincipale.getMenu().getMusculation()) {
-			if(!typeTraining.equals("Musculation")){
-			typeTraining = "Musculation";}
+			if (!typeTraining.equals("Musculation")) {
+				typeTraining = "Musculation";
+			}
 			IntPrincipale.getFrame().getContentPane().removeAll();
 			IntTraining.setName(IntPrincipale.getName());
 			IntPrincipale.getFrame().add(IntTraining.interfaceTraining("Musculation"));
 			IntPrincipale.getFrame().getContentPane().repaint();
 			IntPrincipale.getFrame().revalidate();
 		} else if (e.getSource() == IntPrincipale.getMenu().getGainage()) {
-			if(!typeTraining.equals("Gainage")){
-			typeTraining = "Gainage";}
+			if (!typeTraining.equals("Gainage")) {
+				typeTraining = "Gainage";
+			}
 			IntPrincipale.getFrame().getContentPane().removeAll();
 			IntTraining.setName(IntPrincipale.getName());
 			IntPrincipale.getFrame().add(IntTraining.interfaceTraining("Gainage"));
 			IntPrincipale.getFrame().getContentPane().repaint();
 			IntPrincipale.getFrame().revalidate();
 		} else if (e.getSource() == IntPrincipale.getMenu().getChallenge()) {
-			if(!typeTraining.equals("Challenge")){
-			typeTraining = "Challenge";}
+			if (!typeTraining.equals("Challenge")) {
+				typeTraining = "Challenge";
+			}
 			IntPrincipale.getFrame().getContentPane().removeAll();
 			IntTraining.setName(IntPrincipale.getName());
 			IntPrincipale.getFrame().add(IntTraining.interfaceTraining("Challenge"));

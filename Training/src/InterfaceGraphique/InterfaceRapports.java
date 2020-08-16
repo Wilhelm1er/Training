@@ -5,11 +5,12 @@ import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -24,12 +25,12 @@ import BaseDeDonnées.TrainingBdd;
  */
 
 public class InterfaceRapports {
-	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
+	private InterfacePrincipale IntPrincipale = new InterfacePrincipale();
 	private TrainingBdd trainingBdd = new TrainingBdd();
 	private ChallengeBdd challengeBdd = new ChallengeBdd();
 
 	private JPanel panelRapports = new JPanel();
-	private JPanel panelNorthChoix = new JPanel();
+	//private JPanel panelNorthChoix = new JPanel();
 
 	private JButton trainingButton = new JButton("Training");
 	private JButton challengeButton = new JButton("Challenge");
@@ -49,13 +50,11 @@ public class InterfaceRapports {
 
 		panelRapports.removeAll();
 
-		panelRapports.setLayout(new BorderLayout());
-		panelRapports.add(panelNorthChoix, BorderLayout.NORTH);
+		//panelRapports.setLayout(new BorderLayout());
+		//panelRapports.add(panelNorthChoix, BorderLayout.NORTH);
 
-		// panelWest.setLayout(new GridLayout(20,1));
-
-		panelNorthChoix.add(trainingButton);
-		panelNorthChoix.add(challengeButton);
+		//panelNorthChoix.add(trainingButton);
+		//panelNorthChoix.add(challengeButton);
 
 		String[] colTraining = new String[] { "Date", "type", "Série", "Level", "Corde/Pause", "Temps" };
 
@@ -63,14 +62,16 @@ public class InterfaceRapports {
 
 		modelTraining.setColumnIdentifiers(colTraining);
 
-		scrollTraining.setPreferredSize(new Dimension(500, 300));
+		scrollTraining.setPreferredSize(new Dimension(500, 200));
 
 		DefaultTableCellRenderer custom = new DefaultTableCellRenderer();
 		custom.setHorizontalAlignment(SwingConstants.CENTER); // centre les données de ton tableau
-
-		for (List<String> d : trainingBdd.affichageTraining(IntGraphique.getName())) {
+		/*
+		 * for (List<String> d : trainingBdd.affichageTraining(name)) {
+		 * System.out.println(d); }
+		 */
+		for (List<String> d : trainingBdd.affichageTraining(name)) {
 			modelTraining.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });
-
 		}
 		tableTraining.setModel(modelTraining);
 
@@ -90,13 +91,17 @@ public class InterfaceRapports {
 
 		modelChallenge.setColumnIdentifiers(colChallenge);
 
-		scrollChallenge.setPreferredSize(new Dimension(500, 300));
+		scrollChallenge.setPreferredSize(new Dimension(500, 200));
 
-		for (List<String> d : challengeBdd.affichageChallenge(IntGraphique.getName())) {
+		for (List<String> d : challengeBdd.affichageChallenge(name)) {
 			modelChallenge.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3) });
 		}
 		tableChallenge.setModel(modelChallenge);
-
+		panelRapports.add(scrollTraining);
+		panelRapports.add(scrollChallenge);
+		
+		panelRapports.revalidate();
+		
 		return panelRapports;
 	}
 
@@ -126,5 +131,24 @@ public class InterfaceRapports {
 
 	public JScrollPane getScrollChallenge() {
 		return scrollChallenge;
+	}
+	/**
+	 * Test de l'interface Session
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				InterfaceRapports intR = new InterfaceRapports();
+				JFrame s = new JFrame();
+				s.setSize(600, 500);
+				s.setLocationRelativeTo(null);
+				s.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+				s.setVisible(true);
+				s.add(intR.interfaceRapports());
+			}
+		});
 	}
 }

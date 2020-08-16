@@ -29,7 +29,6 @@ public class SessionActionListener implements ActionListener {
 			IntSession.setNext(true);
 
 		} else if (e.getSource() == IntSession.getTerminerButton()) {
-			IntSession.setNext(true);
 			cR.setTime(IntSession.getTime());
 			cR.setTimestamp_1(IntSession.getTimestamp_1());
 			cR.setLevel(IntSession.getLevel());

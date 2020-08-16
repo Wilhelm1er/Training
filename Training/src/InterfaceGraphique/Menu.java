@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
  */
 public class Menu {
 
+	JMenuItem profil = new JMenuItem("Profil");
 	JMenuItem rapports = new JMenuItem("Rapports");
 	JMenuItem poids = new JMenuItem("Suivi du poids");
 	JMenuItem logout = new JMenuItem("Fermer la session");
@@ -36,6 +37,7 @@ public class Menu {
 
 		JMenu menuTraining = new JMenu("Entrainement");
 
+		menuUser.add(profil);
 		menuUser.add(rapports);
 		menuUser.add(poids);
 
@@ -92,6 +94,13 @@ public class Menu {
 
 	public void setMenuUser(String name) {
 		this.menuUser = new JMenu(name);
+	}
+	public JMenuItem getProfil() {
+		return profil;
+	}
+
+	public void setProfil(JMenuItem profil) {
+		this.profil = profil;
 	}
 
 }

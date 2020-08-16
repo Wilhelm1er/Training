@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -103,19 +104,14 @@ public class InterfaceSession {
 
 				switch (typeTraining) {
 				case "Renforcement":
-					// Ajout training dans la BDD
 					TrainingBdd.ajout_training(name, dateS, typeTraining, nbreSerie, dureeCorde, level, tempsTotal);
 					break;
 				case "Musculation":
-					// Ajout training dans la BDD
 					TrainingBdd.ajout_muscu(name, dateS, typeTraining, nbreSerie, dureePause, level, tempsTotal);
 					break;
 				case "Gainage":
-					// Ajout training dans la BDD
-
 					TrainingBdd.ajout_gainage(name, dateS, typeTraining, nbreSerie, level, tempsTotal);
 					break;
-
 				}
 				chronoWorker.cancel(true);
 			}
@@ -154,7 +150,6 @@ public class InterfaceSession {
 	 *
 	 */
 	public void session() {
-		// frameSession.getContentPane().removeAll();
 		panelPrincipal.setLayout(new BorderLayout());
 		frameSession.setSize(400, 300);
 		frameSession.setLocationRelativeTo(null);
@@ -179,6 +174,10 @@ public class InterfaceSession {
 		panelCenter.add(labelCurrent);
 		panelCenter.add(timeCurrent);
 
+		labelSerie.setVisible(false);
+		labelExercice.setVisible(false);
+		serie.setVisible(false);
+		exercice.setVisible(false);
 		continuerButton.setVisible(false);
 		terminerButton.setVisible(false);
 
@@ -204,9 +203,12 @@ public class InterfaceSession {
 
 		switch (typeTraining) {
 		case "Renforcement":
+			labelSerie.setVisible(true);
+			labelExercice.setVisible(true);
+			serie.setVisible(true);
+			exercice.setVisible(true);
 			// Temps de debut d'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
-
 			for (int i = 1; i <= nbreSerie; i++) {
 				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
@@ -236,6 +238,10 @@ public class InterfaceSession {
 
 			break;
 		case "Musculation":
+			labelSerie.setVisible(true);
+			labelExercice.setVisible(true);
+			serie.setVisible(true);
+			exercice.setVisible(true);
 			// Temps de debut d'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
 			panelCenter.setLayout(new GridLayout(5, 2));
@@ -274,6 +280,10 @@ public class InterfaceSession {
 			terminerButton.setVisible(true);
 			break;
 		case "Gainage":
+			labelSerie.setVisible(true);
+			labelExercice.setVisible(true);
+			serie.setVisible(true);
+			exercice.setVisible(true);
 			continuerButton.setVisible(false);
 			// Temps de debut d'entrainement
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
@@ -283,13 +293,18 @@ public class InterfaceSession {
 				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
 				for (String mapentry : List.keySet()) {
+					/*for (int k = 1; k <= 6; k++) {
+					String path=new String("resources/ImgGainage/Img"+k+".png");
+					JLabel imgGainage = new JLabel(new ImageIcon(path));
+					imgGainage.setSize(50,100);*/
 					exercice.setText(mapentry);
 					panelPrincipal.repaint();
 					labelCurrent.setText("Durée: ");
 					timeCurrent.setText("" + Training.training(typeTraining, level).get(mapentry));
 					this.exercice(Training.training(typeTraining, level).get(mapentry));
+					/*panelPrincipal.add(imgGainage);*/
 					panelPrincipal.repaint();
-					this.pause(5);
+					/*}*/
 				}
 				if (i < nbreSerie) {
 					labelCurrent.setText("Pause de 3min ");
@@ -299,12 +314,13 @@ public class InterfaceSession {
 			terminerButton.setVisible(true);
 			break;
 		case "Challenge":
+			serie.setVisible(false);
 			terminerButton.setVisible(true);
 			continuerButton.setVisible(false);
 			labelSerie.setVisible(false);
 			labelExercice.setVisible(false);
 			timestamp_1 = new Timestamp(System.currentTimeMillis());
-			next = false;
+			
 			if (level == "FBI") {
 				file = new File("resources/Thunderstruck.wav");
 				// durée du challenge
@@ -318,9 +334,6 @@ public class InterfaceSession {
 				Clip clip = AudioSystem.getClip();
 				clip.open(AudioSystem.getAudioInputStream(file));
 				clip.start();
-				while (!next) {
-					Thread.sleep(1000);
-				}
 				clip.stop();
 			} catch (Exception exc) {
 				exc.printStackTrace();

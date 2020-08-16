@@ -22,7 +22,7 @@ import Listeners.PoidsActionListener;
  */
 
 public class InterfacePoids {
-	private InterfacePrincipale IntGraphique = new InterfacePrincipale();
+	private InterfacePrincipale intPrincipale = new InterfacePrincipale();
 	private PoidsBdd poids = new PoidsBdd();
 
 	private JPanel panelPoids = new JPanel();
@@ -56,7 +56,7 @@ public class InterfacePoids {
 		panelPoids.add(panelNorth, BorderLayout.NORTH);
 		panelPoids.add(panelCenter, BorderLayout.CENTER);
 
-		panelNorth.add(dataPoidsButton);
+		//panelNorth.add(dataPoidsButton);
 
 		String[] colonne = new String[] { "Date", "Poids" };
 
@@ -64,7 +64,7 @@ public class InterfacePoids {
 
 		model.setColumnIdentifiers(colonne);
 
-		scroll.setPreferredSize(new Dimension(550, 300));
+		scroll.setPreferredSize(new Dimension(400, 300));
 
 		JLabel labelPoids = new JLabel("Entrer votre poids: ");
 
@@ -75,12 +75,13 @@ public class InterfacePoids {
 		panelNorth.add(textePoids);
 		panelNorth.add(ajoutPoids);
 
-		for (String d : poids.user_Selected(IntGraphique.getName()).keySet()) {
-			model.addRow(new Object[] { d, poids.user_Selected(IntGraphique.getName()).get(d) });
+		for (String d : poids.user_Selected(name).keySet()) {
+			model.addRow(new Object[] { d, poids.user_Selected(name).get(d) });
 
 		}
 		table.setModel(model);
 
+		panelCenter.add(scroll);
 		panelPoids.revalidate();
 
 		return panelPoids;

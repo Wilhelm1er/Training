@@ -76,7 +76,6 @@ public class CompteRendu {
 
 		panelPrincipal.repaint();
 
-		// frameCR.pack();
 		frameCR.revalidate();
 	}
 
