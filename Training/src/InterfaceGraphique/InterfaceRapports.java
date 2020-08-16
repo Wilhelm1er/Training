@@ -2,8 +2,6 @@ package InterfaceGraphique;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -11,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -68,7 +67,7 @@ public class InterfaceRapports {
 		scrollTraining.setPreferredSize(new Dimension(500, 300));
 
 		DefaultTableCellRenderer custom = new DefaultTableCellRenderer();
-		custom.setHorizontalAlignment(JLabel.CENTER); // centre les données de ton tableau
+		custom.setHorizontalAlignment(SwingConstants.CENTER); // centre les données de ton tableau
 
 		for (List<String> d : trainingBdd.affichageTraining(IntGraphique.getName())) {
 			modelTraining.addRow(new Object[] { d.get(0), d.get(1), d.get(2), d.get(3), d.get(4), d.get(5) });

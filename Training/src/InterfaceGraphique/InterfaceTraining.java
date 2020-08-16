@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import Listeners.TrainingActionListener;
 
@@ -125,9 +126,9 @@ public class InterfaceTraining {
 		panelSouth.add(labelOk);
 		panelSouth.add(okButton);
 
-		inputCorde.setHorizontalAlignment(JTextField.CENTER);
-		inputPause.setHorizontalAlignment(JTextField.CENTER);
-		inputSerie.setHorizontalAlignment(JTextField.CENTER);
+		inputCorde.setHorizontalAlignment(SwingConstants.CENTER);
+		inputPause.setHorizontalAlignment(SwingConstants.CENTER);
+		inputSerie.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panelWest.add(comboNiveau);
 

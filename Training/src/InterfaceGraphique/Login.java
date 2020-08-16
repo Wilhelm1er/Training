@@ -5,15 +5,14 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import BaseDeDonnées.Utilisateur;
 import Listeners.LoginActionListener;
@@ -43,7 +42,7 @@ public class Login {
 		frameLogin.setLayout(new BorderLayout());
 		frameLogin.setSize(300, 300);
 		frameLogin.setLocationRelativeTo(null);
-		frameLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameLogin.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frameLogin.setVisible(true);
 
 		JPanel panelNorth = new JPanel();
@@ -68,6 +67,7 @@ public class Login {
 		inputMdp.addKeyListener(new KeyListener(){
 
 			
+@Override
 public void keyPressed(KeyEvent e) {
 
 if (e.getKeyCode() == KeyEvent.VK_ENTER)

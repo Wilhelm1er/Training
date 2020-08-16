@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 
 import Application.Training;
 import Listeners.SessionActionListener;
@@ -157,7 +158,7 @@ public class InterfaceSession {
 		panelPrincipal.setLayout(new BorderLayout());
 		frameSession.setSize(400, 300);
 		frameSession.setLocationRelativeTo(null);
-		frameSession.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frameSession.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frameSession.setVisible(true);
 		frameSession.revalidate();
 

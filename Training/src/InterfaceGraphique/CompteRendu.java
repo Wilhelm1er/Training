@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class CompteRendu {
 	private JFrame frameCR = new JFrame("Compte rendu");
@@ -33,7 +34,7 @@ public class CompteRendu {
 		panelPrincipal.setLayout(new GridLayout(4, 2));
 		frameCR.setSize(400, 300);
 		frameCR.setLocationRelativeTo(null);
-		frameCR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frameCR.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frameCR.setVisible(true);
 		frameCR.revalidate();
 		

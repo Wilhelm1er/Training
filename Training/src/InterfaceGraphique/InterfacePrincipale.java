@@ -1,6 +1,7 @@
 package InterfaceGraphique;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import Listeners.MenuActionListener;
 
@@ -27,7 +28,7 @@ public class InterfacePrincipale {
 
 		intPrincipale.setSize(600, 500);
 		intPrincipale.setLocationRelativeTo(null);
-		intPrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		intPrincipale.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		intPrincipale.setVisible(true);
 
 		intPrincipale.revalidate();
