@@ -39,6 +39,8 @@ Lancement temporaire à partir du Main
   - Ajout training xav
 - Menu à propos, renvoyant vers git
 - Ajout autres activités
+- Bugs:
+  - Temps continue, si changement entrainement apres affichage fenetre Session
 
 ## Contributeurs
 
