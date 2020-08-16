@@ -24,7 +24,6 @@ Lancement temporaire à partir du Main
 
 ## Roadmap
 
-- Pause à tout moment
 - Rapport:
   - statistique
   - Bug affichage rapports
