@@ -34,13 +34,10 @@ public class InterfaceTraining {
 	private JComboBox<String> comboNiveau = new JComboBox<String>();
 	private JLabel niveau = new JLabel("");
 
-	private int dureeCorde;
-	private int dureePause;
 	private int nbreSerie;
 	private JLabel labelOk = new JLabel("Lancer session:");
 	private JButton okButton = new JButton("OK");
 	private String name;
-
 
 	/**
 	 * Panel d'affichage de l'interface relative aux Trainings
@@ -49,9 +46,9 @@ public class InterfaceTraining {
 	 * @return panel de l'interface relative aux Trainings
 	 */
 	public JPanel interfaceTraining(String type) {
-		typeTraining=type;
+		typeTraining = type;
 		panelTraining.removeAll();
-		
+
 		panelTraining.setLayout(new BorderLayout());
 		JPanel panelNorth = new JPanel();
 		JPanel panelWest = new JPanel();
@@ -145,6 +142,7 @@ public class InterfaceTraining {
 	public JComboBox<String> getComboNiveau() {
 		return comboNiveau;
 	}
+
 	public String getComboNiveauItem() {
 		return (String) comboNiveau.getSelectedItem();
 	}
@@ -153,15 +151,6 @@ public class InterfaceTraining {
 		return okButton;
 	}
 
-	
-	  public void processTraining(int time) { JLabel timer = new JLabel();
-	  
-	  panelCenterTRaining.add(timer); for (int i = 0; i < time; i--) { time--;
-	  timer.setText(String.valueOf(time));
-	  
-	  panelTraining.revalidate(); } }
-	 
-
 	public JPanel getPanelCenterTRaining() {
 		return panelCenterTRaining;
 	}
@@ -169,6 +158,7 @@ public class InterfaceTraining {
 	public int getDureeCorde() {
 		return Integer.parseInt(inputCorde.getText());
 	}
+
 	public int getDureePause() {
 		return Integer.parseInt(inputPause.getText());
 	}

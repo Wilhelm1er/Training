@@ -40,7 +40,7 @@ public class TrainingActionListener implements ActionListener {
 			IntSession.setDuree_corde(IntTraining.getDureeCorde());
 			IntSession.setDuree_pause(IntTraining.getDureePause());
 			IntSession.setNbre_serie(IntTraining.getNbreSerie());
-			IntSession.getSerie().setText(" / "+IntTraining.getNbreSerie());;
+			IntSession.getSerie().setText(" / "+IntTraining.getNbreSerie());
 			IntSession.session();
 			
 		} else if (e.getSource() == IntTraining.getComboNiveau()) {

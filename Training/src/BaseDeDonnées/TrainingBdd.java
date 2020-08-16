@@ -58,7 +58,7 @@ public class TrainingBdd {
 		}
 	}
 	/**
-	 * Enregistrement d'un entrainement musculation ou gainage
+	 * Enregistrement d'un entrainement musculation
 	 *
 	 * @param name Nom de l'utilisateur
 	 * @param date Date du jour
@@ -69,7 +69,7 @@ public class TrainingBdd {
 	 * @param time Temps de l'entrainement réalisé
 	 */
 
-	public void ajout_autre(String name, Date date, String entrainement, int serie, int pause, String level, long time) {
+	public void ajout_muscu(String name, Date date, String entrainement, int serie, int pause, String level, long time) {
 		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,tps_pause,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?,?)";
 
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -78,6 +78,34 @@ public class TrainingBdd {
 			pstmt.setString(3, entrainement);
 			pstmt.setInt(4, serie);
 			pstmt.setInt(5, pause);
+			pstmt.setString(6, level);
+			pstmt.setLong(7, time);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	/**
+	 * Enregistrement d'un entrainement gainage
+	 *
+	 * @param name Nom de l'utilisateur
+	 * @param date Date du jour
+	 * @param entrainement Training réalisé
+	 * @param serie Série réalisé
+	 * @param pause Temps de pause
+	 * @param level Intensité de l'entrainement
+	 * @param time Temps de l'entrainement réalisé
+	 */
+
+	public void ajout_gainage(String name, Date date, String entrainement, int serie, String level, long time) {
+		String sql = "INSERT INTO Training(user_id,date,entrainement,serie,level,temps) VALUES((SELECT user_id from Utilisateur WHERE name = ?),?,?,?,?,?)";
+
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, name);
+			pstmt.setDate(2, date);
+			pstmt.setString(3, entrainement);
+			pstmt.setInt(4, serie);
 			pstmt.setString(6, level);
 			pstmt.setLong(7, time);
 			pstmt.executeUpdate();

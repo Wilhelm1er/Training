@@ -299,13 +299,13 @@ public class Training {
 		case "FBI":
 			str.append("Challenge FBI");
 			str.append("\n");
-			str.append("Durée 3 min 31");
+			str.append("Durée 4 min 50");
 			str.append("\n");
 			break;
 		case "Pompiers":
 			str.append("Challenge Pompiers");
 			str.append("\n");
-			str.append("Durée 4 min 50");
+			str.append("Durée 3 min 31");
 			str.append("\n");
 			break;
 		default:

@@ -39,7 +39,6 @@ public class InterfaceSession {
 	private JLabel labelSerieMuscu = new JLabel("Série: ");
 	private JButton demarrerButton = new JButton("Démarrer");
 	private JButton continuerButton = new JButton("Continuer");
-	private JButton pauseButton = new JButton("Pause");
 	private JButton terminerButton = new JButton("Terminer");
 	private String name;
 	private String level;
@@ -48,6 +47,9 @@ public class InterfaceSession {
 	private int nbreSerie;
 	private long diff;
 	private boolean next;
+	private File file;
+	private String termine=" ";
+	private int time;
 
 	private File bip = new File("resources/buzzer1.wav");
 	private Timestamp timestamp_1 = new Timestamp(System.currentTimeMillis());
@@ -55,6 +57,7 @@ public class InterfaceSession {
 	private Training Training = new Training();
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
+	private BaseDeDonnées.ChallengeBdd challenge = new BaseDeDonnées.ChallengeBdd();
 
 	private long tempsTotal;
 
@@ -65,6 +68,42 @@ public class InterfaceSession {
 		@Override
 		protected Object doInBackground() throws Exception {
 
+			if (typeTraining.equals("Challenge")) {
+				if (level.equals("Pompiers")) {
+					chronoWorker.execute();
+					sessionTraining();
+					
+					// Prise de l'instant de fin de l'entrainement
+					Timestamp timestamp_2 = new Timestamp(System.currentTimeMillis());
+
+					System.out.println("Session TERMINEE");
+					System.out.println(" ");
+
+					// Conversion de la durée de l'entrainement.
+					long diff = timestamp_2.getTime() - timestamp_1.getTime();
+
+					int seconds = (int) (diff / 1000) ;
+
+					if (seconds >= time) {
+						System.out.println("Félicitation " + name);
+						termine = "OUI";
+					}
+					if (seconds < time) {
+						int seconds2 = (int) (diff / 1000) % 60;
+						int minutes = (int) ((diff / (1000 * 60)) % 60);
+						int hours = (int) ((diff / (1000 * 60 * 60)) % 24);
+						System.out.println("Dommage " + name);
+						System.out.println("Vous avez tenu: " + minutes + " minutes " + seconds2 + " secondes.");
+						termine = "NON";
+					}
+					Timestamp timestamp_3 = new Timestamp(System.currentTimeMillis());
+					// Conversion de la durée de l'entrainement.
+					tempsTotal = timestamp_3.getTime() - timestamp_1.getTime();
+					// Ajout dans la BDD
+					challenge.ajout(name, dateS, level, tempsTotal, termine);
+				chronoWorker.cancel(true);
+			}
+			}
 			if (!level.equals("Choix")) {
 				List = Training.training(typeTraining, level);
 				chronoWorker.execute();
@@ -73,8 +112,6 @@ public class InterfaceSession {
 				Timestamp timestamp_3 = new Timestamp(System.currentTimeMillis());
 				// Conversion de la durée de l'entrainement.
 				tempsTotal = timestamp_3.getTime() - timestamp_1.getTime();
-				
-				// System.out.println(h + ":" + min + ":" + sec);
 
 				switch (typeTraining) {
 				case "Renforcement":
@@ -83,24 +120,21 @@ public class InterfaceSession {
 					break;
 				case "Musculation":
 					// Ajout training dans la BDD
-					TrainingBdd.ajout_autre(name, dateS, typeTraining, nbreSerie, dureePause, level, tempsTotal);
+					TrainingBdd.ajout_muscu(name, dateS, typeTraining, nbreSerie, dureePause, level, tempsTotal);
 					break;
 				case "Gainage":
 					// Ajout training dans la BDD
-					// BUG CAR PAS DE DUREE DE CORDE DANS L EXO GAINAGE
 
-					TrainingBdd.ajout_training(name, dateS, typeTraining, nbreSerie, dureeCorde, level, tempsTotal);
+					TrainingBdd.ajout_gainage(name, dateS, typeTraining, nbreSerie, level, tempsTotal);
 					break;
 
 				}
 				chronoWorker.cancel(true);
-			} else {
-				//
-
 			}
 			return null;
 		}
 	};
+
 	public long getTempsTotal() {
 		return tempsTotal;
 	}
@@ -157,11 +191,9 @@ public class InterfaceSession {
 		panelCenter.add(labelCurrent);
 		panelCenter.add(timeCurrent);
 
-		pauseButton.setVisible(false);
 		continuerButton.setVisible(false);
 		terminerButton.setVisible(false);
 
-		panelSouth.add(pauseButton);
 		panelSouth.add(continuerButton);
 		panelSouth.add(demarrerButton);
 
@@ -171,7 +203,6 @@ public class InterfaceSession {
 
 		continuerButton.addActionListener(new SessionActionListener(this));
 		demarrerButton.addActionListener(new SessionActionListener(this));
-		pauseButton.addActionListener(new SessionActionListener(this));
 		terminerButton.addActionListener(new SessionActionListener(this));
 
 		frameSession.add(panelPrincipal);
@@ -181,7 +212,6 @@ public class InterfaceSession {
 
 	public void sessionTraining() throws InterruptedException {
 		demarrerButton.setVisible(false);
-		pauseButton.setVisible(true);
 		continuerButton.setVisible(true);
 
 		switch (typeTraining) {
@@ -192,7 +222,6 @@ public class InterfaceSession {
 			for (int i = 1; i <= nbreSerie; i++) {
 				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
-
 				for (String mapentry : List.keySet()) {
 					next = false;
 					this.corde_a_sauter();
@@ -214,57 +243,100 @@ public class InterfaceSession {
 			}
 			this.corde_a_sauter();
 
-			pauseButton.setVisible(false);
 			continuerButton.setVisible(false);
 			terminerButton.setVisible(true);
 
 			break;
 		case "Musculation":
+			// Temps de debut d'entrainement
+			timestamp_1 = new Timestamp(System.currentTimeMillis());
 			panelCenter.setLayout(new GridLayout(5, 2));
 			typeTraining = "Musculation";
 			panelPrincipal.repaint();
 			for (int i = 1; i <= nbreSerie; i++) {
 				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
-			for (String mapentry : List.keySet()) {
-				for(int j=1;j<7;j++) {
-					
-				next = false;
-				panelCenter.add(labelSerieMuscu);
-				panelCenter.add(serieMuscu);
-				serieMuscu.setText(j+" / 6");
-				panelPrincipal.repaint();
-				timeCurrent.setText("");
-				exercice.setText(mapentry);
-				panelPrincipal.repaint();
-				labelCurrent.setText("Répétitions: ");
-				timeCurrent.setText("" + Training.training(typeTraining, level).get(mapentry));
-				panelPrincipal.repaint();
-				while (!next) {
-					Thread.sleep(1000);
-				}
-				exercice.setText("Pause");
-				this.pause(dureePause);
-			}
-			}
-			if (i < nbreSerie) {
-				labelCurrent.setText("Pause de 3min ");
-				this.pause(180);
-			}
-		}
+				for (String mapentry : List.keySet()) {
+					for (int j = 1; j < 7; j++) {
 
-		pauseButton.setVisible(false);
-		continuerButton.setVisible(false);
-		terminerButton.setVisible(true);
+						next = false;
+						panelCenter.add(labelSerieMuscu);
+						panelCenter.add(serieMuscu);
+						serieMuscu.setText(j + " / 6");
+						panelPrincipal.repaint();
+						timeCurrent.setText("");
+						exercice.setText(mapentry);
+						panelPrincipal.repaint();
+						labelCurrent.setText("Répétitions: ");
+						timeCurrent.setText("" + Training.training(typeTraining, level).get(mapentry));
+						panelPrincipal.repaint();
+						while (!next) {
+							Thread.sleep(1000);
+						}
+						this.pause(dureePause);
+					}
+				}
+				if (i < nbreSerie) {
+					labelCurrent.setText("Pause de 3min ");
+					this.pause(180);
+				}
+			}
+
+			continuerButton.setVisible(false);
+			terminerButton.setVisible(true);
 			break;
 		case "Gainage":
+			continuerButton.setVisible(false);
+			// Temps de debut d'entrainement
+			timestamp_1 = new Timestamp(System.currentTimeMillis());
 			typeTraining = "Gainage";
 			panelPrincipal.repaint();
 			for (int i = 1; i <= nbreSerie; i++) {
 				serie.setText(i + " / " + nbreSerie);
 				panelPrincipal.repaint();
+				for (String mapentry : List.keySet()) {
+					exercice.setText(mapentry);
+					panelPrincipal.repaint();
+					labelCurrent.setText("Durée: ");
+					timeCurrent.setText("" + Training.training(typeTraining, level).get(mapentry));
+					this.exercice(Training.training(typeTraining, level).get(mapentry));
+					panelPrincipal.repaint();
+					this.pause(5);
+				}
+				if (i < nbreSerie) {
+					labelCurrent.setText("Pause de 3min ");
+					this.pause(180);
+				}
 			}
-
+			terminerButton.setVisible(true);
+			break;
+		case "Challenge":
+			labelSerie.setVisible(false);
+			labelExercice.setVisible(false);
+			timestamp_1 = new Timestamp(System.currentTimeMillis());
+			next = false;
+			if (level == "FBI") {
+				file = new File("resources/Thunderstruck.wav");
+				// durée du challenge
+				time = 292;
+			}
+			if (level == "Pompiers") {
+				file = new File("resources/BringSallyUp.wav");
+				time = 211;
+			}
+			try {
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(file));
+				clip.start();
+				System.out.println("          En cours   ...   ");
+				while (!next) {
+					Thread.sleep(1000);
+				}
+				clip.stop();
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
+			continuerButton.setVisible(false);
 			terminerButton.setVisible(true);
 			break;
 		}
@@ -319,6 +391,26 @@ public class InterfaceSession {
 	}
 
 	/**
+	 * Methode pour creer un temps d'exercice
+	 * 
+	 * @param time Temps en secondes.
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void exercice(int time) throws InterruptedException {
+
+		for (int i = time; i > 0; i--) {
+			labelCurrent.setText("Temps restant");
+			timeCurrent.setText("" + i);
+			panelPrincipal.repaint();
+			Thread.sleep(1000);
+			if (i == 5) {
+				this.bip();
+			}
+		}
+	}
+
+	/**
 	 * Methode pour jouer le bip sonore
 	 * 
 	 */
@@ -358,14 +450,6 @@ public class InterfaceSession {
 
 	public void setDemarrerButton(JButton demarrerButton) {
 		this.demarrerButton = demarrerButton;
-	}
-
-	public JButton getPauseButton() {
-		return pauseButton;
-	}
-
-	public void setPauseButton(JButton pause) {
-		pauseButton = pause;
 	}
 
 	public JPanel getPanelPrincipal() {
