@@ -29,20 +29,13 @@ Lancement temporaire à partir du Main
   - statistique
   - Bug affichage rapports
   - Entrer ou supprimer ligne rapports, poids
-- Interface graphique
-  - gestion training
-- Bugs:
-  - musculation: temps pause?, repos avant pause, modif db
 - Compte rendu fin exo
 - Training:
-  - Modification musculation
   - Ajout training xav
-  - Création Timer
 - Gestion utilisateurs
   - Modification mot de passe
 - Menu à propos, renvoyant vers git
 - Ajout autres activités
-  
 
 ## Contributeurs
 
