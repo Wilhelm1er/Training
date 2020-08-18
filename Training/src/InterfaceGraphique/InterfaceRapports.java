@@ -19,7 +19,7 @@ import BaseDeDonnées.ChallengeBdd;
 import BaseDeDonnées.TrainingBdd;
 
 /**
- * Interface relative au Poids
+ * Interface relative aux rapports d'activités réalisées
  * 
  * @author Wilhelm1er
  */
@@ -31,7 +31,7 @@ public class InterfaceRapports {
 
 	private JPanel panelRapports = new JPanel();
 	//private JPanel panelNorthChoix = new JPanel();
-
+	
 	private JButton trainingButton = new JButton("Training");
 	private JButton challengeButton = new JButton("Challenge");
 

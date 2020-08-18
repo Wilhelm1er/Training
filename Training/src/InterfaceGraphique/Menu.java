@@ -20,6 +20,7 @@ public class Menu {
 	JMenuItem musculation = new JMenuItem("Musculation");
 	JMenuItem gainage = new JMenuItem("Gainage");
 	JMenuItem challenge = new JMenuItem("Challenge");
+	JMenuItem git = new JMenuItem("Git");
 
 	private JMenu menuUser = new JMenu();
 
@@ -34,8 +35,8 @@ public class Menu {
 		JMenuBar menuBar = new JMenuBar();
 
 		JMenu menuFichier = new JMenu("Fichier");
-
 		JMenu menuTraining = new JMenu("Entrainement");
+		JMenu help = new JMenu("Help");
 
 		menuUser.add(profil);
 		menuUser.add(rapports);
@@ -48,10 +49,13 @@ public class Menu {
 		menuTraining.add(musculation);
 		menuTraining.add(gainage);
 		menuTraining.add(challenge);
+		
+		help.add(git);
 
 		menuBar.add(menuFichier);
 		menuBar.add(menuUser);
 		menuBar.add(menuTraining);
+		menuBar.add(help);
 
 		return menuBar;
 	}
@@ -103,4 +107,11 @@ public class Menu {
 		this.profil = profil;
 	}
 
+	public JMenuItem getGit() {
+		return git;
+	}
+
+	public void setGit(JMenuItem git) {
+		this.git = git;
+	}
 }

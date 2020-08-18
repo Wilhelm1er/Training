@@ -1,7 +1,11 @@
 package Listeners;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import InterfaceGraphique.Login;
 import InterfaceGraphique.InterfacePoids;
@@ -99,6 +103,18 @@ public class MenuActionListener implements ActionListener {
 			IntPrincipale.getFrame().add(IntTraining.interfaceTraining("Challenge"));
 			IntPrincipale.getFrame().getContentPane().repaint();
 			IntPrincipale.getFrame().revalidate();
+		}
+		else if (e.getSource() == IntPrincipale.getMenu().getGit()) {
+			
+	            try {
+					Desktop.getDesktop().browse(new URI("https://github.com/Wilhelm1er/Training"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		}
 	}
 }

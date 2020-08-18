@@ -61,15 +61,21 @@ public class Training {
 			switch (level) {
 			case "Numéro 1":
 				listTraining.put("Dips", 5);
-				listTraining.put("Pompes pieds surélevés", 10);
-				listTraining.put("Pompes", 10);
-				listTraining.put("Tractions", 10);
+				listTraining.put("Pompes pieds surélevés", 5);
+				listTraining.put("Pompes", 5);
+				listTraining.put("Tractions", 5);
 				break;
 			case "Numéro 2":
+				listTraining.put("Dips", 7);
+				listTraining.put("Pompes pieds surélevés", 10);
+				listTraining.put("Pompes", 10);
+				listTraining.put("Tractions", 7);
+				break;
+			case "Numéro 3":
 				listTraining.put("Dips", 10);
 				listTraining.put("Pompes pieds surélevés", 15);
 				listTraining.put("Pompes", 15);
-				listTraining.put("Tractions", 15);
+				listTraining.put("Tractions", 10);
 				break;
 			}
 		}
@@ -231,14 +237,37 @@ public class Training {
 			str.append("\n");
 			str.append(" - 6x 5 Dips");
 			str.append("\n");
+			str.append(" - 6x 5 Pompes pieds surélevés");
+			str.append("\n");
+			str.append(" - 6x 5 Pompes");
+			str.append("\n");
+			str.append(" - 6x 7 Tractions");
+			str.append("\n");
+			break;
+		case "Numéro 2":
+			str.append("Matériels:");
+			str.append("\n");
+			str.append("\n");
+			str.append("Barre de traction");
+			str.append("\n");
+			str.append("Barre à dips");
+			str.append("\n");
+			str.append("Tapis");
+			str.append("\n");
+			str.append("\n");
+			str.append("Exercices:");
+			str.append("\n");
+			str.append("\n");
+			str.append(" - 6x 7 Dips");
+			str.append("\n");
 			str.append(" - 6x 10 Pompes pieds surélevés");
 			str.append("\n");
 			str.append(" - 6x 10 Pompes");
 			str.append("\n");
-			str.append(" - 6x 10 Tractions");
+			str.append(" - 6x 7 Tractions");
 			str.append("\n");
 			break;
-		case "Numéro 2":
+		case "Numéro 3":
 			str.append("Matériels:");
 			str.append("\n");
 			str.append("\n");
@@ -258,7 +287,7 @@ public class Training {
 			str.append("\n");
 			str.append(" - 6x 15 Pompes");
 			str.append("\n");
-			str.append(" - 6x 15 Tractions");
+			str.append(" - 6x 10 Tractions");
 			str.append("\n");
 			break;
 		case "Routine 1":

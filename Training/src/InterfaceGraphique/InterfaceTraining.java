@@ -74,7 +74,7 @@ public class InterfaceTraining {
 		if (type == "Musculation") {
 			panelWest.remove(niveau);
 			comboNiveau.removeAllItems();
-			String[] liste = { "Choix", "Numéro 1", "Numéro 2" };
+			String[] liste = { "Choix", "Numéro 1", "Numéro 2", "Numéro 3" };
 			for (int i = 0; i < liste.length; i++) {
 				comboNiveau.addItem(liste[i]);
 			}
