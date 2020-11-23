@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import BaseDeDonnées.ChallengeBdd;
-import BaseDeDonnées.TrainingBdd;
+import BaseDeDonnees.ChallengeBdd;
+import BaseDeDonnees.TrainingBdd;
 
 /**
  * Interface relative aux rapports d'activités réalisées

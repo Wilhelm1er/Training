@@ -59,12 +59,12 @@ public class InterfaceSession {
 	private Training Training = new Training();
 	private Date date = new Date();
 	private java.sql.Date dateS = new java.sql.Date(date.getTime());
-	private BaseDeDonnées.ChallengeBdd challenge = new BaseDeDonnées.ChallengeBdd();
+	private BaseDeDonnees.ChallengeBdd challenge = new BaseDeDonnees.ChallengeBdd();
 
 	private long tempsTotal;
 	private String termine = " ";
 
-	private BaseDeDonnées.TrainingBdd TrainingBdd = new BaseDeDonnées.TrainingBdd();
+	private BaseDeDonnees.TrainingBdd TrainingBdd = new BaseDeDonnees.TrainingBdd();
 
 	private SwingWorker<Object, Object> worker1 = new SwingWorker<Object, Object>() {
 

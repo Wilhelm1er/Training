@@ -12,7 +12,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import BaseDeDonnées.PoidsBdd;
+import BaseDeDonnees.PoidsBdd;
 import Listeners.PoidsActionListener;
 
 /**

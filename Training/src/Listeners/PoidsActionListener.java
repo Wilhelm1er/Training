@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import BaseDeDonnées.PoidsBdd;
+import BaseDeDonnees.PoidsBdd;
 import InterfaceGraphique.InterfacePoids;
 import InterfaceGraphique.InterfacePrincipale;
 
